@@ -41,6 +41,15 @@ Description: Portfolio/CV/Resume HTML Template
   padding: 0;
 }
 
+.avatar{
+  max-width: 200px;
+  min-width: 40px;
+}
+.avatar150{
+  min-width: 50px;
+  /* max-width: 150px; */
+}
+
 html {
   margin: 0 !important;
   overflow: auto !important;
