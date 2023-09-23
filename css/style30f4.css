@@ -55,10 +55,12 @@ body {
 }
 
 a {
-  color: #a93467;
+  color: #ffffff;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
+  text-decoration: underline;
+  font-style: italic;
 }
 
 a:hover,
@@ -511,7 +513,7 @@ figure {
   }
   #fh5co-event {
     /* background-size: contain !important; */
-    background-image: url("../images/gallery-1.jpg") !important;
+    background-image: url("../images/g1-min.jpg") !important;
   }
   #fh5co-event .event-wrap {
     background: none !important;
@@ -541,7 +543,7 @@ figure {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgb(84 12 12 / 33%)
 }
 
 @media screen and (max-width: 768px) {
@@ -595,7 +597,7 @@ figure {
 #fh5co-event .event-wrap p,
 #fh5co-event .event-wrap span {
   display: block;
-  color: rgba(120, 0, 20, 0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 #fh5co-counter .event-wrap i,
@@ -693,7 +695,7 @@ figure {
 .timeline > li > .timeline-panel {
   width: 40%;
   float: left;
-  border: 1px solid #d4d4d4;
+  border: 1px solid #a14c4c;
   padding: 30px;
   position: relative;
   -webkit-border-radius: 4px;
@@ -708,8 +710,8 @@ figure {
   right: -15px;
   display: inline-block;
   border-top: 15px solid transparent;
-  border-left: 15px solid #ccc;
-  border-right: 0 solid #ccc;
+  border-left: 15px solid #b72d2d;
+  border-right: 0 solid #b72d2d;
   border-bottom: 15px solid transparent;
   content: " ";
 }
@@ -720,8 +722,8 @@ figure {
   right: -14px;
   display: inline-block;
   border-top: 14px solid transparent;
-  border-left: 14px solid #fff;
-  border-right: 0 solid #fff;
+  border-left: 14px solid #fbeeed;
+  border-right: 0 solid #fbeeed;
   border-bottom: 14px solid transparent;
   content: " ";
 }
