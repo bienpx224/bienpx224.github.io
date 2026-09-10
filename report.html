@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiến độ Ecochic 05/09</title>
+<style>
+:root{--nen:#FBFBFC;--the:#FFF;--muc:#1A1D23;--nhat:#5C6370;--mo:#8A909C;--ke:#E3E5EA;--ke2:#CBD0D8;
+ --nhan:#0F6E62;--nhanN:#E6F0EE;--dat:#2E7D5B;--cho:#A66A00;--lam:#3B6EA5;--rui:#B3402F;--xam:#9AA1AD;
+ --nenR:#FBEEEC;--nenC:#FBF4E6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nen:#14161A;--the:#1B1E24;--muc:#EDEEF1;
+ --nhat:#A2A9B6;--mo:#767D8A;--ke:#2A2E36;--ke2:#3A404A;--nhan:#4FBFAC;--nhanN:#16302C;--dat:#5FBF8E;
+ --cho:#D9A441;--lam:#6FA3DC;--rui:#E0745F;--xam:#666D79;--nenR:#2E1C19;--nenC:#2C2314}}
+:root[data-theme="dark"]{--nen:#14161A;--the:#1B1E24;--muc:#EDEEF1;--nhat:#A2A9B6;--mo:#767D8A;--ke:#2A2E36;
+ --ke2:#3A404A;--nhan:#4FBFAC;--nhanN:#16302C;--dat:#5FBF8E;--cho:#D9A441;--lam:#6FA3DC;--rui:#E0745F;
+ --xam:#666D79;--nenR:#2E1C19;--nenC:#2C2314}
+*{box-sizing:border-box}
+body{margin:0;background:var(--nen);color:var(--muc);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+.trang{max-width:940px;margin:0 auto;padding:56px 32px 80px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;text-wrap:balance;margin:0}
+h1{font-size:2.4rem;line-height:1.12;letter-spacing:-.015em}h2{font-size:1.42rem}h3{font-size:1.02rem;margin:26px 0 10px}
+p{margin:0 0 14px;max-width:68ch}
+.nn{font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;color:var(--mo);font-weight:600}
+header{border-bottom:2px solid var(--muc);padding-bottom:22px;margin-bottom:34px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:12px;font-size:.86rem;color:var(--nhat)}
+.meta b{color:var(--muc)}
+section{margin-top:44px}
+.dm{display:flex;align-items:baseline;gap:14px;padding-bottom:10px;border-bottom:1px solid var(--ke2);margin-bottom:20px}
+.so{font-family:Georgia,serif;font-size:1.05rem;color:var(--nhan);font-weight:600;min-width:1.3em}
+/* ba thang đo */
+.thang{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ke);border:1px solid var(--ke);margin:24px 0}
+.tk{background:var(--the);padding:20px}
+.tk .nn{margin-bottom:8px}
+.tk .cs{font-family:Georgia,serif;font-size:3rem;line-height:1;letter-spacing:-.025em}
+.tk .dv{font-size:.84rem;color:var(--nhat);margin-top:6px}
+.tk .gh{font-size:.78rem;color:var(--mo);margin-top:10px;line-height:1.45}
+.t1 .cs{color:var(--lam)}.t2 .cs{color:var(--dat)}.t3 .cs{color:var(--rui)}
+.t1{border-top:3px solid var(--lam)}.t2{border-top:3px solid var(--dat)}.t3{border-top:3px solid var(--rui)}
+.nb{background:var(--nhanN);border-left:3px solid var(--nhan);padding:16px 20px;margin:22px 0}
+.nb p{margin:0;max-width:none}.nb p+p{margin-top:10px}
+.cb{background:var(--nenR);border-left-color:var(--rui)}.ly{background:var(--nenC);border-left-color:var(--cho)}
+/* thanh 2 lớp */
+.bd{display:flex;flex-direction:column;gap:16px;margin:22px 0}
+.hg{display:grid;grid-template-columns:190px 1fr;gap:14px;align-items:center}
+.hg .tn{font-size:.87rem;line-height:1.3}.hg .tn small{display:block;color:var(--mo);font-size:.74rem}
+.th{position:relative;height:30px;background:var(--ke2)}
+.th .lop1{position:absolute;inset:0 auto 0 0;background:var(--cho);opacity:.5}
+.th .lop2{position:absolute;inset:0 auto 0 0;background:var(--dat)}
+.th em{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-style:normal;font-size:.76rem;font-weight:600}
+.ct{display:flex;flex-wrap:wrap;gap:16px;font-size:.78rem;color:var(--nhat);margin-top:4px}
+.ct i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-2px;font-style:normal}
+.cu{overflow-x:auto;margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--ke)}
+th{font-size:.73rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mo);font-weight:600;border-bottom:1px solid var(--ke2);white-space:nowrap}
+td.n,th.n{text-align:right;white-space:nowrap}
+th.gd{border-left:1px solid var(--ke2)}td.gd{border-left:1px solid var(--ke2)}
+tr.tg td{font-weight:700;border-top:2px solid var(--ke2);border-bottom:none;background:var(--the)}
+.mi{display:inline-block;width:52px;height:7px;background:var(--ke);vertical-align:middle;margin-right:7px;position:relative}
+.mi b{position:absolute;inset:0 auto 0 0;height:100%;background:var(--dat)}
+.mi u{position:absolute;inset:0 auto 0 0;height:100%;background:var(--cho);opacity:.5;text-decoration:none}
+.cp{display:inline-block;padding:1px 8px;font-size:.72rem;font-weight:600;border:1px solid currentColor;white-space:nowrap}
+.cr{color:var(--rui)}.cc{color:var(--cho)}.cd{color:var(--dat)}.cl{color:var(--lam)}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}li{margin-bottom:7px}
+ol.kn{margin:0;padding-left:0;list-style:none;counter-reset:k;display:flex;flex-direction:column;gap:16px}
+ol.kn li{counter-increment:k;padding-left:44px;position:relative;margin:0}
+ol.kn li::before{content:counter(k);position:absolute;left:0;top:-2px;width:29px;height:29px;border:1px solid var(--nhan);color:var(--nhan);font-family:Georgia,serif;font-size:.92rem;display:flex;align-items:center;justify-content:center}
+ol.kn b{display:block;margin-bottom:2px}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--ke);font-size:.79rem;color:var(--mo)}
+@media (max-width:680px){.trang{padding:32px 18px 56px}h1{font-size:1.75rem}.thang{grid-template-columns:1fr}
+ .hg{grid-template-columns:1fr;gap:5px}.hg .tn small{display:inline;margin-left:6px}}
+@media print{body{background:#fff;color:#000;font-size:10.5pt}.trang{max-width:none;padding:0}
+ .dm,table,.thang,.nb,.bd,ol.kn li{break-inside:avoid}@page{margin:16mm}}
+</style>
+</head>
+<body>
+
+<div class="trang">
+<header>
+  <h1>Báo cáo tiến độ dự án Ecochic</h1>
+  <div class="meta"><span>Số liệu tính đến <b>05/09/2026</b></span>
+  <span>Nguồn <b>hệ thống quản lý công việc · 669 đầu việc</b></span></div>
+</header>
+
+<section style="margin-top:0">
+  <div class="dm"><span class="so">1</span><h2>Ba thang đo — đọc đúng con số</h2></div>
+  <p>Một đầu việc đi qua ba cửa: <b>lập trình xong</b> → <b>kiểm thử nội bộ đạt</b> → <b>khách ký nghiệm
+  thu</b>. Ba con số dưới đây là ba cửa đó, <b>không thay thế cho nhau</b>. Nói "dự án xong 70%" mà không
+  nói cửa nào thì dễ hiểu nhầm.</p>
+
+  <div class="thang">
+    <div class="tk t1"><div class="nn">Cửa 1 · Lập trình</div><div class="cs">70%</div>
+      <div class="dv">470 / 669 đầu việc</div>
+      <div class="gh">Dev đã hoàn tất, mã đã lên môi trường thử. Chưa nói gì về chất lượng.</div></div>
+    <div class="tk t2"><div class="nn">Cửa 2 · Kiểm thử nội bộ</div><div class="cs">32%</div>
+      <div class="dv">211 / 669 đầu việc</div>
+      <div class="gh">Bộ phận kiểm thử xác nhận chạy đúng. Đây là mức <b>sẵn sàng đem đi nghiệm thu</b>.</div></div>
+    <div class="tk t3"><div class="nn">Cửa 3 · Khách nghiệm thu</div><div class="cs">0%</div>
+      <div class="dv">0 / 45 hạng mục</div>
+      <div class="gh">Chưa hạng mục nào được ký biên bản, chưa đưa vào sử dụng thật.</div></div>
+  </div>
+
+  <div class="nb cb"><p><b>Khoảng cách 70% → 32% chính là hàng đợi kiểm thử.</b> 259 đầu việc đã lập
+  trình xong đang nằm chờ — chiếm 38% toàn dự án. Đây không phải việc chưa làm, mà là việc <b>đã làm
+  nhưng chưa được xác nhận</b>, nên chưa tính được vào tiến độ nghiệm thu.</p></div>
+
+  <div class="cu"><table>
+    <thead><tr><th>Trạng thái</th><th class="n">Việc</th><th class="n">Tỷ lệ</th><th>Tính vào cửa nào</th></tr></thead>
+    <tbody>
+      <tr><td>Chưa bắt đầu</td><td class="n">173</td><td class="n">26%</td><td>—</td></tr>
+      <tr><td>Đang lập trình</td><td class="n">22</td><td class="n">3%</td><td>—</td></tr>
+      <tr><td>Kiểm thử trả về (dev sửa lại)</td><td class="n">4</td><td class="n">1%</td><td>—</td></tr>
+      <tr><td><b>Chờ kiểm thử</b></td><td class="n"><b>259</b></td><td class="n"><b>39%</b></td><td><span class="cp cl">Cửa 1</span></td></tr>
+      <tr><td>Kiểm thử đạt</td><td class="n">95</td><td class="n">14%</td><td><span class="cp cl">Cửa 1</span> <span class="cp cd">Cửa 2</span></td></tr>
+      <tr><td>Đánh dấu hoàn tất</td><td class="n">116</td><td class="n">17%</td><td><span class="cp cl">Cửa 1</span> <span class="cp cd">Cửa 2</span></td></tr>
+      <tr class="tg"><td>Tổng</td><td class="n">669</td><td class="n">100%</td><td></td></tr>
+    </tbody>
+  </table></div>
+  <p><small>116 việc "đánh dấu hoàn tất" phần lớn (88) thuộc ký số và quản lý công việc — hai sản phẩm
+  làm trước, nằm ngoài hợp đồng đang triển khai.</small></p>
+</section>
+
+<section>
+  <div class="dm"><span class="so">2</span><h2>Hai thang đo theo giai đoạn</h2></div>
+  <div class="bd">
+    <div class="hg"><div class="tn">Giai đoạn 1<small>nền tảng lõi · chuẩn bị nghiệm thu</small></div>
+      <div class="th"><span class="lop1" style="width:90%"></span><span class="lop2" style="width:18%"></span><em>139 việc</em></div></div>
+    <div class="hg"><div class="tn">Giai đoạn 2.1<small>hợp đồng đang triển khai</small></div>
+      <div class="th"><span class="lop1" style="width:60%"></span><span class="lop2" style="width:25%"></span><em>383 việc</em></div></div>
+    <div class="hg"><div class="tn">Giai đoạn 2.2<small>dự kiến, chưa ký</small></div>
+      <div class="th"><span class="lop1" style="width:87%"></span><span class="lop2" style="width:75%"></span><em>117 việc</em></div></div>
+    <div class="hg"><div class="tn">Ngoài hợp đồng<small>phát triển thêm</small></div>
+      <div class="th"><span class="lop1" style="width:50%"></span><span class="lop2" style="width:13%"></span><em>30 việc</em></div></div>
+  </div>
+  <div class="ct"><span><i style="background:var(--cho);opacity:.5"></i>Cửa 1 — lập trình xong</span>
+  <span><i style="background:var(--dat)"></i>Cửa 2 — kiểm thử đạt</span>
+  <span><i style="background:var(--ke2)"></i>Chưa lập trình xong</span></div>
+
+  <div class="cu"><table>
+    <thead><tr><th>Giai đoạn</th><th class="n">Tổng</th><th class="n gd">Lập trình xong</th><th class="n">%</th><th class="n gd">Kiểm thử đạt</th><th class="n">%</th><th class="n gd">Khoảng cách</th></tr></thead>
+    <tbody>
+      <tr><td><b>Giai đoạn 1</b></td><td class="n">139</td><td class="n gd">125</td><td class="n"><b>90%</b></td><td class="n gd">25</td><td class="n"><b>18%</b></td><td class="n gd">100 việc chờ</td></tr>
+      <tr><td><b>Giai đoạn 2.1</b></td><td class="n">383</td><td class="n gd">228</td><td class="n"><b>60%</b></td><td class="n gd">94</td><td class="n"><b>25%</b></td><td class="n gd">134 việc chờ</td></tr>
+      <tr><td>Giai đoạn 2.2 (chưa ký)</td><td class="n">117</td><td class="n gd">102</td><td class="n">87%</td><td class="n gd">88</td><td class="n">75%</td><td class="n gd">14 việc chờ</td></tr>
+      <tr><td>Ngoài hợp đồng</td><td class="n">30</td><td class="n gd">15</td><td class="n">50%</td><td class="n gd">4</td><td class="n">13%</td><td class="n gd">11 việc chờ</td></tr>
+      <tr class="tg"><td>Tổng</td><td class="n">669</td><td class="n gd">470</td><td class="n">70%</td><td class="n gd">211</td><td class="n">32%</td><td class="n gd">259 việc chờ</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="nb ly"><p><b>Giai đoạn 1 — chênh lệch lớn nhất: 90% lập trình xong nhưng chỉ 18% qua kiểm
+  thử.</b> Chỉ còn 14 đầu việc chưa lập trình xong, trong khi 100 việc đang chờ kiểm thử. Về mặt phát
+  triển thì giai đoạn này gần như đã sẵn sàng; toàn bộ rào cản nằm ở cửa thứ hai.</p>
+  <p><b>Giai đoạn 2.1 — chênh lệch nhỏ hơn nhưng khối lượng lớn hơn.</b> 155 đầu việc còn chưa lập trình
+  xong, chủ yếu là mảng kho và đơn hàng vừa mở tuần này.</p></div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">3</span><h2>Giai đoạn 1 — 8 hạng mục</h2></div>
+  <div class="cu"><table>
+    <thead><tr><th>Hạng mục</th><th class="n">Việc</th><th class="gd">Lập trình xong</th><th class="gd">Kiểm thử đạt</th><th class="gd">Nút thắt</th></tr></thead>
+    <tbody>
+      <tr><td>1. Đăng nhập tập trung và phân quyền</td><td class="n">83</td><td class="gd"><span class="mi"><u style="width:96%"></u><b style="width:13%"></b></span>96%</td><td class="gd">13%</td><td class="gd"><b>69 việc chờ kiểm thử</b></td></tr>
+      <tr><td>2. Thông báo đa kênh</td><td class="n">13</td><td class="gd"><span class="mi"><u style="width:92%"></u><b style="width:8%"></b></span>92%</td><td class="gd">8%</td><td class="gd">11 việc chờ kiểm thử</td></tr>
+      <tr><td>3. Quản lý nhân sự</td><td class="n">17</td><td class="gd"><span class="mi"><u style="width:76%"></u><b style="width:41%"></b></span>76%</td><td class="gd">41%</td><td class="gd">6 chờ · 4 còn code</td></tr>
+      <tr><td>4. Quản lý tài chính nội bộ</td><td class="n">11</td><td class="gd"><span class="mi"><u style="width:100%"></u><b style="width:27%"></b></span>100%</td><td class="gd">27%</td><td class="gd">8 việc chờ kiểm thử</td></tr>
+      <tr><td>5. Đồng bộ đơn hàng đa sàn</td><td class="n">2</td><td class="gd"><span class="mi"><u style="width:50%"></u><b style="width:50%"></b></span>50%</td><td class="gd">50%</td><td class="gd">1 còn code</td></tr>
+      <tr><td>6. Hệ thống báo cáo</td><td class="n">2</td><td class="gd"><span class="mi"><u style="width:0"></u><b style="width:0"></b></span>0%</td><td class="gd">0%</td><td class="gd"><span class="cp cr">Chưa động</span></td></tr>
+      <tr><td>7. Kho dữ liệu và bảng điều hành</td><td class="n">1</td><td class="gd"><span class="mi"><u style="width:100%"></u><b style="width:0"></b></span>100%</td><td class="gd">0%</td><td class="gd">1 việc chờ kiểm thử</td></tr>
+      <tr><td>8. Hạ tầng triển khai</td><td class="n">2</td><td class="gd"><span class="mi"><u style="width:50%"></u><b style="width:50%"></b></span>50%</td><td class="gd">50%</td><td class="gd">1 còn code (sao lưu)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="nb"><p><b>Sáu trên tám hạng mục đã lập trình xong từ 76% trở lên</b>, nhưng chỉ 3 hạng mục
+  vượt 40% ở cửa kiểm thử. <b>Hạng mục 1 một mình chiếm 69/100 việc chờ</b> của cả giai đoạn — dứt điểm
+  riêng hạng mục này là gỡ được 70% hàng đợi Giai đoạn 1.</p>
+  <p>Hai hạng mục còn thật sự thiếu người làm: <b>hệ thống báo cáo</b> (chưa động) và <b>cơ chế sao lưu</b>
+  (thuộc hạ tầng).</p></div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">4</span><h2>Giai đoạn 2.1 — 8 nhóm hạng mục</h2></div>
+  <div class="cu"><table>
+    <thead><tr><th>Nhóm hạng mục</th><th class="n">Việc</th><th class="gd">Lập trình xong</th><th class="gd">Kiểm thử đạt</th><th class="gd">Nút thắt</th></tr></thead>
+    <tbody>
+      <tr><td><b>Tài chính</b> (1.1–1.7)</td><td class="n">109</td><td class="gd"><span class="mi"><u style="width:98%"></u><b style="width:6%"></b></span>98%</td><td class="gd">6%</td><td class="gd"><b>100 việc chờ kiểm thử</b></td></tr>
+      <tr><td><b>Đồng bộ sàn</b> (4.1–4.3)</td><td class="n">10</td><td class="gd"><span class="mi"><u style="width:80%"></u><b style="width:0"></b></span>80%</td><td class="gd">0%</td><td class="gd">8 chờ kiểm thử</td></tr>
+      <tr><td><b>Website và nội dung</b> (7.1–7.8)</td><td class="n">125</td><td class="gd"><span class="mi"><u style="width:66%"></u><b style="width:59%"></b></span>66%</td><td class="gd"><b>59%</b></td><td class="gd">42 còn code · 9 chờ</td></tr>
+      <tr><td><b>Sản phẩm</b> (3.1–3.6)</td><td class="n">20</td><td class="gd"><span class="mi"><u style="width:45%"></u><b style="width:20%"></b></span>45%</td><td class="gd">20%</td><td class="gd">11 còn code · 5 chờ</td></tr>
+      <tr><td><b>Đơn hàng</b> (2.1–2.5)</td><td class="n">24</td><td class="gd"><span class="mi"><u style="width:12%"></u><b style="width:4%"></b></span>12%</td><td class="gd">4%</td><td class="gd"><b>21 còn code</b> (vừa mở 15 việc)</td></tr>
+      <tr><td><b>Kho</b> (5.1–5.2)</td><td class="n">21</td><td class="gd"><span class="mi"><u style="width:0"></u><b style="width:0"></b></span>0%</td><td class="gd">0%</td><td class="gd"><b>21 còn code</b> (vừa mở)</td></tr>
+      <tr><td><b>Sản xuất</b> (8.1–8.3)</td><td class="n">5</td><td class="gd"><span class="mi"><u style="width:0"></u><b style="width:0"></b></span>0%</td><td class="gd">0%</td><td class="gd">5 còn code · 8.2 và 8.3 chưa có việc</td></tr>
+      <tr><td><b>Kho cầm tay</b> (6.1–6.3)</td><td class="n">1</td><td class="gd"><span class="mi"><u style="width:0"></u><b style="width:0"></b></span>0%</td><td class="gd">0%</td><td class="gd"><span class="cp cr">Tạm dừng</span> 6.2, 6.3 chưa có việc</td></tr>
+    </tbody>
+  </table></div>
+  <div class="nb"><p><b>Hai kiểu tắc khác hẳn nhau, cần hai cách xử lý khác nhau:</b></p>
+  <p><b>Tắc ở kiểm thử</b> — tài chính (98% lập trình xong, 6% qua kiểm thử) và đồng bộ sàn (80% / 0%).
+  Dev đã xong việc, chỉ cần năng lực kiểm thử.</p>
+  <p><b>Tắc ở lập trình</b> — kho (0%), đơn hàng (12%), sản xuất (0%). Đây là khối lượng thật sự chưa làm,
+  cần người và thời gian. Riêng kho và đơn hàng vừa mở 36 đầu việc tuần này sau buổi rà hiện trạng.</p>
+  <p><b>Website là nhóm duy nhất cân bằng</b> — 66% lập trình xong, 59% qua kiểm thử. Khoảng cách nhỏ
+  nghĩa là làm tới đâu kiểm thử tới đó.</p></div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">5</span><h2>Theo mảng nghiệp vụ</h2></div>
+  <div class="cu"><table>
+    <thead><tr><th>Mảng</th><th class="n">Việc</th><th class="n gd">Lập trình</th><th class="n gd">Kiểm thử</th><th class="gd">Nhận xét</th></tr></thead>
+    <tbody>
+      <tr><td>Ký số <small>(ngoài HĐ)</small></td><td class="n">58</td><td class="n gd">98%</td><td class="n gd"><b>97%</b></td><td class="gd">Hoàn chỉnh, trình diễn được</td></tr>
+      <tr><td>Quản trị nội dung</td><td class="n">86</td><td class="n gd">80%</td><td class="n gd"><b>72%</b></td><td class="gd">Ổn định</td></tr>
+      <tr><td>Quản lý công việc <small>(ngoài HĐ)</small></td><td class="n">47</td><td class="n gd">79%</td><td class="n gd"><b>68%</b></td><td class="gd">Ổn định</td></tr>
+      <tr><td>Nhân sự</td><td class="n">16</td><td class="n gd">75%</td><td class="n gd">44%</td><td class="gd">Đang tiến đều</td></tr>
+      <tr><td>Website bán hàng</td><td class="n">34</td><td class="n gd">38%</td><td class="n gd">35%</td><td class="gd">Kiểm thử theo kịp lập trình</td></tr>
+      <tr><td>Tài chính</td><td class="n">137</td><td class="n gd"><b>96%</b></td><td class="n gd">8%</td><td class="gd"><span class="cp cc">Tắc kiểm thử</span> 121 việc chờ</td></tr>
+      <tr><td>Đăng nhập &amp; phân quyền</td><td class="n">88</td><td class="n gd"><b>97%</b></td><td class="n gd">14%</td><td class="gd"><span class="cp cc">Tắc kiểm thử</span> 73 việc chờ</td></tr>
+      <tr><td>Tài liệu <small>(ngoài HĐ)</small></td><td class="n">19</td><td class="n gd">74%</td><td class="n gd">16%</td><td class="gd">11 việc chờ kiểm thử</td></tr>
+      <tr><td>Sản phẩm</td><td class="n">21</td><td class="n gd">38%</td><td class="n gd">14%</td><td class="gd">Cả hai cửa đều chậm</td></tr>
+      <tr><td>Đơn hàng</td><td class="n">33</td><td class="n gd">12%</td><td class="n gd">6%</td><td class="gd"><span class="cp cr">Tắc lập trình</span> 29 việc còn làm</td></tr>
+      <tr><td>Kho</td><td class="n">40</td><td class="n gd">0%</td><td class="n gd">0%</td><td class="gd"><span class="cp cr">Chưa khởi động</span></td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Đọc bảng theo khoảng cách hai cột:</b> chênh lệch lớn (tài chính 96→8, đăng nhập 97→14) là tắc ở
+  kiểm thử — giải bằng nhân lực kiểm thử. Cả hai cột đều thấp (đơn hàng 12→6, kho 0→0) là chưa làm —
+  giải bằng nhân lực phát triển. Hai vấn đề khác nhau, không gộp chung được.</p>
+</section>
+
+<section>
+  <div class="dm"><span class="so">6</span><h2>Cửa 2 — năng lực kiểm thử quyết định tiến độ</h2></div>
+  <div class="cu"><table>
+    <thead><tr><th>Chỉ số</th><th class="n">Giá trị</th><th>Ghi chú</th></tr></thead>
+    <tbody>
+      <tr><td>Đang chờ kiểm thử</td><td class="n"><b>259</b></td><td>129 việc dev báo xong + 130 kịch bản kiểm thử chưa chạy</td></tr>
+      <tr><td>Trong đó thuộc Giai đoạn 1</td><td class="n"><b>100</b></td><td>phần quyết định buổi nghiệm thu sắp tới</td></tr>
+      <tr><td>Nhịp thật 4 ngày qua</td><td class="n">16 · 4 · 8 · 15</td><td>trung bình <b>11 việc/ngày</b>, dao động mạnh</td></tr>
+      <tr><td>Thời gian giải phóng toàn bộ</td><td class="n"><b>~24 ngày</b></td><td>gần 5 tuần làm việc với nhịp hiện tại</td></tr>
+      <tr><td>Nếu chỉ tập trung Giai đoạn 1</td><td class="n"><b>~9 ngày</b></td><td>khả thi trong 2 tuần</td></tr>
+    </tbody>
+  </table></div>
+  <div class="nb cb"><p><b>Cảnh báo về xu hướng:</b> trong 2 ngày qua hệ thống tăng thêm 90 đầu việc mới,
+  trong khi kiểm thử giải phóng được khoảng 23 việc. Nếu tốc độ tạo việc tiếp tục vượt tốc độ kiểm thử
+  thì hàng đợi sẽ phình chứ không co — cần theo dõi hai con số này song song hằng tuần, không chỉ nhìn
+  tỷ lệ phần trăm.</p></div>
+  <p><b>Nguyên nhân gốc đã khắc phục (01/09):</b> trước đó đội phát triển chuyển trạng thái nhưng vẫn để
+  tên mình, nên bộ phận kiểm thử chỉ nhìn thấy 5 việc trong danh sách của mình thay vì 256. Nay mọi việc
+  chờ kiểm thử đều được gán kèm bộ phận kiểm thử, cơ chế chạy tự động mỗi sáng.</p>
+</section>
+
+<section>
+  <div class="dm"><span class="so">7</span><h2>Việc cần làm sớm — 19 đầu việc chặn nghiệm thu</h2></div>
+  <div class="cu"><table>
+    <thead><tr><th>Nhóm</th><th class="n">Việc</th><th>Nội dung</th><th>Ai</th></tr></thead>
+    <tbody>
+      <tr><td><b>Cửa 1 — còn phải lập trình</b></td><td class="n"><b>7</b></td><td>cấu hình chân trang website · sửa hàng loạt sản phẩm (2 việc) · hiển thị đúng múi giờ · đường kết nối tồn kho · lỗi khoá tài khoản hai lớp</td><td>Hải, Cường, Khánh, Quý</td></tr>
+      <tr><td><b>Cửa 2 — chờ kiểm thử xác nhận</b></td><td class="n">7</td><td>luồng duyệt phiếu chi · kênh bán website · dữ liệu luồng hoá đơn · bảng dòng tiền · đối chiếu số liệu đơn với file khách · 6 tiêu chí đồng bộ đa sàn</td><td>Vân Anh</td></tr>
+      <tr><td>Điều phối và tài liệu</td><td class="n">5</td><td>tổ chức buổi nghiệm thu · thu đầu vào từ khách · bộ tài liệu hướng dẫn · xác nhận sao lưu</td><td>Biển</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Bảy đầu vào đang chờ khách hàng</h3>
+  <ul>
+    <li>Danh sách vai trò và quyền hạn thực tế</li>
+    <li>File xuất đơn hàng tháng 7 và tháng 8 từ các sàn</li>
+    <li>Sao kê ngân hàng và sao kê sàn còn thiếu</li>
+    <li>Danh sách chỉ số dòng tiền cần hiển thị</li>
+    <li>Tài khoản email tên miền riêng và mẫu nội dung thư</li>
+    <li>Xác nhận bộ chỉ số báo cáo đã đầy đủ</li>
+    <li>Nội dung website theo danh mục đã gửi</li>
+  </ul>
+</section>
+
+<section>
+  <div class="dm"><span class="so">8</span><h2>Rủi ro</h2></div>
+  <div class="cu"><table>
+    <thead><tr><th style="width:32%">Vấn đề</th><th>Cửa</th><th>Mức</th><th>Đề xuất</th></tr></thead>
+    <tbody>
+      <tr><td><b>Hàng đợi kiểm thử 259 việc</b> — cần ~5 tuần với nhịp 11 việc/ngày; đồng thời việc mới sinh nhanh hơn tốc độ giải phóng</td><td>2</td><td><span class="cp cr">Cao</span></td><td>Bổ sung nhân sự kiểm thử; chia mốc nghiệm thu theo giai đoạn, dứt điểm Giai đoạn 1 trước</td></tr>
+      <tr><td><b>Mảng kho 40 việc chưa khởi động</b> — vừa mở sau buổi rà 04/09</td><td>1</td><td><span class="cp cr">Cao</span></td><td>Chốt thứ tự ưu tiên và mốc thời gian với người phụ trách kho ngay tuần này</td></tr>
+      <tr><td><b>Ứng dụng kho cầm tay tạm dừng</b> — đối tác dừng hợp tác, chưa có văn bản điều chỉnh phạm vi; 2/3 hạng mục chưa có đầu việc nào</td><td>1</td><td><span class="cp cr">Cao</span></td><td>Buổi làm việc riêng với khách: chốt thiết bị thay thế, ký văn bản điều chỉnh phạm vi</td></tr>
+      <tr><td>Mảng đơn hàng 12% lập trình xong — luồng đặt và xử lý đơn vừa mở 15 việc</td><td>1</td><td><span class="cp cc">Trung bình</span></td><td>Bám sát tiến độ hằng tuần, đây là luồng bán hàng chính</td></tr>
+      <tr><td>Hai hạng mục sản xuất (8.2, 8.3) treo theo đối tác cũ</td><td>1</td><td><span class="cp cc">Trung bình</span></td><td>Xử lý cùng buổi làm việc về thiết bị</td></tr>
+      <tr><td>Hạng mục báo cáo Giai đoạn 1 chưa động; cơ chế sao lưu chưa xác nhận</td><td>1</td><td><span class="cp cc">Trung bình</span></td><td>Chốt bộ chỉ số với khách trước khi dựng; xác nhận sao lưu với hạ tầng</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">9</span><h2>Kết luận và kiến nghị</h2></div>
+  <p><b>Đánh giá theo ba cửa:</b> phần lập trình đã đi được <b>70%</b> chặng đường và Giai đoạn 1 đạt
+  <b>90%</b> — về mặt phát triển gần như sẵn sàng. Nhưng chỉ <b>32%</b> vượt được cửa kiểm thử, và
+  <b>chưa hạng mục nào</b> qua được cửa nghiệm thu với khách. Nút thắt của dự án hiện nay không nằm ở
+  năng lực phát triển.</p>
+  <ol class="kn">
+    <li><b>Dứt điểm Giai đoạn 1 — khả thi trong 2 tuần</b>Còn 14 việc lập trình và 100 việc chờ kiểm thử.
+    Dồn nhân lực kiểm thử riêng cho Giai đoạn 1 thì khoảng 9 ngày làm việc là xong, đủ tổ chức nghiệm thu.
+    Ưu tiên hạng mục 1 (đăng nhập và phân quyền) vì nó chiếm 69/100 việc chờ.</li>
+    <li><b>Tăng năng lực kiểm thử — quyết định tiến độ cả dự án</b>Đây là cửa hẹp nhất. Với nhịp hiện tại
+    cần gần 5 tuần cho 259 việc, trong khi việc mới vẫn sinh ra nhanh hơn tốc độ giải phóng. Cần bổ sung
+    người hoặc thu hẹp phạm vi kiểm thử theo mức ưu tiên thống nhất với khách.</li>
+    <li><b>Khởi động mảng kho và đơn hàng</b>Đây là hai nhóm tắc ở cửa lập trình, không phải cửa kiểm thử —
+    61 đầu việc vừa mở mà chưa khởi động. Cần bố trí người và chốt mốc, nếu không sẽ thành nút thắt tiếp
+    theo ngay khi hàng đợi kiểm thử được giải phóng.</li>
+    <li><b>Chốt phương án thay thế cho phần thiết bị kho cầm tay</b>Nhóm hạng mục lớn nhất Giai đoạn 2.1
+    treo hoàn toàn vì lý do khách quan, 2/3 hạng mục chưa có đầu việc nào. Cần văn bản điều chỉnh phạm vi
+    để tránh tranh chấp khi nghiệm thu, đồng thời gỡ hai hạng mục sản xuất treo theo.</li>
+  </ol>
+</section>
+
+<footer>Số liệu trích xuất từ hệ thống quản lý công việc của dự án, tính đến ngày 05/09/2026.
+Không tính 5 đầu việc đã huỷ và 53 mục quản trị danh mục hợp đồng.</footer>
+</div>
+
+</body>
+</html>
