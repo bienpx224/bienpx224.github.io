@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html class="h-full" lang="vi">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tổng quan kinh doanh — Bản điện thoại | Ecochic Report</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.js"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily:{ sans:['"Inter"','sans-serif'], heading:['"Plus Jakarta Sans"','sans-serif'] },
+  colors:{ brand:{50:'#f4f8ee',100:'#e7f0dc',200:'#cfe2bc',500:'#6A9739',600:'#58802d',700:'#466524',800:'#38501f'} },
+}}}
+</script>
+
+<style>
+  body{-webkit-font-smoothing:antialiased;background:
+       radial-gradient(1000px 600px at 15% -5%, #eef5e4 0%, transparent 55%),
+       radial-gradient(900px 600px at 85% 10%, #e6f1f7 0%, transparent 50%), #F1F5F9}
+
+  /* Khung điện thoại */
+  .phone{width:390px;height:812px;border-radius:44px;background:#0F172A;padding:11px;
+         box-shadow:0 34px 60px -22px rgba(15,23,42,.42), 0 0 0 1px rgba(15,23,42,.08);position:relative;flex:none}
+  .screen{width:100%;height:100%;border-radius:34px;overflow:hidden;background:#F8FAFC;position:relative;
+          display:flex;flex-direction:column}
+  .island{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:104px;height:26px;
+          background:#0F172A;border-radius:9999px;z-index:60}
+  .scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .scroll::-webkit-scrollbar{width:0}
+
+  .src{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;line-height:1;
+       padding:2.5px 6px;border-radius:9999px;white-space:nowrap}
+  .src-ok{background:#ecfdf5;color:#047857}.src-mix{background:#fffbeb;color:#b45309}.src-new{background:#eff6ff;color:#1d4ed8}
+  .src i{width:4px;height:4px;border-radius:9999px;display:block}
+  .src-ok i{background:#10b981}.src-mix i{background:#f59e0b}.src-new i{background:#3b82f6}
+
+  .chip{font-size:11px;font-weight:600;padding:6px 12px;border-radius:9999px;border:1px solid #e2e8f0;
+        background:#fff;color:#475569;white-space:nowrap}
+  .chip.on{background:#6A9739;border-color:#6A9739;color:#fff}
+
+  /* Dải cuộn ngang: ẩn thanh cuộn, bám mép thẻ */
+  .hscroll{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px;
+           scrollbar-width:none}
+  .hscroll::-webkit-scrollbar{display:none}
+  .hscroll > *{scroll-snap-align:start;flex:none}
+
+  .apexcharts-tooltip{border:1px solid #e2e8f0!important;border-radius:10px!important;box-shadow:0 10px 26px -12px rgba(15,23,42,.3)!important}
+  .spark{width:100%;height:24px;display:block}
+
+  .caption{max-width:390px}
+</style>
+</head>
+
+<body class="font-sans text-slate-800 min-h-full py-10 px-6">
+
+<!-- ═══════ TIÊU ĐỀ TRANG TRÌNH BÀY ═══════ -->
+<div class="max-w-[1400px] mx-auto mb-8">
+  <div class="flex items-center gap-2.5 mb-3">
+    <div class="w-9 h-9 rounded-full bg-[#6A9739] text-white flex items-center justify-center font-extrabold text-sm tracking-tighter">ec</div>
+    <div>
+      <div class="text-xl font-black tracking-tight text-[#6A9739] leading-none font-heading">ecochic</div>
+      <div class="text-[11px] text-slate-400 font-medium">report.ecochic.space</div>
+    </div>
+  </div>
+  <h1 class="text-2xl font-black tracking-tight text-slate-900 font-heading">TỔNG QUAN KINH DOANH — BẢN ĐIỆN THOẠI</h1>
+  <p class="text-sm text-slate-500 mt-1.5 max-w-3xl leading-relaxed">
+    Cùng một màn báo cáo, bố cục lại cho màn hình dọc. Ba khung dưới đây là ba trạng thái thật của màn —
+    có thể <strong class="text-slate-700">cuộn trực tiếp bên trong từng khung</strong> để xem đầy đủ.
+  </p>
+  <div class="mt-4 flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-2.5 max-w-3xl">
+    <svg class="w-4 h-4 text-amber-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+    <p class="text-xs text-amber-900 leading-relaxed">
+      <strong>Bản demo giao diện.</strong> Mọi con số là <strong>số minh hoạ</strong>. Nhãn
+      <span class="src src-ok"><i></i>CÓ SẴN</span> / <span class="src src-mix"><i></i>CẦN GHÉP</span> /
+      <span class="src src-new"><i></i>CẦN XÂY</span> cho biết dữ liệu đã có hay phải bổ sung.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════ BA KHUNG ĐIỆN THOẠI ═══════ -->
+<div class="max-w-[1400px] mx-auto flex flex-wrap gap-x-12 gap-y-12 justify-center xl:justify-start">
+
+  <!-- ─────────── KHUNG 1: TRANG CHÍNH ─────────── -->
+  <div>
+    <div class="phone">
+      <div class="island"></div>
+      <div class="screen">
+
+        <!-- Thanh trạng thái + đầu trang -->
+        <div class="bg-white shrink-0">
+          <div class="h-11"></div>
+          <div class="px-4 pb-2.5 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full bg-[#6A9739] text-white flex items-center justify-center font-extrabold text-[11px] tracking-tighter">ec</div>
+              <div>
+                <div class="text-[13px] font-black text-slate-900 leading-tight font-heading">Tổng quan</div>
+                <div class="text-[10px] text-slate-400 leading-tight">Tháng 9 · 21/30 ngày</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1">
+              <button class="relative p-2 text-slate-500">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 00-4-5.7V5a2 2 0 10-4 0v.3C7.7 6.2 6 8.4 6 11v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-width="2"/></svg>
+                <span class="absolute top-1 right-1 bg-rose-500 text-white text-[8px] font-bold rounded-full h-3.5 min-w-[14px] flex items-center justify-center border-2 border-white">3</span>
+              </button>
+              <div class="w-7 h-7 rounded-full bg-[#6A9739] text-white font-bold flex items-center justify-center text-[11px]">A</div>
+            </div>
+          </div>
+
+          <!-- Tìm kiếm + nút Bộ lọc (luật mobile: chỉ 2 thứ này, phần còn lại vào khay) -->
+          <div class="px-4 pb-3 flex items-center gap-2">
+            <div class="flex-1 flex items-center gap-2 bg-slate-100 rounded-xl px-3 py-2">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3M17 11a6 6 0 11-12 0 6 6 0 0112 0z" stroke-linecap="round" stroke-width="2"/></svg>
+              <span class="text-xs text-slate-400">Tìm SKU, gian hàng…</span>
+            </div>
+            <button class="relative flex items-center gap-1.5 bg-[#6A9739] text-white rounded-xl px-3 py-2 text-xs font-semibold">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 5h18M6 12h12M10 19h4" stroke-linecap="round" stroke-width="2"/></svg>
+              Bộ lọc
+              <span class="absolute -top-1 -right-1 bg-white text-[#6A9739] text-[9px] font-black rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center border border-brand-200">2</span>
+            </button>
+          </div>
+
+          <!-- Tóm tắt bộ lọc đang áp dụng -->
+          <div class="px-4 pb-2.5 flex items-center gap-1.5 overflow-x-auto hscroll" style="padding-left:16px;padding-right:16px">
+            <span class="chip on">Tất cả sàn</span>
+            <span class="chip on">01/09 — 30/09</span>
+            <span class="chip">Đối chiếu kỳ trước</span>
+          </div>
+        </div>
+
+        <!-- Nội dung cuộn -->
+        <div class="scroll bg-[#F8FAFC] pb-3">
+
+          <!-- Đồng hồ tiến độ: cuộn ngang -->
+          <div class="pt-3.5 pb-1 px-4 flex items-center justify-between">
+            <h2 class="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider">Tiến độ mục tiêu kỳ</h2>
+            <span class="src src-new"><i></i>CẦN XÂY</span>
+          </div>
+          <p class="px-4 text-[10px] text-slate-400 mb-2.5">Vuốt ngang để xem GMV · NMV · Quảng cáo</p>
+
+          <div class="hscroll pb-1">
+            <div class="w-[215px] bg-white border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#6A9739] to-brand-200"></div>
+              <div class="p-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-slate-700">Doanh số GMV</span>
+                  <span class="src src-ok"><i></i>CÓ SẴN</span>
+                </div>
+                <div id="m-g1" class="-my-1"></div>
+                <div class="grid grid-cols-2 gap-1.5 -mt-2">
+                  <div class="bg-brand-50 rounded-lg px-2 py-1.5">
+                    <div class="text-[8px] font-bold text-brand-700 uppercase tracking-wider">Thực hiện</div>
+                    <div class="text-[13px] font-black text-brand-800 tabular-nums">8,40 Tỷ</div>
+                  </div>
+                  <div class="bg-slate-50 rounded-lg px-2 py-1.5">
+                    <div class="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Mục tiêu</div>
+                    <div class="text-[13px] font-black text-slate-600 tabular-nums">12,00 Tỷ</div>
+                  </div>
+                </div>
+                <div class="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between">
+                  <span class="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">▲ +12,8%</span>
+                  <span class="text-[9px] text-slate-400">so kỳ trước</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-[215px] bg-white border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-teal-500 to-teal-200"></div>
+              <div class="p-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-slate-700">Doanh số NMV</span>
+                  <span class="src src-ok"><i></i>CÓ SẴN</span>
+                </div>
+                <div id="m-g2" class="-my-1"></div>
+                <div class="grid grid-cols-2 gap-1.5 -mt-2">
+                  <div class="bg-teal-50 rounded-lg px-2 py-1.5">
+                    <div class="text-[8px] font-bold text-teal-700 uppercase tracking-wider">Thực hiện</div>
+                    <div class="text-[13px] font-black text-teal-800 tabular-nums">6,05 Tỷ</div>
+                  </div>
+                  <div class="bg-slate-50 rounded-lg px-2 py-1.5">
+                    <div class="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Mục tiêu</div>
+                    <div class="text-[13px] font-black text-slate-600 tabular-nums">8,64 Tỷ</div>
+                  </div>
+                </div>
+                <div class="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between">
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold text-teal-700 bg-teal-50 px-1.5 py-0.5 rounded">G2N 72,0%</span>
+                  <span class="text-[9px] text-slate-400">giữ lại</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-[215px] bg-white border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-amber-500 to-amber-200"></div>
+              <div class="p-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-slate-700">Chi phí quảng cáo</span>
+                  <span class="src src-mix"><i></i>CẦN GHÉP</span>
+                </div>
+                <div id="m-g3" class="-my-1"></div>
+                <div class="grid grid-cols-2 gap-1.5 -mt-2">
+                  <div class="bg-amber-50 rounded-lg px-2 py-1.5">
+                    <div class="text-[8px] font-bold text-amber-700 uppercase tracking-wider">Đã tiêu</div>
+                    <div class="text-[13px] font-black text-amber-800 tabular-nums">520,0 Tr</div>
+                  </div>
+                  <div class="bg-slate-50 rounded-lg px-2 py-1.5">
+                    <div class="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Ngân sách</div>
+                    <div class="text-[13px] font-black text-slate-600 tabular-nums">800,0 Tr</div>
+                  </div>
+                </div>
+                <div class="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-[10px] font-bold text-slate-700">CIR 6,19%</span>
+                  <span class="text-[9px] text-slate-400">net 8,60%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nhịp độ -->
+          <div class="px-4 pt-3.5">
+            <div class="bg-white border border-slate-200 rounded-2xl p-3.5">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[11px] font-bold text-slate-700">Nhịp độ so với kỳ vọng</span>
+                <span class="src src-new"><i></i>MỚI</span>
+              </div>
+              <p class="text-[10px] text-slate-500 leading-snug mb-2.5">
+                Đã qua 21/30 ngày → kỳ vọng <strong class="text-slate-700">70,0%</strong>. GMV đang đạt
+                <strong class="text-slate-700">70,0%</strong> — <strong class="text-indigo-600">đúng nhịp</strong>.
+              </p>
+              <div class="space-y-2">
+                <div>
+                  <div class="flex justify-between text-[9px] mb-1"><span class="font-semibold text-slate-400">Nhịp kỳ vọng</span><span class="font-bold text-slate-400 tabular-nums">70,0%</span></div>
+                  <div class="h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-slate-300 rounded-full" style="width:70%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-[9px] mb-1"><span class="font-semibold text-slate-600">Thực hiện GMV</span><span class="font-bold text-indigo-600 tabular-nums">70,0%</span></div>
+                  <div class="h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-indigo-500 rounded-full transition-all duration-1000 bar" data-w="70" style="width:0%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chỉ số chính: 2 cột -->
+          <div class="px-4 pt-4 pb-1 flex items-center justify-between">
+            <h2 class="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider">Doanh thu &amp; giá trị</h2>
+            <span class="src src-ok"><i></i>CÓ SẴN</span>
+          </div>
+          <div class="px-4 grid grid-cols-2 gap-2.5" id="m-kpi-rev"></div>
+
+          <div class="px-4 pt-4 pb-1 flex items-center justify-between">
+            <h2 class="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider">Vận hành đơn</h2>
+            <span class="src src-ok"><i></i>CÓ SẴN</span>
+          </div>
+          <div class="px-4 grid grid-cols-2 gap-2.5" id="m-kpi-ops"></div>
+
+          <div class="px-4 pt-4 pb-1">
+            <div class="flex items-center justify-between">
+              <h2 class="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider">Khách hàng</h2>
+              <span class="src src-new"><i></i>CẦN NỐI API SÀN</span>
+            </div>
+          </div>
+          <div class="px-4 grid grid-cols-2 gap-2.5" id="m-kpi-cus"></div>
+
+          <div class="h-4"></div>
+        </div>
+
+        <!-- Thanh điều hướng đáy -->
+        <nav class="shrink-0 bg-white border-t border-slate-200 px-2 pt-2 pb-5 flex items-center justify-around">
+          <button class="flex flex-col items-center gap-0.5 text-[#6A9739]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h5v6H4V5zm10-1h5a1 1 0 011 1v4h-6V4zM4 12h6v7H5a1 1 0 01-1-1v-6zm10 0h6v6a1 1 0 01-1 1h-5v-7z" stroke-width="1.8"/></svg>
+            <span class="text-[9px] font-bold">Tổng quan</span>
+          </button>
+          <button class="flex flex-col items-center gap-0.5 text-slate-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 16V9m5 7V5m5 11v-4" stroke-linecap="round" stroke-width="2"/><rect height="18" rx="2" width="18" x="3" y="3" stroke-width="1.6"/></svg>
+            <span class="text-[9px] font-semibold">Biểu đồ</span>
+          </button>
+          <button class="flex flex-col items-center gap-0.5 text-slate-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" stroke-linecap="round" stroke-width="1.8"/></svg>
+            <span class="text-[9px] font-semibold">Đơn hàng</span>
+          </button>
+          <button class="flex flex-col items-center gap-0.5 text-slate-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8a3 3 0 100-6 3 3 0 000 6zm-7 13v-2a5 5 0 015-5h4a5 5 0 015 5v2" stroke-linecap="round" stroke-width="1.8"/></svg>
+            <span class="text-[9px] font-semibold">Cá nhân</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+    <div class="caption mt-4">
+      <div class="text-sm font-bold text-slate-800">1 · Trang chính</div>
+      <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+        Đầu trang dính: tìm kiếm + nút <strong>Bộ lọc</strong> (có huy hiệu đếm số điều kiện đang áp).
+        Đồng hồ tiến độ <strong>vuốt ngang</strong> để không chiếm hết màn. Chỉ số xếp <strong>2 cột</strong> theo chuẩn responsive.
+      </p>
+    </div>
+  </div>
+
+  <!-- ─────────── KHUNG 2: BIỂU ĐỒ & TỈ TRỌNG ─────────── -->
+  <div>
+    <div class="phone">
+      <div class="island"></div>
+      <div class="screen">
+        <div class="bg-white shrink-0 border-b border-slate-100">
+          <div class="h-11"></div>
+          <div class="px-4 pb-3 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <button class="p-1 -ml-1 text-slate-500">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-width="2"/></svg>
+              </button>
+              <div>
+                <div class="text-[13px] font-black text-slate-900 leading-tight font-heading">Biểu đồ &amp; tỉ trọng</div>
+                <div class="text-[10px] text-slate-400 leading-tight">01/09 — 30/09 · tất cả sàn</div>
+              </div>
+            </div>
+            <button class="p-2 text-slate-500">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-width="2"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="scroll bg-[#F8FAFC]">
+
+          <!-- Diễn biến theo ngày -->
+          <div class="px-4 pt-3.5">
+            <div class="bg-white border border-slate-200 rounded-2xl p-3.5">
+              <div class="flex items-start justify-between gap-2 mb-0.5">
+                <h3 class="text-xs font-bold text-slate-800 leading-snug">Diễn biến doanh số theo ngày</h3>
+                <span class="src src-ok shrink-0"><i></i>CÓ SẴN</span>
+              </div>
+              <p class="text-[10px] text-slate-500 mb-1">Cột = thực hiện · đường = luỹ kế so mục tiêu kỳ</p>
+              <div class="flex gap-1.5 mb-1">
+                <button class="chip on" style="padding:4px 10px;font-size:10px">GMV</button>
+                <button class="chip" style="padding:4px 10px;font-size:10px">NMV</button>
+                <button class="chip" style="padding:4px 10px;font-size:10px">Số đơn</button>
+              </div>
+              <div id="m-daily"></div>
+            </div>
+          </div>
+
+          <!-- Doanh số theo nguồn -->
+          <div class="px-4 pt-3">
+            <div class="bg-white border border-slate-200 rounded-2xl p-3.5">
+              <div class="flex items-start justify-between gap-2 mb-0.5">
+                <h3 class="text-xs font-bold text-slate-800 leading-snug">Doanh số theo nguồn bán</h3>
+                <span class="src src-new shrink-0"><i></i>CẦN XÂY</span>
+              </div>
+              <p class="text-[10px] text-slate-500 mb-1">Cột chồng — đọc được tổng ngày và cơ cấu nguồn</p>
+              <div id="m-source"></div>
+            </div>
+          </div>
+
+          <!-- Tỉ trọng gian hàng -->
+          <div class="px-4 pt-3">
+            <div class="bg-white border border-slate-200 rounded-2xl p-3.5">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="text-xs font-bold text-slate-800">Tỉ trọng theo gian hàng</h3>
+                <span class="src src-ok shrink-0"><i></i>CÓ SẴN</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div id="m-donut-shop" class="shrink-0"></div>
+                <div class="flex-1 space-y-1.5" id="m-legend-shop"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tiến độ từng nguồn -->
+          <div class="px-4 pt-3">
+            <div class="bg-white border border-slate-200 rounded-2xl p-3.5">
+              <div class="flex items-start justify-between gap-2 mb-2.5">
+                <div>
+                  <h3 class="text-xs font-bold text-slate-800">Tiến độ mục tiêu từng nguồn</h3>
+                  <p class="text-[10px] text-slate-500 mt-0.5">Vạch xám = nhịp kỳ vọng 70%</p>
+                </div>
+                <span class="src src-new shrink-0"><i></i>MỚI</span>
+              </div>
+              <div class="space-y-3" id="m-runrate"></div>
+            </div>
+          </div>
+
+          <!-- Top SKU -->
+          <div class="px-4 pt-3">
+            <div class="bg-white border border-slate-200 rounded-2xl p-3.5">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-xs font-bold text-slate-800">Top SKU bán chạy</h3>
+                <button class="text-[10px] font-semibold text-[#6A9739]">Xem tất cả →</button>
+              </div>
+              <div class="space-y-2.5" id="m-sku"></div>
+            </div>
+          </div>
+
+          <!-- Ba donut nhỏ: cuộn ngang -->
+          <div class="pt-3 pb-1 px-4">
+            <h3 class="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider">Tỉ trọng theo chiều</h3>
+            <p class="text-[10px] text-slate-400 mt-0.5 mb-2">Vuốt ngang: vận chuyển · thanh toán · kênh sàn</p>
+          </div>
+          <div class="hscroll pb-2">
+            <div class="w-[230px] bg-white border border-slate-200 rounded-2xl p-3">
+              <h4 class="text-[11px] font-bold text-slate-800 mb-1 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#6A9739]"></span>Đơn vị vận chuyển</h4>
+              <div class="flex items-center gap-2">
+                <div id="m-d-carrier" class="shrink-0"></div>
+                <div class="flex-1 space-y-1" id="m-l-carrier"></div>
+              </div>
+            </div>
+            <div class="w-[230px] bg-white border border-slate-200 rounded-2xl p-3">
+              <h4 class="text-[11px] font-bold text-slate-800 mb-1 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Phương thức thanh toán</h4>
+              <div class="flex items-center gap-2">
+                <div id="m-d-pay" class="shrink-0"></div>
+                <div class="flex-1 space-y-1" id="m-l-pay"></div>
+              </div>
+            </div>
+            <div class="w-[230px] bg-white border border-slate-200 rounded-2xl p-3">
+              <h4 class="text-[11px] font-bold text-slate-800 mb-1 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>GMV theo kênh sàn</h4>
+              <div class="flex items-center gap-2">
+                <div id="m-d-plat" class="shrink-0"></div>
+                <div class="flex-1 space-y-1" id="m-l-plat"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-4"></div>
+        </div>
+
+        <nav class="shrink-0 bg-white border-t border-slate-200 px-2 pt-2 pb-5 flex items-center justify-around">
+          <button class="flex flex-col items-center gap-0.5 text-slate-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h5v6H4V5zm10-1h5a1 1 0 011 1v4h-6V4zM4 12h6v7H5a1 1 0 01-1-1v-6zm10 0h6v6a1 1 0 01-1 1h-5v-7z" stroke-width="1.8"/></svg>
+            <span class="text-[9px] font-semibold">Tổng quan</span>
+          </button>
+          <button class="flex flex-col items-center gap-0.5 text-[#6A9739]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 16V9m5 7V5m5 11v-4" stroke-linecap="round" stroke-width="2"/><rect height="18" rx="2" width="18" x="3" y="3" stroke-width="1.6"/></svg>
+            <span class="text-[9px] font-bold">Biểu đồ</span>
+          </button>
+          <button class="flex flex-col items-center gap-0.5 text-slate-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" stroke-linecap="round" stroke-width="1.8"/></svg>
+            <span class="text-[9px] font-semibold">Đơn hàng</span>
+          </button>
+          <button class="flex flex-col items-center gap-0.5 text-slate-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8a3 3 0 100-6 3 3 0 000 6zm-7 13v-2a5 5 0 015-5h4a5 5 0 015 5v2" stroke-linecap="round" stroke-width="1.8"/></svg>
+            <span class="text-[9px] font-semibold">Cá nhân</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+    <div class="caption mt-4">
+      <div class="text-sm font-bold text-slate-800">2 · Biểu đồ &amp; tỉ trọng</div>
+      <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+        Biểu đồ giữ nguyên bản chất nhưng rút gọn trục và bỏ chú giải rườm rà. Các khối phụ
+        (vận chuyển / thanh toán / kênh sàn) gom thành <strong>dải vuốt ngang</strong> thay vì kéo dài trang.
+      </p>
+    </div>
+  </div>
+
+  <!-- ─────────── KHUNG 3: KHAY BỘ LỌC ─────────── -->
+  <div>
+    <div class="phone">
+      <div class="island"></div>
+      <div class="screen">
+
+        <!-- Nền mờ phía sau -->
+        <div class="absolute inset-0 bg-[#F8FAFC]">
+          <div class="h-11 bg-white"></div>
+          <div class="px-4 py-2.5 bg-white border-b border-slate-100 flex items-center gap-2">
+            <div class="w-7 h-7 rounded-full bg-[#6A9739] text-white flex items-center justify-center font-extrabold text-[11px]">ec</div>
+            <div class="text-[13px] font-black text-slate-900 font-heading">Tổng quan</div>
+          </div>
+          <div class="p-4 space-y-2.5 opacity-60">
+            <div class="h-24 bg-white border border-slate-200 rounded-2xl"></div>
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="h-20 bg-white border border-slate-200 rounded-xl"></div>
+              <div class="h-20 bg-white border border-slate-200 rounded-xl"></div>
+              <div class="h-20 bg-white border border-slate-200 rounded-xl"></div>
+              <div class="h-20 bg-white border border-slate-200 rounded-xl"></div>
+            </div>
+          </div>
+        </div>
+        <div class="absolute inset-0 bg-slate-900/45"></div>
+
+        <!-- Khay bộ lọc -->
+        <div class="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl flex flex-col" style="height:76%">
+          <div class="pt-2.5 pb-1 flex justify-center shrink-0">
+            <div class="w-9 h-1 rounded-full bg-slate-300"></div>
+          </div>
+          <div class="px-4 pb-3 flex items-center justify-between shrink-0">
+            <h3 class="text-sm font-black text-slate-900 font-heading">Bộ lọc</h3>
+            <button class="p-1.5 -mr-1.5 text-slate-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-width="2"/></svg>
+            </button>
+          </div>
+
+          <div class="scroll px-4 space-y-4 pb-3">
+            <div>
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Sàn thương mại</div>
+              <div class="flex flex-wrap gap-2">
+                <button class="chip on">Tất cả</button><button class="chip">TikTok Shop</button>
+                <button class="chip">Shopee</button><button class="chip">Lazada</button>
+              </div>
+            </div>
+            <div>
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Gian hàng</div>
+              <div class="flex flex-wrap gap-2">
+                <button class="chip on">Tất cả</button><button class="chip">ecochic.official</button><button class="chip">ecochicvn</button>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Nguồn bán</span>
+                <span class="src src-new"><i></i>CẦN XÂY</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button class="chip on">Tất cả</button><button class="chip">Thẻ sản phẩm</button>
+                <button class="chip">Affiliate</button><button class="chip">Livestream</button><button class="chip">Video</button>
+              </div>
+            </div>
+            <div>
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Loại kỳ</div>
+              <div class="inline-flex bg-slate-100 p-1 rounded-xl text-[11px] font-semibold text-slate-600 w-full">
+                <button class="flex-1 py-1.5 rounded-lg">Ngày</button>
+                <button class="flex-1 py-1.5 rounded-lg">Tuần</button>
+                <button class="flex-1 py-1.5 bg-white text-[#6A9739] rounded-lg shadow-sm font-bold">Tháng</button>
+                <button class="flex-1 py-1.5 rounded-lg">Quý</button>
+                <button class="flex-1 py-1.5 rounded-lg">Năm</button>
+              </div>
+            </div>
+            <label class="flex items-center justify-between py-1">
+              <span class="text-xs font-medium text-slate-600">Đối chiếu kỳ trước</span>
+              <span class="w-9 h-5 rounded-full bg-[#6A9739] relative">
+                <span class="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-white"></span>
+              </span>
+            </label>
+
+            <!-- Khoảng thời gian LUÔN ĐỨNG CUỐI (luật F1) -->
+            <div>
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Khoảng thời gian</div>
+              <div class="flex flex-wrap gap-2 mb-2.5">
+                <button class="chip">7 ngày</button><button class="chip">30 ngày</button>
+                <button class="chip on">Tháng này</button><button class="chip">Quý này</button>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="flex-1 flex items-center gap-2 border border-slate-200 rounded-xl px-3 py-2.5">
+                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3M7 11h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-width="2"/></svg>
+                  <span class="text-xs font-medium text-slate-700">01/09/2026</span>
+                </div>
+                <span class="text-slate-300 text-xs">—</span>
+                <div class="flex-1 flex items-center gap-2 border border-slate-200 rounded-xl px-3 py-2.5">
+                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3M7 11h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-width="2"/></svg>
+                  <span class="text-xs font-medium text-slate-700">30/09/2026</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hai nút dính đáy -->
+          <div class="shrink-0 border-t border-slate-200 px-4 pt-3 pb-6 flex gap-2.5 bg-white">
+            <button class="flex-1 py-3 rounded-xl border border-slate-200 text-slate-700 text-sm font-semibold">Thiết lập lại</button>
+            <button class="flex-[1.4] py-3 rounded-xl bg-[#6A9739] text-white text-sm font-bold">Áp dụng (2)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caption mt-4">
+      <div class="text-sm font-bold text-slate-800">3 · Khay bộ lọc</div>
+      <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+        Toàn bộ điều kiện lọc gom vào khay trượt từ đáy. <strong>Khoảng thời gian luôn nằm cuối</strong>,
+        hai nút <strong>Thiết lập lại / Áp dụng</strong> dính đáy để không phải cuộn ngược lên.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div class="max-w-[1400px] mx-auto mt-12 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+  <p class="text-xs text-slate-400">2026 © <span class="font-bold text-[#6A9739]">ECOCHIC</span> · Bản demo giao diện màn Báo cáo (điện thoại) — số liệu minh hoạ</p>
+  <p class="text-[11px] text-slate-400">Phiên bản thiết kế v2.5 · Cập nhật 15/09/2026</p>
+</div>
+
+<script>
+/* ═══════ DỮ LIỆU (đồng bộ với bản desktop) ═══════ */
+const DAYS = Array.from({length:30},(_,i)=>String(i+1).padStart(2,'0')+'/09');
+function series(base, amp, seed){
+  return DAYS.map((_,i)=>{
+    const w=[1,1.05,1,.95,1.1,1.35,1.25][i%7];
+    const wave=Math.sin((i+seed)*0.55)*amp + Math.cos((i+seed)*1.3)*amp*0.4;
+    return Math.max(0, Math.round((base*w+wave)/1000)*1000);
+  });
+}
+const gmvDaily = series(280_000_000, 42_000_000, 1);
+const targetDaily = DAYS.map(()=>400_000_000);
+const TARGET_PERIOD = 12_000_000_000;
+let acc=0;
+const cumPct = gmvDaily.map((v,i)=>{ if(i>20) return null; acc+=v; return +(acc/TARGET_PERIOD*100).toFixed(1); });
+
+const SOURCES=[
+  {name:'Thẻ sản phẩm',value:2_940_000_000,target:3_900_000_000,color:'#6A9739',base:98_000_000,seed:2},
+  {name:'Affiliate',   value:2_520_000_000,target:3_000_000_000,color:'#0EA5E9',base:84_000_000,seed:5},
+  {name:'Livestream',  value:2_352_000_000,target:4_200_000_000,color:'#F59E0B',base:78_000_000,seed:9},
+  {name:'Video',       value:  588_000_000,target:  900_000_000,color:'#8B5CF6',base:20_000_000,seed:13},
+];
+const SHOPS=[
+  {name:'ecochicvn',        value:5_880_000_000,color:'#6A9739'},
+  {name:'ecochic.official', value:2_520_000_000,color:'#14B8A6'},
+];
+const CARRIERS=[{name:'J&T Express',value:45,color:'#6A9739'},{name:'SPX Express',value:25,color:'#0EA5E9'},
+                {name:'GHTK',value:15,color:'#F59E0B'},{name:'Viettel Post',value:10,color:'#8B5CF6'},
+                {name:'Khác',value:5,color:'#CBD5E1'}];
+const PAYMENTS=[{name:'COD (Tiền mặt)',value:65,color:'#0EA5E9'},{name:'Chuyển khoản / Ví',value:35,color:'#6A9739'}];
+const PLATFORMS=[{name:'TikTok Shop',value:55,color:'#F59E0B'},{name:'Shopee',value:40,color:'#0EA5E9'},{name:'Lazada',value:5,color:'#8B5CF6'}];
+const TOP_SKU=[
+  {name:'Xà đơn lê tê mã A2000B ECOCHIC',pct:15,gmv:1_260_000_000,color:'#6A9739'},
+  {name:'Áo Baby Tee Cotton Mỹ ECOCHIC',pct:12,gmv:1_008_000_000,color:'#0EA5E9'},
+  {name:'Set Hộp 4 Quần Chip ECOCHIC A699 Cotton Kháng Khuẩn',pct:8,gmv:672_000_000,color:'#F59E0B'},
+  {name:'Quần Legging Nữ ECOCHIC Siêu Co Giãn Định Hình',pct:6,gmv:504_000_000,color:'#8B5CF6'},
+];
+
+const KPI={
+  'm-kpi-rev':[
+    {label:'Doanh số GMV', val:'8,40 Tỷ',  d:+12.8, src:'ok',  s:[62,65,64,70,72,78,80]},
+    {label:'Doanh số NMV', val:'6,05 Tỷ',  d:+10.4, src:'ok',  s:[48,50,49,53,55,58,60]},
+    {label:'Doanh số / đơn',val:'400.000', d:+2.1,  src:'ok',  s:[38,39,38,40,40,41,40]},
+    {label:'Chi phí quảng cáo',val:'520,0 Tr',d:+18.5,src:'mix',s:[30,34,36,40,45,48,52]},
+  ],
+  'm-kpi-ops':[
+    {label:'Tổng số đơn',   val:'21.000', d:+10.5, src:'ok', s:[15,16,16,18,19,20,21]},
+    {label:'Tỉ lệ G2N',     val:'72,0%',  d:+1.2,  src:'ok', s:[69,70,70,71,71,72,72]},
+    {label:'Tỉ lệ đơn huỷ', val:'28,0%',  d:-1.2,  src:'ok', s:[31,30,30,29,29,28,28], inv:true},
+    {label:'Tỉ lệ hoàn trả',val:'5,0%',   d:-0.4,  src:'ok', s:[5.6,5.5,5.4,5.2,5.1,5,5], inv:true},
+  ],
+  'm-kpi-cus':[
+    {label:'Lượt truy cập', val:'1.400.000', d:+8.2, src:'new', s:[1.05,1.1,1.15,1.22,1.3,1.35,1.4]},
+    {label:'Tỉ lệ chuyển đổi',val:'1,50%',   d:+0.1, src:'new', s:[1.3,1.35,1.38,1.42,1.45,1.48,1.5]},
+    {label:'Số người mua',  val:'15.000',    d:+9.3, src:'ok',  s:[11,11.6,12.2,13,13.8,14.4,15]},
+    {label:'Người mua mới', val:'60,0%',     d:+2.4, src:'mix', s:[54,55,56,57,58,59,60]},
+  ],
+};
+
+/* ═══════ TIỆN ÍCH ═══════ */
+const vnd=n=>n.toLocaleString('vi-VN');
+const shortVnd=n=>{const a=Math.abs(n);
+  if(a>=1e9)return (n/1e9).toFixed(2).replace('.',',')+' Tỷ';
+  if(a>=1e6)return (n/1e6).toFixed(1).replace('.',',')+' Tr';
+  if(a>=1e3)return (n/1e3).toFixed(0)+' N'; return vnd(n);};
+const pct1=n=>n.toFixed(1).replace('.',',')+'%';
+const SRC_LABEL={ok:['src-ok','CÓ SẴN'],mix:['src-mix','CẦN GHÉP'],new:['src-new','CẦN XÂY']};
+
+function sparkSvg(vals,color){
+  const w=100,h=24,min=Math.min(...vals),max=Math.max(...vals),rng=(max-min)||1;
+  const pts=vals.map((v,i)=>[(i/(vals.length-1))*w, h-2-((v-min)/rng)*(h-6)]);
+  const line=pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  const id='g'+Math.random().toString(36).slice(2,8);
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${color}" stop-opacity=".22"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="0,${h} ${line} ${w},${h}" fill="url(#${id})"/>
+    <polyline points="${line}" fill="none" stroke="${color}" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+  </svg>`;
+}
+
+/* ═══════ THẺ CHỈ SỐ ═══════ */
+Object.entries(KPI).forEach(([id,items])=>{
+  document.getElementById(id).innerHTML = items.map(k=>{
+    const good = k.inv ? k.d<0 : k.d>0;
+    const tone = good ? 'text-emerald-700 bg-emerald-50' : 'text-rose-700 bg-rose-50';
+    const unit = k.val.includes('%') ? ' điểm' : '%';
+    const [cls,txt] = SRC_LABEL[k.src];
+    return `<div class="bg-white border border-slate-200 rounded-xl p-2.5">
+      <div class="flex items-start justify-between gap-1 mb-1">
+        <span class="text-[10px] font-semibold text-slate-500 leading-tight min-h-[24px]">${k.label}</span>
+        <span class="src ${cls} shrink-0"><i></i>${txt}</span>
+      </div>
+      <div class="text-base font-black text-slate-900 tabular-nums leading-none font-heading">${k.val}</div>
+      <div class="mt-1.5">${sparkSvg(k.s, good?'#6A9739':'#F43F5E')}</div>
+      <span class="inline-block mt-1 text-[9px] font-bold ${tone} px-1.5 py-0.5 rounded">
+        ${k.d>0?'▲ +':'▼ '}${String(k.d).replace('.',',')}${unit}
+      </span>
+    </div>`;
+  }).join('');
+});
+
+/* ═══════ ĐỒNG HỒ TIẾN ĐỘ ═══════ */
+function gauge(el,pct,color){
+  new ApexCharts(document.querySelector(el),{
+    chart:{type:'radialBar',height:130,sparkline:{enabled:true},animations:{enabled:true,speed:900}},
+    series:[pct], colors:[color],
+    plotOptions:{radialBar:{startAngle:-130,endAngle:130,hollow:{size:'60%'},
+      track:{background:'#F1F5F9',strokeWidth:'100%'},
+      dataLabels:{name:{show:false},
+        value:{offsetY:6,fontSize:'22px',fontWeight:800,color:'#0F172A',
+               fontFamily:'"Plus Jakarta Sans"',formatter:v=>Math.round(v)+'%'}}}},
+    stroke:{lineCap:'round'},
+  }).render();
+}
+gauge('#m-g1',70,'#6A9739'); gauge('#m-g2',70,'#14B8A6'); gauge('#m-g3',65,'#F59E0B');
+
+/* ═══════ BIỂU ĐỒ DIỄN BIẾN ═══════ */
+new ApexCharts(document.querySelector('#m-daily'),{
+  chart:{type:'line',height:190,toolbar:{show:false},fontFamily:'Inter',zoom:{enabled:false},animations:{speed:700}},
+  series:[
+    {name:'Mục tiêu',type:'column',data:targetDaily},
+    {name:'GMV',type:'column',data:gmvDaily},
+    {name:'Luỹ kế %',type:'line',data:cumPct},
+  ],
+  colors:['#E2E8F0','#6A9739','#F59E0B'],
+  stroke:{width:[0,0,2.4],curve:'smooth'},
+  plotOptions:{bar:{columnWidth:'70%',borderRadius:2,borderRadiusApplication:'end'}},
+  dataLabels:{enabled:false},
+  grid:{borderColor:'#F1F5F9',strokeDashArray:4,padding:{left:0,right:0}},
+  legend:{show:false},
+  xaxis:{categories:DAYS,tickAmount:4,axisBorder:{show:false},axisTicks:{show:false},
+         labels:{style:{colors:'#94A3B8',fontSize:'9px'}}},
+  yaxis:[
+    {labels:{formatter:v=>shortVnd(v),style:{colors:'#94A3B8',fontSize:'9px'}},axisBorder:{show:false},axisTicks:{show:false}},
+    {show:false},
+    {opposite:true,min:0,max:100,tickAmount:4,labels:{formatter:v=>Math.round(v)+'%',style:{colors:'#F59E0B',fontSize:'9px'}},
+     axisBorder:{show:false},axisTicks:{show:false}},
+  ],
+  tooltip:{shared:true,intersect:false,style:{fontSize:'10px'},
+    y:{formatter:(v,{seriesIndex})=> v==null?'—':(seriesIndex===2?pct1(v):vnd(v)+' đ')}},
+}).render();
+
+/* ═══════ CỘT CHỒNG THEO NGUỒN ═══════ */
+new ApexCharts(document.querySelector('#m-source'),{
+  chart:{type:'bar',height:180,stacked:true,toolbar:{show:false},fontFamily:'Inter',animations:{speed:700}},
+  series:SOURCES.map(s=>({name:s.name,data:series(s.base,s.base*0.18,s.seed)})),
+  colors:SOURCES.map(s=>s.color),
+  plotOptions:{bar:{columnWidth:'75%',borderRadius:2,borderRadiusApplication:'end',borderRadiusWhenStacked:'last'}},
+  dataLabels:{enabled:false},
+  grid:{borderColor:'#F1F5F9',strokeDashArray:4},
+  legend:{position:'top',horizontalAlign:'left',fontSize:'9px',markers:{radius:3,width:7,height:7},itemMargin:{horizontal:5}},
+  xaxis:{categories:DAYS,tickAmount:4,axisBorder:{show:false},axisTicks:{show:false},
+         labels:{style:{colors:'#94A3B8',fontSize:'9px'}}},
+  yaxis:{labels:{formatter:v=>shortVnd(v),style:{colors:'#94A3B8',fontSize:'9px'}}},
+  tooltip:{shared:true,intersect:false,style:{fontSize:'10px'},y:{formatter:v=>vnd(v)+' đ'}},
+}).render();
+
+/* ═══════ DONUT ═══════ */
+function donut(el,data,size,label,value){
+  new ApexCharts(document.querySelector(el),{
+    chart:{type:'donut',height:size,width:size,animations:{speed:800}},
+    series:data.map(d=>d.value), labels:data.map(d=>d.name), colors:data.map(d=>d.color),
+    stroke:{width:2,colors:['#fff']}, dataLabels:{enabled:false}, legend:{show:false},
+    plotOptions:{pie:{donut:{size:'70%',labels:{show:!!label,
+      name:{show:false},
+      value:{show:true,fontSize:'12px',fontWeight:800,color:'#0F172A',offsetY:-4,
+             fontFamily:'"Plus Jakarta Sans"',formatter:()=>value},
+      total:{show:true,showAlways:true,label:label,fontSize:'8px',fontWeight:600,color:'#94A3B8',formatter:()=>value}
+    }}}},
+    tooltip:{style:{fontSize:'10px'},y:{formatter:v=>v>100?vnd(v)+' đ':pct1(v)}},
+  }).render();
+}
+function legend(el,data,total,money){
+  document.getElementById(el).innerHTML = data.map(d=>{
+    const p = total ? d.value/total*100 : d.value;
+    return `<div class="flex items-center justify-between gap-1.5 text-[10px]">
+      <span class="flex items-center gap-1.5 min-w-0">
+        <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${d.color}"></span>
+        <span class="text-slate-600 font-medium truncate">${d.name}</span>
+      </span>
+      <span class="flex items-center gap-1.5 shrink-0">
+        ${money?`<span class="text-slate-400 tabular-nums">${shortVnd(d.value)}</span>`:''}
+        <span class="font-bold text-slate-800 tabular-nums">${pct1(p)}</span>
+      </span></div>`;
+  }).join('');
+}
+const shopTotal = SHOPS.reduce((a,b)=>a+b.value,0);
+donut('#m-donut-shop', SHOPS, 130, 'TỔNG GMV', shortVnd(shopTotal));
+legend('m-legend-shop', SHOPS, shopTotal, true);
+donut('#m-d-carrier', CARRIERS, 92,'',''); legend('m-l-carrier', CARRIERS, 0, false);
+donut('#m-d-pay',     PAYMENTS, 92,'',''); legend('m-l-pay',     PAYMENTS, 0, false);
+donut('#m-d-plat',    PLATFORMS,92,'',''); legend('m-l-plat',    PLATFORMS,0, false);
+
+/* ═══════ TIẾN ĐỘ TỪNG NGUỒN ═══════ */
+document.getElementById('m-runrate').innerHTML = SOURCES.map(s=>{
+  const p = s.value/s.target*100, behind = p<70;
+  return `<div>
+    <div class="flex items-center justify-between mb-1">
+      <span class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-600">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:${s.color}"></span>${s.name}</span>
+      <span class="flex items-center gap-1.5">
+        <span class="text-xs font-black tabular-nums" style="color:${s.color}">${Math.round(p)}%</span>
+        ${behind?'<span class="text-[8px] font-bold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded">CHẬM</span>'
+                :'<span class="text-[8px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">ĐÚNG NHỊP</span>'}
+      </span>
+    </div>
+    <div class="relative h-1.5 bg-slate-100 rounded-full overflow-hidden">
+      <div class="h-full rounded-full bar transition-all duration-1000" data-w="${p}" style="width:0%;background:${s.color}"></div>
+      <span class="absolute top-0 bottom-0 w-px bg-slate-400/70" style="left:70%"></span>
+    </div>
+    <div class="flex justify-between mt-1 text-[9px] text-slate-400 tabular-nums">
+      <span>TH <strong class="text-slate-600">${shortVnd(s.value)}</strong></span>
+      <span>MT ${shortVnd(s.target)}</span>
+    </div></div>`;
+}).join('');
+
+/* ═══════ TOP SKU ═══════ */
+document.getElementById('m-sku').innerHTML = TOP_SKU.map((s,i)=>`
+  <div>
+    <div class="flex items-start justify-between gap-2 mb-1">
+      <span class="flex items-start gap-2 min-w-0">
+        <span class="w-4 h-4 rounded text-white text-[9px] font-black flex items-center justify-center shrink-0 mt-px"
+              style="background:${s.color}">${i+1}</span>
+        <span class="text-[11px] font-semibold text-slate-700 leading-snug">${s.name}</span>
+      </span>
+      <span class="text-[11px] font-bold shrink-0 tabular-nums" style="color:${s.color}">${pct1(s.pct)}</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+        <div class="h-full rounded-full bar transition-all duration-1000" data-w="${s.pct/18*100}" style="width:0%;background:${s.color}"></div>
+      </div>
+      <span class="text-[10px] text-slate-400 tabular-nums shrink-0">${shortVnd(s.gmv)}</span>
+    </div>
+  </div>`).join('');
+
+/* ═══════ CHẠY HIỆU ỨNG THANH ═══════ */
+setTimeout(()=>{ document.querySelectorAll('.bar').forEach(b=>{ b.style.width = b.dataset.w+'%'; }); }, 350);
+</script>
+
+</body>
+</html>

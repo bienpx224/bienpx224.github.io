@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html class="h-full bg-slate-50" lang="vi">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tổng quan kinh doanh — Ecochic Report</title>
+
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- ApexCharts -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.js"></script>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['"Inter"', '"Plus Jakarta Sans"', 'sans-serif'],
+        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+      },
+      colors: {
+        brand: {
+          50:'#f4f8ee',100:'#e7f0dc',200:'#cfe2bc',300:'#aecd90',
+          400:'#8bb463',500:'#6A9739',600:'#58802d',700:'#466524',
+          800:'#38501f',900:'#233213',
+        }
+      },
+      keyframes: {
+        pulseSoft: { '0%,100%':{opacity:'1'}, '50%':{opacity:'.4'} },
+      },
+      animation: {
+        pulseSoft: 'pulseSoft 2.2s ease-in-out infinite',
+      }
+    }
+  }
+}
+</script>
+
+<style>
+  body{font-feature-settings:"cv02","cv03","cv04","cv11";-webkit-font-smoothing:antialiased}
+  ::-webkit-scrollbar{width:7px;height:7px}
+  ::-webkit-scrollbar-track{background:#f1f5f9}
+  ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:9999px}
+  ::-webkit-scrollbar-thumb:hover{background:#94a3b8}
+
+  /* Xuất hiện dần khi cuộn tới */
+  .reveal{opacity:0;transform:translateY(16px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
+
+  /* Thẻ nổi nhẹ khi rê chuột */
+  .lift{transition:box-shadow .22s ease,transform .22s ease,border-color .22s ease}
+  .lift:hover{transform:translateY(-2px);box-shadow:0 10px 26px -12px rgba(15,23,42,.18);border-color:#cbd5e1}
+
+  /* Nhãn nguồn dữ liệu */
+  .src{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;line-height:1;
+       padding:3px 7px;border-radius:9999px;white-space:nowrap}
+  .src-ok{background:#ecfdf5;color:#047857}
+  .src-mix{background:#fffbeb;color:#b45309}
+  .src-new{background:#eff6ff;color:#1d4ed8}
+  .src i{width:5px;height:5px;border-radius:9999px;display:block}
+  .src-ok i{background:#10b981}.src-mix i{background:#f59e0b}.src-new i{background:#3b82f6}
+
+  .spark{width:100%;height:28px;display:block;overflow:visible}
+
+  .apexcharts-tooltip{box-shadow:0 12px 32px -12px rgba(15,23,42,.28)!important;border:1px solid #e2e8f0!important;border-radius:12px!important}
+  .apexcharts-legend-text{font-family:Inter,sans-serif!important;font-size:11px!important;color:#475569!important}
+  .apexcharts-xaxistooltip{display:none!important}
+
+  /* Dải chip lọc */
+  .chip{font-size:11px;font-weight:600;padding:5px 11px;border-radius:9999px;border:1px solid #e2e8f0;
+        background:#fff;color:#475569;transition:all .16s ease;cursor:pointer;white-space:nowrap}
+  .chip:hover{border-color:#cbd5e1;background:#f8fafc}
+  .chip.on{background:#6A9739;border-color:#6A9739;color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+
+  .sec-title{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+</style>
+</head>
+
+<body class="h-full flex flex-col font-sans text-slate-800 bg-[#F8FAFC]">
+
+<!-- ═════════════════════ HEADER ═════════════════════ -->
+<header class="h-16 bg-white border-b border-slate-200 sticky top-0 z-50 flex items-center justify-between px-6 shrink-0">
+  <div class="flex items-center gap-4">
+    <button onclick="toggleSidebar()" class="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition" title="Thu gọn / Mở rộng">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-width="2"/></svg>
+    </button>
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-full bg-[#6A9739] text-white flex items-center justify-center font-extrabold text-sm tracking-tighter">ec</div>
+      <div class="flex flex-col">
+        <span class="text-xl font-black tracking-tight text-[#6A9739] leading-none">ecochic</span>
+        <span class="text-[10px] font-medium text-slate-400 mt-0.5">report.ecochic.space</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <div class="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-emerald-50 rounded-lg">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulseSoft"></span>
+      <span class="text-[11px] font-semibold text-emerald-700">Dữ liệu làm mới 15 phút/lần · 09:30</span>
+    </div>
+    <button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#6A9739] hover:bg-brand-600 text-white text-xs font-semibold rounded-lg shadow-sm transition">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-width="2.5"/></svg>
+      Tạo bảng điều khiển
+    </button>
+    <button class="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition" title="Ứng dụng">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z"/></svg>
+    </button>
+    <div class="relative">
+      <button class="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition" title="Thông báo">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 00-4-5.7V5a2 2 0 10-4 0v.3C7.7 6.2 6 8.4 6 11v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-width="2"/></svg>
+        <span class="absolute top-1 right-1 bg-rose-500 text-white text-[10px] font-bold rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center border-2 border-white">3</span>
+      </button>
+    </div>
+    <div class="h-6 w-px bg-slate-200 mx-1"></div>
+    <div class="flex items-center gap-2 pl-1 cursor-pointer group">
+      <div class="w-8 h-8 rounded-full bg-[#6A9739] text-white font-bold flex items-center justify-center text-sm">A</div>
+      <div class="text-left hidden md:block">
+        <div class="text-xs font-bold text-slate-800 leading-tight">Super Admin</div>
+        <div class="text-[11px] text-slate-400 leading-tight">Ban Giám đốc</div>
+      </div>
+      <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-width="2"/></svg>
+    </div>
+  </div>
+</header>
+
+<div class="flex flex-1 overflow-hidden">
+
+<!-- ═════════════════════ SIDEBAR ═════════════════════ -->
+<aside id="app-sidebar" class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 overflow-y-auto">
+  <div class="p-4">
+    <div class="flex items-center justify-between px-2 mb-4">
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h5v6H4V5zm10-1h5a1 1 0 011 1v4h-6V4zM4 12h6v7H5a1 1 0 01-1-1v-6zm10 0h6v6a1 1 0 01-1 1h-5v-7z" stroke-width="1.8"/></svg>
+        <span class="text-sm font-bold text-slate-800">Bảng điều khiển</span>
+      </div>
+      <span class="text-[10px] font-bold text-brand-700 bg-brand-50 px-1.5 py-0.5 rounded">v2.5</span>
+    </div>
+
+    <div class="mb-1 px-2 flex items-center justify-between">
+      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Báo cáo kinh doanh</span>
+      <span class="text-[9px] text-slate-300 italic">kéo để xếp</span>
+    </div>
+    <nav class="space-y-0.5 text-sm mb-5">
+      <a class="flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-brand-50 text-brand-800 font-bold border-l-[3px] border-[#6A9739] cursor-pointer">
+        <span class="flex items-center gap-2"><span class="text-slate-300 text-[10px]">⠿</span>Tổng quan kinh doanh</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#6A9739]"></span>
+      </a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer"><span class="text-slate-300 text-[10px]">⠿</span>So sánh kỳ trước</a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer"><span class="text-slate-300 text-[10px]">⠿</span>Đơn hàng</a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer"><span class="text-slate-300 text-[10px]">⠿</span>Sản phẩm &amp; SKU</a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer"><span class="text-slate-300 text-[10px]">⠿</span>Khách hàng</a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer"><span class="text-slate-300 text-[10px]">⠿</span>Marketing &amp; quảng cáo</a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer"><span class="text-slate-300 text-[10px]">⠿</span>Tài chính</a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer"><span class="text-slate-300 text-[10px]">⠿</span>Kho &amp; Mua hàng</a>
+    </nav>
+
+    <div class="mb-1 px-2"><span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Thiết lập</span></div>
+    <nav class="space-y-0.5 text-sm mb-5">
+      <a class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer">
+        Mục tiêu &amp; hạn mức <span class="src src-new"><i></i>MỚI</span>
+      </a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer">Nguồn dữ liệu</a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer">Lịch gửi báo cáo</a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer">Phân quyền xem</a>
+    </nav>
+
+    <div class="mb-1 px-2"><span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Trợ giúp</span></div>
+    <nav class="space-y-0.5 text-sm">
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer">Chỉ số &amp; cách tính</a>
+      <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium cursor-pointer">Hướng dẫn sử dụng</a>
+    </nav>
+  </div>
+
+  <div class="p-4">
+    <div class="bg-brand-50 border border-brand-100 rounded-xl p-3">
+      <div class="text-xs font-bold text-brand-800">Cần trợ giúp?</div>
+      <a class="text-[11px] text-brand-700 hover:underline font-medium cursor-pointer">Xem hướng dẫn sử dụng →</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ═════════════════════ MAIN ═════════════════════ -->
+<main class="flex-1 overflow-y-auto">
+
+  <!-- Băng thông báo bản demo -->
+  <div class="px-8 pt-4">
+    <div class="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-2.5">
+      <svg class="w-4 h-4 text-amber-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+      <p class="text-xs text-amber-900 leading-relaxed">
+        <strong>Bản demo giao diện để duyệt thiết kế.</strong> Toàn bộ con số là <strong>số minh hoạ</strong>, không phải dữ liệu thật của kỳ nào.
+        Mỗi khối đều gắn <strong>nhãn nguồn dữ liệu</strong> để thấy rõ phần nào hệ thống đã có, phần nào cần bổ sung — xem chú giải bên dưới.
+      </p>
+    </div>
+  </div>
+
+  <!-- Tiêu đề trang -->
+  <div class="px-8 pt-5">
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <nav class="flex items-center gap-1.5 text-[11px] text-slate-400 font-medium mb-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10" stroke-linecap="round" stroke-width="2"/></svg>
+          Trang chủ <span class="text-slate-300">/</span> Báo cáo <span class="text-slate-300">/</span>
+          <span class="text-slate-600 font-semibold">Tổng quan kinh doanh</span>
+        </nav>
+        <div class="flex items-center gap-2.5">
+          <h1 class="text-2xl font-black tracking-tight text-slate-900 font-heading">TỔNG QUAN KINH DOANH</h1>
+          <span class="text-[10px] font-bold text-brand-700 bg-brand-50 border border-brand-100 px-2 py-1 rounded-md">ĐA SÀN</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-1">Doanh thu &amp; tiến độ mục tiêu · vận hành đơn · khách hàng &amp; chuyển đổi — hợp nhất TikTok Shop, Shopee, Lazada</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button class="inline-flex items-center gap-1.5 px-3 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg text-xs font-semibold transition">
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-width="2"/></svg>
+          Lịch gửi báo cáo
+        </button>
+        <button class="inline-flex items-center gap-1.5 px-3 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg text-xs font-semibold transition">
+          <svg class="w-3.5 h-3.5 text-[#6A9739]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-width="2"/></svg>
+          Xuất Excel / PDF
+        </button>
+        <button class="inline-flex items-center gap-1.5 px-3 py-2 bg-[#6A9739] hover:bg-brand-600 text-white rounded-lg text-xs font-semibold shadow-sm transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-width="2.5"/></svg>
+          Thêm tiện ích
+        </button>
+        <button class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chú giải nguồn dữ liệu -->
+    <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 bg-white border border-slate-200 rounded-xl px-4 py-2.5">
+      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Nguồn dữ liệu</span>
+      <span class="flex items-center gap-1.5 text-[11px] text-slate-600"><span class="src src-ok"><i></i>CÓ SẴN</span> hệ thống đang lưu, dựng được ngay</span>
+      <span class="flex items-center gap-1.5 text-[11px] text-slate-600"><span class="src src-mix"><i></i>CẦN GHÉP NGUỒN</span> có dữ liệu thô, cần chốt công thức</span>
+      <span class="flex items-center gap-1.5 text-[11px] text-slate-600"><span class="src src-new"><i></i>CẦN XÂY MỚI</span> phải nối thêm API sàn hoặc làm màn nhập liệu</span>
+    </div>
+  </div>
+
+  <!-- ═════════ BỘ LỌC ═════════ -->
+  <section class="px-8 pt-4">
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-[0_1px_2px_rgba(15,23,42,.04)]">
+
+      <!-- Hàng 1: phạm vi dữ liệu -->
+      <div class="flex flex-wrap items-center gap-x-8 gap-y-3 px-4 py-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider w-16 shrink-0">Sàn</span>
+          <div class="flex flex-wrap gap-1.5">
+            <button class="chip on">Tất cả</button>
+            <button class="chip">TikTok Shop</button>
+            <button class="chip">Shopee</button>
+            <button class="chip">Lazada</button>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider w-16 shrink-0">Gian hàng</span>
+          <div class="flex flex-wrap gap-1.5">
+            <button class="chip on">Tất cả</button>
+            <button class="chip">ecochic.official</button>
+            <button class="chip">ecochicvn</button>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0">Nguồn bán</span>
+          <div class="flex flex-wrap gap-1.5">
+            <button class="chip on">Tất cả</button>
+            <button class="chip">Thẻ sản phẩm</button>
+            <button class="chip">Affiliate</button>
+            <button class="chip">Livestream</button>
+            <button class="chip">Video</button>
+          </div>
+          <span class="src src-new"><i></i>CẦN XÂY MỚI</span>
+        </div>
+      </div>
+
+      <!-- Hàng 2: kỳ + thời gian + hành động -->
+      <div class="flex flex-wrap items-center justify-between gap-4 px-4 py-3">
+        <div class="flex flex-wrap items-center gap-5">
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Loại kỳ</span>
+            <div class="inline-flex bg-slate-100 p-1 rounded-xl text-xs font-semibold text-slate-600">
+              <button class="px-2.5 py-1 rounded-lg hover:text-slate-900 transition">Ngày</button>
+              <button class="px-2.5 py-1 rounded-lg hover:text-slate-900 transition">Tuần</button>
+              <button class="px-2.5 py-1 bg-white text-[#6A9739] rounded-lg shadow-sm font-bold">Tháng</button>
+              <button class="px-2.5 py-1 rounded-lg hover:text-slate-900 transition">Quý</button>
+              <button class="px-2.5 py-1 rounded-lg hover:text-slate-900 transition">Năm</button>
+            </div>
+          </div>
+
+          <label class="flex items-center gap-2 text-xs">
+            <input type="checkbox" checked class="rounded border-slate-300 text-[#6A9739] focus:ring-brand-500/30 w-3.5 h-3.5">
+            <span class="font-medium text-slate-600">Đối chiếu kỳ trước</span>
+          </label>
+
+          <!-- Khoảng thời gian luôn đứng CUỐI dải lọc (luật F1) -->
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Khoảng thời gian</span>
+            <button class="flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-700 transition">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3M7 11h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-width="2"/></svg>
+              01/09 — 30/09
+              <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-width="2.5"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button class="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 font-medium py-1.5 px-2 rounded-lg hover:bg-slate-100 transition">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-width="2"/></svg>
+            Xoá bộ lọc
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ A. TIẾN ĐỘ MỤC TIÊU ═════════ -->
+  <section class="px-8 pt-6 reveal">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+      <div class="flex items-center gap-2.5">
+        <span class="w-6 h-6 rounded-lg bg-brand-50 flex items-center justify-center">
+          <svg class="w-3.5 h-3.5 text-[#6A9739]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 6a4 4 0 100 8 4 4 0 000-8z" stroke-width="2"/></svg>
+        </span>
+        <h2 class="sec-title text-slate-700">Tiến độ mục tiêu kỳ (Runrate)</h2>
+        <span class="text-[11px] text-slate-400">Thực hiện so với mục tiêu tháng 9 · đã qua 21/30 ngày</span>
+        <span class="src src-new"><i></i>CẦN XÂY MỚI — màn nhập mục tiêu</span>
+      </div>
+      <button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-[11px] font-semibold text-slate-700 transition">
+        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.3 4.3a2 2 0 013.4 0l.7 1.2a2 2 0 002 1l1.3-.1a2 2 0 011.8 3l-.7 1.2a2 2 0 000 2l.7 1.2a2 2 0 01-1.8 3l-1.3-.1a2 2 0 00-2 1l-.7 1.2a2 2 0 01-3.4 0l-.7-1.2a2 2 0 00-2-1l-1.3.1a2 2 0 01-1.8-3l.7-1.2a2 2 0 000-2l-.7-1.2a2 2 0 011.8-3l1.3.1a2 2 0 002-1l.7-1.2z" stroke-width="1.6"/></svg>
+        Thiết lập mục tiêu kỳ
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-4">
+
+      <!-- GMV -->
+      <div class="lift bg-white border border-slate-200 rounded-2xl overflow-hidden">
+        <div class="h-1 bg-gradient-to-r from-[#6A9739] to-brand-300"></div>
+        <div class="p-4">
+          <div class="flex items-start justify-between mb-1">
+            <div>
+              <div class="text-xs font-bold text-slate-700">Tổng doanh số — GMV</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Trước huỷ &amp; hoàn</div>
+            </div>
+            <span class="src src-ok"><i></i>CÓ SẴN</span>
+          </div>
+          <div id="gauge-gmv" class="-mt-1"></div>
+          <div class="grid grid-cols-2 gap-2 -mt-3">
+            <div class="bg-brand-50/70 rounded-lg px-2.5 py-2">
+              <div class="text-[9px] font-bold text-brand-700 uppercase tracking-wider">Thực hiện</div>
+              <div class="text-sm font-black text-brand-800 tabular-nums" data-count="8400000000" data-fmt="vnd">0</div>
+            </div>
+            <div class="bg-slate-50 rounded-lg px-2.5 py-2">
+              <div class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Mục tiêu</div>
+              <div class="text-sm font-black text-slate-600 tabular-nums">12,00 Tỷ</div>
+            </div>
+          </div>
+          <div class="mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between">
+            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7" stroke-linecap="round" stroke-width="2.5"/></svg>+12,8%
+            </span>
+            <span class="text-[10px] text-slate-400">so kỳ trước</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- NMV -->
+      <div class="lift bg-white border border-slate-200 rounded-2xl overflow-hidden">
+        <div class="h-1 bg-gradient-to-r from-teal-500 to-teal-300"></div>
+        <div class="p-4">
+          <div class="flex items-start justify-between mb-1">
+            <div>
+              <div class="text-xs font-bold text-slate-700">Doanh số sau huỷ — NMV</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">GMV trừ đơn đã huỷ</div>
+            </div>
+            <span class="src src-ok"><i></i>CÓ SẴN</span>
+          </div>
+          <div id="gauge-nmv" class="-mt-1"></div>
+          <div class="grid grid-cols-2 gap-2 -mt-3">
+            <div class="bg-teal-50 rounded-lg px-2.5 py-2">
+              <div class="text-[9px] font-bold text-teal-700 uppercase tracking-wider">Thực hiện</div>
+              <div class="text-sm font-black text-teal-800 tabular-nums" data-count="6048000000" data-fmt="vnd">0</div>
+            </div>
+            <div class="bg-slate-50 rounded-lg px-2.5 py-2">
+              <div class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Mục tiêu</div>
+              <div class="text-sm font-black text-slate-600 tabular-nums">8,64 Tỷ</div>
+            </div>
+          </div>
+          <div class="mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between">
+            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md">
+              <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>G2N 72,0%
+            </span>
+            <span class="text-[10px] text-slate-400">tỉ lệ giữ lại doanh số</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chi phí ADS -->
+      <div class="lift bg-white border border-slate-200 rounded-2xl overflow-hidden">
+        <div class="h-1 bg-gradient-to-r from-amber-500 to-amber-300"></div>
+        <div class="p-4">
+          <div class="flex items-start justify-between mb-1">
+            <div>
+              <div class="text-xs font-bold text-slate-700">Chi phí quảng cáo</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">ADS · so ngân sách kỳ</div>
+            </div>
+            <span class="src src-mix"><i></i>CẦN GHÉP NGUỒN</span>
+          </div>
+          <div id="gauge-ads" class="-mt-1"></div>
+          <div class="grid grid-cols-2 gap-2 -mt-3">
+            <div class="bg-amber-50 rounded-lg px-2.5 py-2">
+              <div class="text-[9px] font-bold text-amber-700 uppercase tracking-wider">Đã tiêu</div>
+              <div class="text-sm font-black text-amber-800 tabular-nums" data-count="520000000" data-fmt="vnd">0</div>
+            </div>
+            <div class="bg-slate-50 rounded-lg px-2.5 py-2">
+              <div class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Ngân sách</div>
+              <div class="text-sm font-black text-slate-600 tabular-nums">800,0 Tr</div>
+            </div>
+          </div>
+          <div class="mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] font-bold text-slate-700">CIR 6,19% <span class="text-slate-400 font-medium">· net 8,60%</span></span>
+            <span class="text-[10px] text-slate-400">chi phí / doanh số</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nhịp độ kỳ -->
+      <div class="lift bg-white border border-slate-200 rounded-2xl overflow-hidden">
+        <div class="h-1 bg-gradient-to-r from-indigo-500 to-indigo-300"></div>
+        <div class="p-4">
+          <div class="flex items-start justify-between mb-2">
+            <div>
+              <div class="text-xs font-bold text-slate-700">Nhịp độ so với kỳ vọng</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Đã qua 21/30 ngày = kỳ vọng 70,0%</div>
+            </div>
+            <span class="src src-new"><i></i>MỚI</span>
+          </div>
+
+          <div class="flex items-baseline gap-1.5 mb-1">
+            <span class="text-3xl font-black text-indigo-700 tabular-nums" data-count="100" data-fmt="pct1">0</span>
+            <span class="text-xs font-bold text-slate-500">so kỳ vọng</span>
+          </div>
+          <p class="text-[11px] text-slate-500 leading-snug mb-3">
+            GMV đạt <strong class="text-slate-700">70,0%</strong> mục tiêu, đúng bằng nhịp kỳ vọng — dự phóng cán đích <strong class="text-slate-700">12,00 Tỷ</strong>.
+          </p>
+
+          <div class="space-y-2">
+            <div>
+              <div class="flex items-center justify-between text-[10px] mb-1">
+                <span class="font-semibold text-slate-500">Nhịp kỳ vọng tới hôm nay</span>
+                <span class="font-bold text-slate-400 tabular-nums">70,0%</span>
+              </div>
+              <div class="h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-slate-300 rounded-full" style="width:70%"></div></div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] mb-1">
+                <span class="font-semibold text-slate-600">Thực hiện GMV</span>
+                <span class="font-bold text-indigo-600 tabular-nums">70,0%</span>
+              </div>
+              <div class="h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-indigo-500 rounded-full transition-all duration-1000 bar-anim" data-w="70" style="width:0%"></div></div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] mb-1">
+                <span class="font-semibold text-slate-600">Thực hiện NMV</span>
+                <span class="font-bold text-teal-600 tabular-nums">70,0%</span>
+              </div>
+              <div class="h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-teal-500 rounded-full transition-all duration-1000 bar-anim" data-w="70" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═════════ B. CHỈ SỐ CHÍNH ═════════ -->
+  <section class="px-8 pt-7 reveal">
+
+    <!-- Nhóm 1 -->
+    <div class="flex items-center gap-2.5 mb-3">
+      <span class="w-6 h-6 rounded-lg bg-brand-50 flex items-center justify-center">
+        <svg class="w-3.5 h-3.5 text-[#6A9739]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.7 0-3 .9-3 2s1.3 2 3 2 3 .9 3 2-1.3 2-3 2m0-8c1.3 0 2.4.5 2.8 1.3M12 8V6m0 10v2m0-2c-1.3 0-2.4-.5-2.8-1.3" stroke-linecap="round" stroke-width="2"/></svg>
+      </span>
+      <h2 class="sec-title text-slate-700">Doanh thu &amp; giá trị</h2>
+      <span class="text-[11px] text-slate-400">GMV, NMV, giá trị đơn và chi phí quảng cáo</span>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 mb-6" id="kpi-revenue"></div>
+
+    <!-- Nhóm 2 -->
+    <div class="flex items-center gap-2.5 mb-3">
+      <span class="w-6 h-6 rounded-lg bg-sky-50 flex items-center justify-center">
+        <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h9" stroke-linecap="round" stroke-width="2"/></svg>
+      </span>
+      <h2 class="sec-title text-slate-700">Sản lượng &amp; vận hành đơn</h2>
+      <span class="text-[11px] text-slate-400">Số đơn, tỉ lệ huỷ / hoàn trả / giao thành công</span>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 mb-6" id="kpi-ops"></div>
+
+    <!-- Nhóm 3 -->
+    <div class="flex items-center gap-2.5 mb-3">
+      <span class="w-6 h-6 rounded-lg bg-violet-50 flex items-center justify-center">
+        <svg class="w-3.5 h-3.5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5-2.2M9 20H4v-2a3 3 0 015-2.2m0 4.2h6v-2a3 3 0 00-6 0v2zm3-8a3 3 0 100-6 3 3 0 000 6z" stroke-linecap="round" stroke-width="2"/></svg>
+      </span>
+      <h2 class="sec-title text-slate-700">Khách hàng &amp; chuyển đổi</h2>
+      <span class="text-[11px] text-slate-400">Lưu lượng gian hàng, người mua và tỉ lệ chuyển đổi</span>
+      <span class="src src-new"><i></i>CẦN NỐI API BUSINESS INSIGHTS CỦA SÀN</span>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3" id="kpi-customer"></div>
+  </section>
+
+  <!-- ═════════ C. DIỄN BIẾN THEO NGÀY ═════════ -->
+  <section class="px-8 pt-7 reveal">
+    <div class="bg-white border border-slate-200 rounded-2xl p-5">
+      <div class="flex flex-wrap items-start justify-between gap-3 mb-1">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h2 class="text-sm font-bold text-slate-800">Diễn biến doanh số &amp; mục tiêu theo ngày</h2>
+            <span class="src src-ok"><i></i>CÓ SẴN</span>
+            <span class="src src-new"><i></i>PHẦN MỤC TIÊU CẦN XÂY MỚI</span>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-1">Cột = doanh số thực hiện từng ngày · đường = luỹ kế so mục tiêu kỳ · vùng mờ = mục tiêu ngày</p>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button class="chip on">GMV</button>
+          <button class="chip">NMV</button>
+          <button class="chip">Số đơn</button>
+        </div>
+      </div>
+      <div id="chart-daily"></div>
+    </div>
+  </section>
+
+  <!-- ═════════ D. TỈ TRỌNG DOANH SỐ ═════════ -->
+  <section class="px-8 pt-5 reveal">
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+
+      <!-- Theo gian hàng -->
+      <div class="lift bg-white border border-slate-200 rounded-2xl p-5">
+        <div class="flex items-start justify-between mb-1">
+          <div>
+            <h3 class="text-sm font-bold text-slate-800">Tỉ trọng theo gian hàng</h3>
+            <p class="text-[11px] text-slate-500 mt-0.5">Phân bổ GMV giữa các shop</p>
+          </div>
+          <span class="src src-ok"><i></i>CÓ SẴN</span>
+        </div>
+        <div id="donut-shop"></div>
+        <div class="space-y-1.5 mt-1" id="legend-shop"></div>
+      </div>
+
+      <!-- Theo nguồn bán -->
+      <div class="lift bg-white border border-slate-200 rounded-2xl p-5">
+        <div class="flex items-start justify-between mb-1">
+          <div>
+            <h3 class="text-sm font-bold text-slate-800">Tỉ trọng theo nguồn bán</h3>
+            <p class="text-[11px] text-slate-500 mt-0.5">Thẻ sản phẩm · Affiliate · Livestream · Video</p>
+          </div>
+          <span class="src src-new"><i></i>CẦN XÂY MỚI</span>
+        </div>
+        <div id="donut-source"></div>
+        <div class="space-y-1.5 mt-1" id="legend-source"></div>
+      </div>
+
+      <!-- Runrate theo nguồn -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-5">
+        <div class="flex items-start justify-between mb-3">
+          <div>
+            <h3 class="text-sm font-bold text-slate-800">Tiến độ mục tiêu từng nguồn</h3>
+            <p class="text-[11px] text-slate-500 mt-0.5">Thực hiện / mục tiêu · vạch xám = nhịp kỳ vọng 70%</p>
+          </div>
+          <span class="src src-new"><i></i>MỚI</span>
+        </div>
+        <div class="space-y-3.5" id="runrate-source"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ E. DOANH SỐ THEO NGUỒN / NGÀY ═════════ -->
+  <section class="px-8 pt-5 reveal">
+    <div class="bg-white border border-slate-200 rounded-2xl p-5">
+      <div class="flex flex-wrap items-start justify-between gap-3 mb-1">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h2 class="text-sm font-bold text-slate-800">Doanh số theo nguồn bán — từng ngày</h2>
+            <span class="src src-new"><i></i>CẦN XÂY MỚI</span>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-1">
+            Cột chồng để đọc được <strong>tổng ngày</strong> và <strong>cơ cấu nguồn</strong> trong một lần nhìn —
+            thay vì xếp cạnh nhau 8 cột/ngày như bản Lark hiện tại.
+          </p>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button class="chip on">Cột chồng</button>
+          <button class="chip">Tỉ trọng %</button>
+        </div>
+      </div>
+      <div id="chart-source-daily"></div>
+    </div>
+  </section>
+
+  <!-- ═════════ F. CHỈ SỐ VẬN HÀNH THEO NGÀY ═════════ -->
+  <section class="px-8 pt-5 reveal">
+    <div class="bg-white border border-slate-200 rounded-2xl p-5">
+      <div class="flex flex-wrap items-start justify-between gap-3 mb-1">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h2 class="text-sm font-bold text-slate-800">Chỉ số vận hành theo ngày</h2>
+            <span class="src src-ok"><i></i>CÓ SẴN</span>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-1">
+            Mặc định hiện <strong>3 đường quan trọng nhất</strong>; bấm chip để thêm/bớt đường — tránh rối như biểu đồ 8 đường chồng nhau.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-1.5" id="ops-toggle"></div>
+      </div>
+      <div id="chart-ops"></div>
+    </div>
+  </section>
+
+  <!-- ═════════ G. TỈ TRỌNG THEO CHIỀU ═════════ -->
+  <section class="px-8 pt-5 pb-8 reveal">
+    <div class="mb-3">
+      <h2 class="text-lg font-black tracking-tight text-slate-900 font-heading">Tỉ trọng theo chiều</h2>
+      <p class="text-xs text-slate-500 mt-0.5">SKU bán chạy, đơn vị vận chuyển, phương thức thanh toán và kênh sàn</p>
+    </div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+
+      <!-- Top SKU -->
+      <div class="xl:col-span-2 bg-white border border-slate-200 rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-xl bg-brand-50 flex items-center justify-center">
+              <svg class="w-4 h-4 text-[#6A9739]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M17 7h4v4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </span>
+            <div>
+              <h3 class="text-sm font-bold text-slate-800">Top SKU bán chạy nhất</h3>
+              <p class="text-[11px] text-slate-500">Tên hiển thị đầy đủ 100% · tỉ trọng GMV và doanh số đóng góp</p>
+            </div>
+          </div>
+          <button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-[11px] font-semibold text-slate-700 transition">
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-width="2"/></svg>
+            Xem tất cả
+          </button>
+        </div>
+        <div class="space-y-3" id="top-sku"></div>
+        <div class="flex items-center justify-between pt-3 mt-3 border-t border-slate-100">
+          <span class="flex items-center gap-2 text-xs text-slate-500">
+            <span class="w-2 h-2 rounded-full bg-slate-300"></span>Khác (tất cả SKU còn lại)
+          </span>
+          <span class="text-xs font-bold text-slate-600 tabular-nums">54,0%</span>
+        </div>
+      </div>
+
+      <!-- Cột phải: 3 donut -->
+      <div class="space-y-4">
+        <div class="lift bg-white border border-slate-200 rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#6A9739]"></span>Đơn vị vận chuyển</h3>
+            <span class="text-[11px] font-bold text-slate-600">J&amp;T <span class="text-[#6A9739]">45,0%</span></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div id="donut-carrier" class="shrink-0"></div>
+            <div class="flex-1 space-y-1" id="legend-carrier"></div>
+          </div>
+        </div>
+
+        <div class="lift bg-white border border-slate-200 rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Phương thức thanh toán</h3>
+            <span class="text-[11px] font-bold text-slate-600">COD <span class="text-sky-600">65,0%</span></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div id="donut-payment" class="shrink-0"></div>
+            <div class="flex-1 space-y-1" id="legend-payment"></div>
+          </div>
+        </div>
+
+        <div class="lift bg-white border border-slate-200 rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>GMV theo kênh sàn</h3>
+            <span class="text-[11px] font-bold text-slate-600">TikTok <span class="text-amber-600">55,0%</span></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div id="donut-platform" class="shrink-0"></div>
+            <div class="flex-1 space-y-1" id="legend-platform"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ FOOTER ═════════ -->
+  <footer class="border-t border-slate-200 bg-white px-8 py-5">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <p class="text-xs text-slate-400">2026 © <span class="font-bold text-[#6A9739]">ECOCHIC</span> · Bản demo giao diện màn Báo cáo — số liệu minh hoạ</p>
+      <div class="flex items-center gap-4 text-[11px] text-slate-400">
+        <span>Phiên bản thiết kế v2.5</span>
+        <span class="text-slate-200">|</span>
+        <span>Cập nhật 15/09/2026</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   DỮ LIỆU MINH HOẠ (số trung tính, không gắn kỳ thật)
+   ═══════════════════════════════════════════════════ */
+const PALETTE = ['#6A9739','#0EA5E9','#F59E0B','#8B5CF6','#14B8A6','#F43F5E','#94A3B8'];
+
+const DAYS = Array.from({length:30},(_,i)=>String(i+1).padStart(2,'0')+'/09');
+
+/* Sinh chuỗi ngày ổn định (không ngẫu nhiên mỗi lần mở) */
+function series(base, amp, seed){
+  return DAYS.map((_,i)=>{
+    const w = [1,1.05,1,.95,1.1,1.35,1.25][i%7];          // nhịp trong tuần
+    const wave = Math.sin((i+seed)*0.55)*amp + Math.cos((i+seed)*1.3)*amp*0.4;
+    return Math.max(0, Math.round((base*w + wave)/1000)*1000);
+  });
+}
+
+const gmvDaily   = series(280_000_000, 42_000_000, 1);
+const targetDaily= DAYS.map(()=>400_000_000);
+const nmvDaily   = gmvDaily.map(v=>Math.round(v*0.72/1000)*1000);
+
+/* Luỹ kế % so mục tiêu kỳ (12 tỷ), chỉ tới ngày 21 */
+const TARGET_PERIOD = 12_000_000_000;
+let acc = 0;
+const cumPct = gmvDaily.map((v,i)=>{ if(i>20) return null; acc+=v; return +(acc/TARGET_PERIOD*100).toFixed(1); });
+
+const SOURCES = [
+  {name:'Thẻ sản phẩm', value:2_940_000_000, target:3_900_000_000, color:'#6A9739', base:98_000_000, seed:2},
+  {name:'Affiliate',    value:2_520_000_000, target:3_000_000_000, color:'#0EA5E9', base:84_000_000, seed:5},
+  {name:'Livestream',   value:2_352_000_000, target:4_200_000_000, color:'#F59E0B', base:78_000_000, seed:9},
+  {name:'Video',        value:  588_000_000, target:  900_000_000, color:'#8B5CF6', base:20_000_000, seed:13},
+];
+
+const SHOPS = [
+  {name:'ecochicvn',        value:5_880_000_000, color:'#6A9739'},
+  {name:'ecochic.official', value:2_520_000_000, color:'#14B8A6'},
+];
+
+const CARRIERS = [
+  {name:'J&T Express',  value:45.0, color:'#6A9739'},
+  {name:'SPX Express',  value:25.0, color:'#0EA5E9'},
+  {name:'GHTK',         value:15.0, color:'#F59E0B'},
+  {name:'Viettel Post', value:10.0, color:'#8B5CF6'},
+  {name:'Khác',         value: 5.0, color:'#CBD5E1'},
+];
+const PAYMENTS = [
+  {name:'COD (Tiền mặt)',    value:65.0, color:'#0EA5E9'},
+  {name:'Chuyển khoản / Ví', value:35.0, color:'#6A9739'},
+];
+const PLATFORMS = [
+  {name:'TikTok Shop', value:55.0, color:'#F59E0B'},
+  {name:'Shopee',      value:40.0, color:'#0EA5E9'},
+  {name:'Lazada',      value: 5.0, color:'#8B5CF6'},
+];
+
+const TOP_SKU = [
+  {name:'Xà đơn lê tê mã A2000B ECOCHIC',                   pct:15.0, gmv:1_260_000_000, color:'#6A9739'},
+  {name:'Áo Baby Tee Cotton Mỹ ECOCHIC',                    pct:12.0, gmv:1_008_000_000, color:'#0EA5E9'},
+  {name:'Set Hộp 4 Quần Chip ECOCHIC A699 Cotton Kháng Khuẩn', pct: 8.0, gmv:  672_000_000, color:'#F59E0B'},
+  {name:'Quần Legging Nữ ECOCHIC Siêu Co Giãn Định Hình',   pct: 6.0, gmv:  504_000_000, color:'#8B5CF6'},
+  {name:'Áo Khoác Gió Nữ ECOCHIC Chống Nắng UV',            pct: 5.0, gmv:  420_000_000, color:'#14B8A6'},
+];
+
+/* Ba nhóm chỉ số — mỗi thẻ: nhãn, giá trị, đơn vị, delta, nguồn, chuỗi sparkline */
+const KPI = {
+  'kpi-revenue':[
+    {label:'Tổng doanh số (GMV)', val:'8,40 Tỷ',    sub:'8.400.000.000 đ', d:+12.8, src:'ok',  s:[62,65,64,70,72,78,80]},
+    {label:'Doanh số sau huỷ (NMV)', val:'6,05 Tỷ', sub:'6.048.000.000 đ', d:+10.4, src:'ok',  s:[48,50,49,53,55,58,60]},
+    {label:'Doanh số / đơn (AOV)', val:'400.000',   sub:'đồng mỗi đơn',    d:+2.1,  src:'ok',  s:[38,39,38,40,40,41,40]},
+    {label:'Chi phí quảng cáo',  val:'520,0 Tr',    sub:'ngân sách 800 Tr',d:+18.5, src:'mix', s:[30,34,36,40,45,48,52]},
+    {label:'% CIR ADS',          val:'6,19%',       sub:'chi phí / GMV',   d:+0.6,  src:'mix', s:[5.2,5.6,5.8,6.0,6.1,6.2,6.19], inv:true},
+    {label:'% CIR ADS (net)',    val:'8,60%',       sub:'chi phí / NMV',   d:+0.9,  src:'mix', s:[7.1,7.5,7.9,8.1,8.3,8.5,8.6],  inv:true},
+  ],
+  'kpi-ops':[
+    {label:'Tổng số đơn hàng',   val:'21.000',      sub:'đơn trong kỳ',    d:+10.5, src:'ok',  s:[15,16,16,18,19,20,21]},
+    {label:'Tỉ lệ G2N',          val:'72,0%',       sub:'GMV giữ lại thành NMV', d:+1.2, src:'ok', s:[69,70,70,71,71,72,72]},
+    {label:'Tỉ lệ đơn huỷ',      val:'28,0%',       sub:'trên tổng đơn',   d:-1.2,  src:'ok',  s:[31,30,30,29,29,28,28], inv:true},
+    {label:'Tỉ lệ đơn hoàn trả', val:'5,0%',        sub:'trên đơn đã giao',d:-0.4,  src:'ok',  s:[5.6,5.5,5.4,5.2,5.1,5.0,5.0], inv:true},
+    {label:'Số lượng đã giao',   val:'15.120',      sub:'đơn giao thành công', d:+11.8, src:'ok', s:[11,11.5,12,13,14,14.6,15.1]},
+    {label:'Đơn cần vận chuyển', val:'1.260',       sub:'chờ đóng gói / bàn giao', d:-6.0, src:'ok', s:[1.6,1.5,1.5,1.4,1.3,1.3,1.26], inv:true},
+  ],
+  'kpi-customer':[
+    {label:'Số lượt truy cập',   val:'1.400.000',   sub:'lượt vào gian hàng', d:+8.2, src:'new', s:[1.05,1.1,1.15,1.22,1.3,1.35,1.4]},
+    {label:'Lượt nhấp sản phẩm', val:'700.000',     sub:'lượt xem chi tiết SP', d:+7.5, src:'new', s:[.52,.55,.58,.61,.65,.68,.70]},
+    {label:'Tỉ lệ chuyển đổi',   val:'1,50%',       sub:'đơn / lượt truy cập', d:+0.1, src:'new', s:[1.3,1.35,1.38,1.42,1.45,1.48,1.5]},
+    {label:'Số người mua',       val:'15.000',      sub:'khách phát sinh đơn', d:+9.3, src:'ok',  s:[11,11.6,12.2,13,13.8,14.4,15]},
+    {label:'Tỉ lệ người mua mới',val:'60,0%',       sub:'lần đầu mua hàng',    d:+2.4, src:'mix', s:[54,55,56,57,58,59,60]},
+    {label:'Tỉ lệ người mua cũ', val:'40,0%',       sub:'đã từng mua trước đó',d:-2.4, src:'mix', s:[46,45,44,43,42,41,40]},
+  ],
+};
+
+/* ═══════════════ TIỆN ÍCH ═══════════════ */
+const vnd = n => n.toLocaleString('vi-VN');
+const shortVnd = n => {
+  const a = Math.abs(n);
+  if (a >= 1e9) return (n/1e9).toFixed(2).replace('.',',')+' Tỷ';
+  if (a >= 1e6) return (n/1e6).toFixed(1).replace('.',',')+' Tr';
+  if (a >= 1e3) return (n/1e3).toFixed(0)+' N';
+  return vnd(n);
+};
+const pct1 = n => n.toFixed(1).replace('.',',')+'%';
+
+function toggleSidebar(){
+  document.getElementById('app-sidebar').classList.toggle('hidden');
+}
+
+/* Sparkline SVG nhẹ (không dùng thư viện — 18 thẻ vẫn mượt) */
+function sparkSvg(vals, color){
+  const w=100, h=28, min=Math.min(...vals), max=Math.max(...vals), rng=(max-min)||1;
+  const pts = vals.map((v,i)=>[ (i/(vals.length-1))*w, h-2-((v-min)/rng)*(h-6) ]);
+  const line = pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  const area = `0,${h} ${line} ${w},${h}`;
+  const id = 'g'+Math.random().toString(36).slice(2,8);
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${color}" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="${area}" fill="url(#${id})"/>
+    <polyline points="${line}" fill="none" stroke="${color}" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="${pts.at(-1)[0].toFixed(1)}" cy="${pts.at(-1)[1].toFixed(1)}" r="2" fill="${color}"/>
+  </svg>`;
+}
+
+const SRC_LABEL = { ok:['src-ok','CÓ SẴN'], mix:['src-mix','CẦN GHÉP'], new:['src-new','CẦN XÂY'] };
+
+/* ═══════════════ DỰNG THẺ CHỈ SỐ ═══════════════ */
+Object.entries(KPI).forEach(([containerId, items])=>{
+  const el = document.getElementById(containerId);
+  el.innerHTML = items.map(k=>{
+    // Chỉ số "ngược chiều" (huỷ, hoàn, CIR): tăng = xấu
+    const good = k.inv ? k.d < 0 : k.d > 0;
+    const tone = good ? 'text-emerald-700 bg-emerald-50' : 'text-rose-700 bg-rose-50';
+    const arrow = k.d > 0 ? 'M5 15l7-7 7 7' : 'M19 9l-7 7-7-7';
+    const sign = k.d > 0 ? '+' : '';
+    const sparkColor = good ? '#6A9739' : '#F43F5E';
+    const [cls,txt] = SRC_LABEL[k.src];
+    // Chỉ số vốn là % thì mức thay đổi tính bằng ĐIỂM phần trăm, không phải %
+    const unit = k.val.includes('%') ? ' điểm' : '%';
+    return `
+    <div class="lift bg-white border border-slate-200 rounded-xl p-3.5 flex flex-col">
+      <div class="flex items-start justify-between gap-2 mb-1.5">
+        <span class="text-[11px] font-semibold text-slate-500 leading-snug min-h-[32px]">${k.label}</span>
+        <span class="src ${cls} shrink-0"><i></i>${txt}</span>
+      </div>
+      <div class="text-xl font-black text-slate-900 tabular-nums leading-none font-heading">${k.val}</div>
+      <div class="text-[10px] text-slate-400 mt-1 min-h-[14px]">${k.sub}</div>
+      <div class="mt-2">${sparkSvg(k.s, sparkColor)}</div>
+      <div class="flex items-center justify-between mt-1.5 pt-1.5 border-t border-slate-100">
+        <span class="inline-flex items-center gap-0.5 text-[10px] font-bold ${tone} px-1.5 py-0.5 rounded">
+          <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="${arrow}" stroke-linecap="round" stroke-width="3"/></svg>
+          ${sign}${String(k.d).replace('.',',')}${unit}
+        </span>
+        <span class="text-[9px] text-slate-400">so kỳ trước</span>
+      </div>
+    </div>`;
+  }).join('');
+});
+
+/* ═══════════════ ĐỒNG HỒ TIẾN ĐỘ (RADIAL) ═══════════════ */
+function gauge(elId, pct, color, label){
+  new ApexCharts(document.querySelector(elId), {
+    chart:{ type:'radialBar', height:168, sparkline:{enabled:true},
+            animations:{enabled:true, speed:900, easing:'easeinout'} },
+    series:[pct],
+    colors:[color],
+    plotOptions:{ radialBar:{
+      startAngle:-135, endAngle:135, hollow:{size:'62%'},
+      track:{ background:'#F1F5F9', strokeWidth:'100%' },
+      dataLabels:{
+        name:{ offsetY:20, fontSize:'10px', fontWeight:600, color:'#94A3B8', fontFamily:'Inter' },
+        value:{ offsetY:-14, fontSize:'30px', fontWeight:800, color:'#0F172A', fontFamily:'"Plus Jakarta Sans"',
+                formatter:v=>Math.round(v)+'%' }
+      }
+    }},
+    fill:{ type:'gradient', gradient:{ shade:'light', type:'horizontal', shadeIntensity:.25,
+           gradientToColors:[color], stops:[0,100], opacityFrom:1, opacityTo:1 } },
+    stroke:{ lineCap:'round' },
+    labels:[label],
+  }).render();
+}
+gauge('#gauge-gmv', 70, '#6A9739', 'TIẾN ĐỘ KỲ');
+gauge('#gauge-nmv', 70, '#14B8A6', 'TIẾN ĐỘ KỲ');
+gauge('#gauge-ads', 65, '#F59E0B', 'ĐÃ DÙNG');
+
+/* ═══════════════ BIỂU ĐỒ DIỄN BIẾN THEO NGÀY ═══════════════ */
+new ApexCharts(document.querySelector('#chart-daily'), {
+  chart:{ type:'line', height:330, toolbar:{show:false}, fontFamily:'Inter',
+          animations:{enabled:true, speed:800}, zoom:{enabled:false} },
+  series:[
+    { name:'Mục tiêu ngày',  type:'column', data:targetDaily },
+    { name:'GMV thực hiện',  type:'column', data:gmvDaily },
+    { name:'Luỹ kế / mục tiêu kỳ', type:'line', data:cumPct },
+  ],
+  colors:['#E2E8F0','#6A9739','#F59E0B'],
+  stroke:{ width:[0,0,3], curve:'smooth' },
+  plotOptions:{ bar:{ columnWidth:'62%', borderRadius:3, borderRadiusApplication:'end' } },
+  fill:{ opacity:[1,1,1] },
+  dataLabels:{ enabled:false },
+  grid:{ borderColor:'#F1F5F9', strokeDashArray:4, padding:{left:6,right:6} },
+  legend:{ position:'top', horizontalAlign:'left', markers:{radius:3, width:9, height:9}, itemMargin:{horizontal:10} },
+  xaxis:{ categories:DAYS, tickAmount:10, axisBorder:{show:false}, axisTicks:{show:false},
+          labels:{ style:{colors:'#94A3B8', fontSize:'10px'} } },
+  yaxis:[
+    { seriesName:'Mục tiêu ngày', labels:{ formatter:v=>shortVnd(v), style:{colors:'#94A3B8', fontSize:'10px'} },
+      axisBorder:{show:false}, axisTicks:{show:false} },
+    { seriesName:'Mục tiêu ngày', show:false },
+    { opposite:true, min:0, max:100, tickAmount:5,
+      labels:{ formatter:v=>Math.round(v)+'%', style:{colors:'#F59E0B', fontSize:'10px'} },
+      axisBorder:{show:false}, axisTicks:{show:false} },
+  ],
+  tooltip:{ shared:true, intersect:false, style:{fontSize:'11px'},
+    y:{ formatter:(v,{seriesIndex})=> v==null ? '—' : (seriesIndex===2 ? pct1(v) : vnd(v)+' đ') } },
+  annotations:{ xaxis:[{ x:DAYS[20], borderColor:'#94A3B8', strokeDashArray:4,
+    label:{ text:'Hôm nay', style:{background:'#475569', color:'#fff', fontSize:'10px', fontWeight:600} } }] },
+}).render();
+
+/* ═══════════════ CỘT CHỒNG THEO NGUỒN / NGÀY ═══════════════ */
+new ApexCharts(document.querySelector('#chart-source-daily'), {
+  chart:{ type:'bar', height:300, stacked:true, toolbar:{show:false}, fontFamily:'Inter',
+          animations:{enabled:true, speed:700} },
+  series: SOURCES.map(s=>({ name:s.name, data: series(s.base, s.base*0.18, s.seed) })),
+  colors: SOURCES.map(s=>s.color),
+  plotOptions:{ bar:{ columnWidth:'66%', borderRadius:3, borderRadiusApplication:'end', borderRadiusWhenStacked:'last' } },
+  dataLabels:{ enabled:false },
+  grid:{ borderColor:'#F1F5F9', strokeDashArray:4 },
+  legend:{ position:'top', horizontalAlign:'left', markers:{radius:3, width:9, height:9}, itemMargin:{horizontal:10} },
+  xaxis:{ categories:DAYS, tickAmount:10, axisBorder:{show:false}, axisTicks:{show:false},
+          labels:{ style:{colors:'#94A3B8', fontSize:'10px'} } },
+  yaxis:{ labels:{ formatter:v=>shortVnd(v), style:{colors:'#94A3B8', fontSize:'10px'} } },
+  tooltip:{ shared:true, intersect:false, y:{ formatter:v=>vnd(v)+' đ' } },
+}).render();
+
+/* ═══════════════ CHỈ SỐ VẬN HÀNH THEO NGÀY ═══════════════ */
+/* `small:true` = chỉ số dải nhỏ (<10%) → đẩy sang trục phải, nếu không sẽ bị ép dẹt
+   xuống đáy khi vẽ chung trục với các chỉ số dải 20–80%. */
+const OPS = [
+  {name:'Tỉ lệ G2N',            color:'#6A9739', base:72,  amp:3.2, on:true },
+  {name:'Tỉ lệ đơn huỷ',        color:'#F43F5E', base:28,  amp:3.2, on:true },
+  {name:'Tỉ lệ người mua mới',  color:'#8B5CF6', base:60,  amp:4,   on:true },
+  {name:'Tỉ lệ quay lại',       color:'#14B8A6', base:22,  amp:3,   on:false},
+  {name:'Tỉ lệ đơn hoàn trả',   color:'#F59E0B', base:5,   amp:.8,  on:false, small:true},
+  {name:'Tỉ lệ chuyển đổi đơn', color:'#0EA5E9', base:1.5, amp:.25, on:false, small:true},
+];
+function opsSeries(o,i){
+  return DAYS.map((_,d)=> +(o.base + Math.sin((d+i*3)*0.6)*o.amp).toFixed(2));
+}
+/* Dựng cấu hình trục theo đúng tập đường đang bật */
+function opsAxes(active){
+  const hasSmall = active.some(o=>o.small);
+  return active.map(o=>({
+    seriesName: o.small ? 'RIGHT' : 'LEFT',
+    opposite: !!o.small,
+    show: o === active.find(x=>!!x.small === !!o.small),   // chỉ vẽ nhãn 1 lần mỗi bên
+    min:0, max: o.small ? 10 : 100, tickAmount:5,
+    labels:{ formatter:v=>v.toFixed(o.small?1:0)+'%',
+             style:{colors: o.small ? '#0EA5E9' : '#94A3B8', fontSize:'10px'} },
+    axisBorder:{show:false}, axisTicks:{show:false},
+    title: { text: hasSmall ? (o.small ? 'Dải nhỏ (phải)' : 'Dải lớn (trái)') : '',
+             style:{color:'#CBD5E1', fontSize:'9px', fontWeight:600} },
+  }));
+}
+const opsChart = new ApexCharts(document.querySelector('#chart-ops'), {
+  chart:{ type:'line', height:290, toolbar:{show:false}, fontFamily:'Inter',
+          animations:{enabled:true, speed:700}, zoom:{enabled:false} },
+  series: OPS.filter(o=>o.on).map((o,i)=>({name:o.name, data:opsSeries(o,i)})),
+  colors: OPS.filter(o=>o.on).map(o=>o.color),
+  stroke:{ width:2.6, curve:'smooth' },
+  dataLabels:{ enabled:false },
+  markers:{ size:0, hover:{size:5} },
+  grid:{ borderColor:'#F1F5F9', strokeDashArray:4 },
+  legend:{ show:false },
+  xaxis:{ categories:DAYS, tickAmount:10, axisBorder:{show:false}, axisTicks:{show:false},
+          labels:{ style:{colors:'#94A3B8', fontSize:'10px'} } },
+  yaxis: opsAxes(OPS.filter(o=>o.on)),
+  tooltip:{ shared:true, intersect:false, y:{ formatter:v=>pct1(v) } },
+});
+opsChart.render();
+
+/* Chip bật/tắt đường */
+const opsToggle = document.getElementById('ops-toggle');
+opsToggle.innerHTML = OPS.map((o,i)=>
+  `<button class="chip ${o.on?'on':''}" data-i="${i}" style="${o.on?`background:${o.color};border-color:${o.color}`:''}">${o.name}</button>`
+).join('');
+opsToggle.addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-i]'); if(!btn) return;
+  const o = OPS[+btn.dataset.i];
+  if(o.on && OPS.filter(x=>x.on).length === 1) return;   // luôn giữ ít nhất 1 đường
+  o.on = !o.on;
+  btn.classList.toggle('on', o.on);
+  btn.style.cssText = o.on ? `background:${o.color};border-color:${o.color}` : '';
+  const active = OPS.filter(x=>x.on);
+  opsChart.updateOptions({ colors: active.map(x=>x.color), yaxis: opsAxes(active) }, false, false);
+  opsChart.updateSeries(active.map((x,i)=>({name:x.name, data:opsSeries(x,i)})), true);
+});
+
+/* ═══════════════ DONUT + CHÚ GIẢI ═══════════════ */
+function donut(elId, data, size, centerLabel, centerValue){
+  new ApexCharts(document.querySelector(elId), {
+    chart:{ type:'donut', height:size, width:size, animations:{enabled:true, speed:800} },
+    series: data.map(d=>d.value),
+    labels: data.map(d=>d.name),
+    colors: data.map(d=>d.color),
+    stroke:{ width:2, colors:['#fff'] },
+    dataLabels:{ enabled:false },
+    legend:{ show:false },
+    plotOptions:{ pie:{ donut:{ size:'70%', labels:{
+      show:!!centerLabel, name:{ show:true, fontSize:'9px', fontWeight:600, color:'#94A3B8', offsetY:16, formatter:()=>centerLabel },
+      value:{ show:true, fontSize:'15px', fontWeight:800, color:'#0F172A', offsetY:-10,
+              fontFamily:'"Plus Jakarta Sans"', formatter:()=>centerValue },
+      total:{ show:true, showAlways:true, label:centerLabel, fontSize:'9px', fontWeight:600, color:'#94A3B8',
+              formatter:()=>centerValue }
+    }}}},
+    tooltip:{ y:{ formatter:v=> v>100 ? vnd(v)+' đ' : pct1(v) } },
+  }).render();
+}
+
+function legend(elId, data, total, asMoney){
+  document.getElementById(elId).innerHTML = data.map(d=>{
+    const p = total ? (d.value/total*100) : d.value;
+    return `<div class="flex items-center justify-between gap-2 text-[11px]">
+      <span class="flex items-center gap-1.5 min-w-0">
+        <span class="w-2 h-2 rounded-full shrink-0" style="background:${d.color}"></span>
+        <span class="text-slate-600 font-medium truncate">${d.name}</span>
+      </span>
+      <span class="flex items-center gap-2 shrink-0">
+        ${asMoney?`<span class="text-slate-400 tabular-nums">${shortVnd(d.value)}</span>`:''}
+        <span class="font-bold text-slate-800 tabular-nums w-11 text-right">${pct1(p)}</span>
+      </span>
+    </div>`;
+  }).join('');
+}
+
+const shopTotal = SHOPS.reduce((a,b)=>a+b.value,0);
+donut('#donut-shop', SHOPS, 200, 'TỔNG GMV', shortVnd(shopTotal));
+legend('legend-shop', SHOPS, shopTotal, true);
+
+const srcTotal = SOURCES.reduce((a,b)=>a+b.value,0);
+donut('#donut-source', SOURCES, 200, 'TỔNG GMV', shortVnd(srcTotal));
+legend('legend-source', SOURCES, srcTotal, true);
+
+donut('#donut-carrier', CARRIERS, 110, '', ''); legend('legend-carrier', CARRIERS, 0, false);
+donut('#donut-payment', PAYMENTS, 110, '', ''); legend('legend-payment', PAYMENTS, 0, false);
+donut('#donut-platform', PLATFORMS, 110, '', ''); legend('legend-platform', PLATFORMS, 0, false);
+
+/* ═══════════════ TIẾN ĐỘ TỪNG NGUỒN ═══════════════ */
+document.getElementById('runrate-source').innerHTML = SOURCES.map(s=>{
+  const p = s.value/s.target*100;
+  const behind = p < 70;
+  return `<div>
+    <div class="flex items-center justify-between mb-1.5">
+      <span class="flex items-center gap-1.5 text-[11px] font-semibold text-slate-600">
+        <span class="w-2 h-2 rounded-full" style="background:${s.color}"></span>${s.name}
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="text-sm font-black tabular-nums" style="color:${s.color}">${Math.round(p)}%</span>
+        ${behind ? '<span class="text-[9px] font-bold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded">CHẬM NHỊP</span>'
+                 : '<span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">ĐÚNG NHỊP</span>'}
+      </span>
+    </div>
+    <div class="relative h-2 bg-slate-100 rounded-full overflow-hidden">
+      <div class="h-full rounded-full bar-anim transition-all duration-1000" data-w="${p}" style="width:0%;background:${s.color}"></div>
+      <span class="absolute top-0 bottom-0 w-px bg-slate-400/70" style="left:70%"></span>
+    </div>
+    <div class="flex items-center justify-between mt-1 text-[10px] text-slate-400 tabular-nums">
+      <span>Thực hiện <strong class="text-slate-600">${shortVnd(s.value)}</strong></span>
+      <span>Mục tiêu ${shortVnd(s.target)}</span>
+    </div>
+  </div>`;
+}).join('');
+
+/* ═══════════════ TOP SKU ═══════════════ */
+document.getElementById('top-sku').innerHTML = TOP_SKU.map((s,i)=>`
+  <div class="group">
+    <div class="flex items-center justify-between gap-3 mb-1.5">
+      <span class="flex items-center gap-2.5 min-w-0">
+        <span class="w-5 h-5 rounded-md text-white text-[10px] font-black flex items-center justify-center shrink-0"
+              style="background:${s.color}">${i+1}</span>
+        <span class="text-xs font-semibold text-slate-700 group-hover:text-slate-900 transition">${s.name}</span>
+      </span>
+      <span class="flex items-center gap-2.5 shrink-0 tabular-nums">
+        <span class="text-xs font-bold" style="color:${s.color}">${pct1(s.pct)}</span>
+        <span class="text-[11px] text-slate-400">${shortVnd(s.gmv)}</span>
+      </span>
+    </div>
+    <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+      <div class="h-full rounded-full bar-anim transition-all duration-1000" data-w="${s.pct/18*100}" style="width:0%;background:${s.color}"></div>
+    </div>
+  </div>`).join('');
+
+/* ═══════════════ HIỆU ỨNG: ĐẾM SỐ, THANH, XUẤT HIỆN ═══════════════ */
+function animateCount(el){
+  const target = +el.dataset.count, fmt = el.dataset.fmt, dur = 900, t0 = performance.now();
+  (function step(t){
+    const k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3), v = target*e;
+    el.textContent = fmt==='vnd' ? shortVnd(v) : fmt==='pct1' ? pct1(v) : vnd(Math.round(v));
+    if(k<1) requestAnimationFrame(step);
+  })(t0);
+}
+
+function playIn(el){
+  if(el.classList.contains('in')) return;
+  el.classList.add('in');
+  el.querySelectorAll('[data-count]').forEach(animateCount);
+  el.querySelectorAll('.bar-anim').forEach(b=>{ b.style.width = b.dataset.w+'%'; });
+}
+
+// `main` là vùng cuộn thật (không phải window) → phải đặt làm root của observer
+const scroller = document.querySelector('main');
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ playIn(en.target); io.unobserve(en.target); } });
+},{ root:scroller, threshold:0, rootMargin:'0px 0px -8% 0px' });
+
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Lưới an toàn: nếu trình duyệt không kích hoạt observer (in ấn, chụp màn, cuộn nhanh)
+// thì sau 2s mọi khối vẫn phải hiện đầy đủ — demo không được phép trắng trang.
+setTimeout(()=>{
+  document.querySelectorAll('.reveal').forEach(playIn);
+  document.querySelectorAll('[data-count]').forEach(el=>{ if(el.textContent==='0') animateCount(el); });
+  document.querySelectorAll('.bar-anim').forEach(b=>{ if(!b.style.width || b.style.width==='0%') b.style.width = b.dataset.w+'%'; });
+  window.dispatchEvent(new Event('resize')); // ép ApexCharts đo lại bề rộng
+}, 2000);
+
+// Phần tử động nằm ngoài .reveal (thẻ tiến độ mục tiêu)
+setTimeout(()=>{
+  document.querySelectorAll('[data-count]').forEach(el=>{ if(el.textContent==='0') animateCount(el); });
+}, 350);
+</script>
+
+</body>
+</html>
