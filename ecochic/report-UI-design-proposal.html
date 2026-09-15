@@ -77,6 +77,29 @@ tailwind.config = {
   .chip.on{background:#6A9739;border-color:#6A9739;color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 
   .sec-title{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+
+  /* ── Chế độ SẮP XẾP ──────────────────────────────────────────────
+     Mọi khối trên màn đều là widget lắp từ màn cấu hình, không có khối
+     nào đóng cứng. Bật chế độ này để lộ ra tay nắm kéo + loại widget. */
+  .wdg{position:relative}
+  .wdg-chip{display:none;position:absolute;top:-10px;right:10px;z-index:20;
+            align-items:center;gap:6px;padding:3px 8px;border-radius:9999px;
+            background:#0F172A;color:#fff;font-size:10px;font-weight:700;
+            box-shadow:0 4px 12px -4px rgba(15,23,42,.4);white-space:nowrap}
+  .wdg-chip b{font-weight:800;color:#A3E635}
+  .wdg-chip span{opacity:.6;font-weight:600}
+  body.arrange .wdg-chip{display:inline-flex}
+  body.arrange .wdg > .lift, body.arrange .wdg > div:first-child{cursor:grab}
+  body.arrange .wdg::after{content:'';position:absolute;inset:-4px;border:1.5px dashed #cbd5e1;
+                           border-radius:18px;pointer-events:none}
+  body.arrange .wdg:hover::after{border-color:#6A9739;background:rgba(106,151,57,.04)}
+  body.arrange .wdg{overflow:visible}
+  body.arrange .add-slot{display:flex}
+  .add-slot{display:none}
+
+  /* Tên kỹ thuật của loại widget trong phụ lục */
+  #feasibility-rows code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;
+    background:#F1F5F9;color:#475569;padding:1px 5px;border-radius:4px;margin-left:2px}
 </style>
 </head>
 
@@ -214,6 +237,17 @@ tailwind.config = {
       </div>
 
       <div class="flex items-center gap-2">
+        <!-- Xem ↔ Sắp xếp: chứng minh mọi khối đều là widget kéo-thả được -->
+        <div class="inline-flex bg-slate-100 p-1 rounded-lg text-xs font-semibold text-slate-600">
+          <button id="mode-view" class="px-2.5 py-1.5 bg-white text-slate-900 rounded-md shadow-sm font-bold inline-flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke-width="2"/></svg>
+            Xem
+          </button>
+          <button id="mode-arrange" class="px-2.5 py-1.5 rounded-md hover:text-slate-900 inline-flex items-center gap-1.5 transition">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg>
+            Sắp xếp
+          </button>
+        </div>
         <button class="inline-flex items-center gap-1.5 px-3 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg text-xs font-semibold transition">
           <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-width="2"/></svg>
           Lịch gửi báo cáo
@@ -238,6 +272,19 @@ tailwind.config = {
       <span class="flex items-center gap-1.5 text-[11px] text-slate-600"><span class="src src-ok"><i></i>CÓ SẴN</span> hệ thống đang lưu, dựng được ngay</span>
       <span class="flex items-center gap-1.5 text-[11px] text-slate-600"><span class="src src-mix"><i></i>CẦN GHÉP NGUỒN</span> có dữ liệu thô, cần chốt công thức</span>
       <span class="flex items-center gap-1.5 text-[11px] text-slate-600"><span class="src src-new"><i></i>CẦN XÂY MỚI</span> phải nối thêm API sàn hoặc làm màn nhập liệu</span>
+      <span class="ml-auto text-[11px] text-slate-400">Mức tăng/giảm trên thẻ = so <strong class="text-slate-500">kỳ liền trước cùng độ dài</strong></span>
+    </div>
+
+    <!-- Hiện khi bật chế độ Sắp xếp -->
+    <div id="arrange-hint" class="hidden mt-3 flex items-start gap-3 bg-slate-900 text-white rounded-xl px-4 py-2.5">
+      <svg class="w-4 h-4 mt-0.5 shrink-0 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+      <p class="text-xs leading-relaxed">
+        <strong>Chế độ sắp xếp.</strong> Mỗi khối trên màn là <strong>một widget</strong> — nhãn đen hiện
+        <b class="text-lime-400">loại biểu đồ</b> và ô lưới (trên lưới 12 cột). Kéo tay nắm để đổi chỗ,
+        kéo mép để đổi kích thước, bấm <strong>⋯</strong> để sửa cấu hình / nhân bản / gỡ khỏi bảng.
+        Vị trí lưu ngay vào tài khoản. <strong>Không khối nào là giao diện đóng cứng</strong> —
+        màn mẫu này chỉ là một bảng đã lắp sẵn, nhân bản về là sửa được.
+      </p>
     </div>
   </div>
 
@@ -447,28 +494,13 @@ tailwind.config = {
             GMV đạt <strong class="text-slate-700">70,0%</strong> mục tiêu, đúng bằng nhịp kỳ vọng — dự phóng cán đích <strong class="text-slate-700">12,00 Tỷ</strong>.
           </p>
 
-          <div class="space-y-2">
-            <div>
-              <div class="flex items-center justify-between text-[10px] mb-1">
-                <span class="font-semibold text-slate-500">Nhịp kỳ vọng tới hôm nay</span>
-                <span class="font-bold text-slate-400 tabular-nums">70,0%</span>
-              </div>
-              <div class="h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-slate-300 rounded-full" style="width:70%"></div></div>
-            </div>
-            <div>
-              <div class="flex items-center justify-between text-[10px] mb-1">
-                <span class="font-semibold text-slate-600">Thực hiện GMV</span>
-                <span class="font-bold text-indigo-600 tabular-nums">70,0%</span>
-              </div>
-              <div class="h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-indigo-500 rounded-full transition-all duration-1000 bar-anim" data-w="70" style="width:0%"></div></div>
-            </div>
-            <div>
-              <div class="flex items-center justify-between text-[10px] mb-1">
-                <span class="font-semibold text-slate-600">Thực hiện NMV</span>
-                <span class="font-bold text-teal-600 tabular-nums">70,0%</span>
-              </div>
-              <div class="h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-teal-500 rounded-full transition-all duration-1000 bar-anim" data-w="70" style="width:0%"></div></div>
-            </div>
+          <!-- Cùng loại widget "progress" với khối Tiến độ từng nguồn bên dưới,
+               khác mỗi chỗ: khối này KHÔNG chia chiều nên chỉ ra một thanh. -->
+          <div id="progress-pace"></div>
+
+          <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] font-bold text-slate-700">Dự phóng cán đích <span class="text-indigo-600">12,00 Tỷ</span></span>
+            <span class="text-[10px] text-slate-400">còn 9 ngày</span>
           </div>
         </div>
       </div>
@@ -690,6 +722,81 @@ tailwind.config = {
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- ═════════ PHỤ LỤC KHẢ THI (gấp lại — dành cho buổi rà phạm vi) ═════════ -->
+  <section class="px-8 pb-8">
+    <details class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <summary class="px-5 py-4 cursor-pointer select-none flex items-center justify-between gap-3 hover:bg-slate-50 transition">
+        <span class="flex items-center gap-2.5">
+          <span class="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center">
+            <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-width="1.8"/></svg>
+          </span>
+          <span>
+            <span class="text-sm font-bold text-slate-800">Phụ lục — Bản đồ widget &amp; mức độ khả thi</span>
+            <span class="block text-[11px] text-slate-500 mt-0.5">Từng khối trên màn này tương ứng widget nào, đã có sẵn hay phải dựng mới</span>
+          </span>
+        </span>
+        <span class="text-[11px] font-semibold text-slate-400 shrink-0">Bấm để mở ▾</span>
+      </summary>
+
+      <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+        <p class="text-xs text-slate-600 leading-relaxed mb-3 max-w-4xl">
+          Màn Báo cáo dựng theo <strong>hệ widget kéo-thả</strong>: mỗi khối là một widget lưu trong cơ sở dữ liệu,
+          người dùng tự thêm / đổi chỗ / đổi kích thước. Bản thiết kế này <strong>giữ nguyên hệ đó</strong> —
+          <strong>không khối nào là giao diện đóng cứng</strong>, tất cả đều lắp được từ màn cấu hình widget.
+          Màn mẫu chỉ là một dashboard đã lắp sẵn rồi xuất ra, khách nhân bản về tự sửa.
+          Cột "Ô lưới" là kích thước widget trên lưới 12 cột.
+        </p>
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-1.5 mb-4 text-[11px] text-slate-500">
+          <span class="flex items-center gap-1.5"><span class="src src-new"><i></i>LOẠI BIỂU ĐỒ MỚI</span> phải bổ sung vào danh mục — <strong class="text-slate-700">3 loại</strong></span>
+          <span class="flex items-center gap-1.5"><span class="src src-mix"><i></i>MỞ TUỲ CHỌN CẤU HÌNH</span> loại đã có, chỉ thiếu nút bấm trong màn cấu hình</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse min-w-[720px]">
+            <thead>
+              <tr class="text-left text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-200">
+                <th class="py-2 pr-3 font-bold">Khối trên màn</th>
+                <th class="py-2 pr-3 font-bold">Ô lưới</th>
+                <th class="py-2 pr-3 font-bold">Loại biểu đồ</th>
+                <th class="py-2 font-bold">Trạng thái</th>
+              </tr>
+            </thead>
+            <tbody id="feasibility-rows" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+
+        <div class="mt-5 pt-4 border-t border-slate-100">
+          <h4 class="text-xs font-bold text-slate-800 mb-2.5">Ba việc nền phải làm trước — dùng chung cho mọi màn báo cáo</h4>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+              <div class="text-[11px] font-bold text-slate-700 mb-1">1 · Thêm 3 loại biểu đồ + mở tuỳ chọn</div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Danh mục hiện có 5 loại: đường, cột, tròn, thẻ số, bảng. Thêm <strong>đồng hồ</strong>,
+                <strong>thanh tiến độ</strong>, <strong>cột + đường 2 trục</strong>. Cột chồng / nằm ngang /
+                khoét giữa / biểu đồ tí hon <strong>không phải loại mới</strong> — chỉ là tuỳ chọn của loại đã có,
+                cần bổ sung nút bấm vào màn cấu hình.
+              </p>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
+              <div class="text-[11px] font-bold text-amber-800 mb-1">2 · Sửa cách tính "so kỳ trước"</div>
+              <p class="text-[11px] text-amber-900/80 leading-relaxed">
+                Cách tính hiện tại lấy <strong>nửa đầu của chính khoảng đang xem</strong> làm kỳ trước —
+                nên mức tăng gần như luôn dương. Phải đổi sang truy vấn đúng kỳ liền trước.
+              </p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+              <div class="text-[11px] font-bold text-slate-700 mb-1">3 · Tầng bố cục cho điện thoại</div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Lưới hiện cố định 12 cột ở mọi bề rộng — trên điện thoại một thẻ số chỉ còn ~90px.
+                Cần cho lưới <strong>tự gập về 1 cột</strong> khi màn hẹp và tắt kéo-thả.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
   </section>
 
   <!-- ═════════ FOOTER ═════════ -->
@@ -1053,31 +1160,47 @@ donut('#donut-carrier', CARRIERS, 110, '', ''); legend('legend-carrier', CARRIER
 donut('#donut-payment', PAYMENTS, 110, '', ''); legend('legend-payment', PAYMENTS, 0, false);
 donut('#donut-platform', PLATFORMS, 110, '', ''); legend('legend-platform', PLATFORMS, 0, false);
 
-/* ═══════════════ TIẾN ĐỘ TỪNG NGUỒN ═══════════════ */
-document.getElementById('runrate-source').innerHTML = SOURCES.map(s=>{
-  const p = s.value/s.target*100;
-  const behind = p < 70;
-  return `<div>
-    <div class="flex items-center justify-between mb-1.5">
-      <span class="flex items-center gap-1.5 text-[11px] font-semibold text-slate-600">
-        <span class="w-2 h-2 rounded-full" style="background:${s.color}"></span>${s.name}
-      </span>
-      <span class="flex items-center gap-1.5">
-        <span class="text-sm font-black tabular-nums" style="color:${s.color}">${Math.round(p)}%</span>
-        ${behind ? '<span class="text-[9px] font-bold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded">CHẬM NHỊP</span>'
-                 : '<span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">ĐÚNG NHỊP</span>'}
-      </span>
-    </div>
-    <div class="relative h-2 bg-slate-100 rounded-full overflow-hidden">
-      <div class="h-full rounded-full bar-anim transition-all duration-1000" data-w="${p}" style="width:0%;background:${s.color}"></div>
-      <span class="absolute top-0 bottom-0 w-px bg-slate-400/70" style="left:70%"></span>
-    </div>
-    <div class="flex items-center justify-between mt-1 text-[10px] text-slate-400 tabular-nums">
-      <span>Thực hiện <strong class="text-slate-600">${shortVnd(s.value)}</strong></span>
-      <span>Mục tiêu ${shortVnd(s.target)}</span>
-    </div>
-  </div>`;
-}).join('');
+/* ═══════════════ WIDGET "progress" (dùng CHUNG 2 chỗ) ═══════════════
+   Một loại widget duy nhất, cấu hình quyết định hình dạng:
+     • KHÔNG chia chiều  → 1 thanh   → thẻ "Nhịp độ so với kỳ vọng"
+     • CÓ chia chiều     → n thanh   → khối "Tiến độ mục tiêu từng nguồn"
+   PACE = vạch nhịp kỳ vọng (đã qua 21/30 ngày = 70%).                  */
+const PACE = 70;
+
+function renderProgress(elId, items, opts={}){
+  const { showMoney = true } = opts;
+  document.getElementById(elId).innerHTML = items.map(s=>{
+    const p = s.value / s.target * 100;
+    const behind = p < PACE;
+    return `<div>
+      <div class="flex items-center justify-between mb-1.5">
+        <span class="flex items-center gap-1.5 text-[11px] font-semibold text-slate-600">
+          <span class="w-2 h-2 rounded-full" style="background:${s.color}"></span>${s.name}
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="text-sm font-black tabular-nums" style="color:${s.color}">${Math.round(p)}%</span>
+          ${behind ? '<span class="text-[9px] font-bold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded">CHẬM NHỊP</span>'
+                   : '<span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">ĐÚNG NHỊP</span>'}
+        </span>
+      </div>
+      <div class="relative h-2 bg-slate-100 rounded-full overflow-hidden">
+        <div class="h-full rounded-full bar-anim transition-all duration-1000" data-w="${p}" style="width:0%;background:${s.color}"></div>
+        <span class="absolute top-0 bottom-0 w-px bg-slate-500/80" style="left:${PACE}%"></span>
+      </div>
+      ${showMoney ? `<div class="flex items-center justify-between mt-1 text-[10px] text-slate-400 tabular-nums">
+        <span>Thực hiện <strong class="text-slate-600">${shortVnd(s.value)}</strong></span>
+        <span>Mục tiêu ${shortVnd(s.target)}</span>
+      </div>` : ''}
+    </div>`;
+  }).join('<div class="h-3.5"></div>');
+}
+
+// Không chia chiều → một thanh
+renderProgress('progress-pace', [
+  {name:'GMV so mục tiêu kỳ', value:8_400_000_000, target:12_000_000_000, color:'#6366F1'}
+]);
+// Chia chiều theo nguồn bán → nhiều thanh
+renderProgress('runrate-source', SOURCES);
 
 /* ═══════════════ TOP SKU ═══════════════ */
 document.getElementById('top-sku').innerHTML = TOP_SKU.map((s,i)=>`
@@ -1097,6 +1220,103 @@ document.getElementById('top-sku').innerHTML = TOP_SKU.map((s,i)=>`
       <div class="h-full rounded-full bar-anim transition-all duration-1000" data-w="${s.pct/18*100}" style="width:0%;background:${s.color}"></div>
     </div>
   </div>`).join('');
+
+/* ═══════════════ GẮN NHÃN WIDGET + CHẾ ĐỘ SẮP XẾP ═══════════════
+   Gắn bằng JS thay vì rải class khắp HTML: mỗi mục = [selector, loại, ô lưới].
+   Bật "Sắp xếp" sẽ lộ tay nắm kéo + loại widget + ô lưới trên từng khối —
+   để thấy rõ màn này lắp từ widget cấu hình được, không phải giao diện đóng cứng. */
+const WIDGET_MAP = [
+  ['#gauge-gmv',           'gauge',    'w3×h3'],
+  ['#gauge-nmv',           'gauge',    'w3×h3'],
+  ['#gauge-ads',           'gauge',    'w3×h3'],
+  ['#progress-pace',       'progress', 'w3×h3'],
+  ['#chart-daily',         'combo',    'w12×h5'],
+  ['#donut-shop',          'pie',      'w4×h4'],
+  ['#donut-source',        'pie',      'w4×h4'],
+  ['#runrate-source',      'progress', 'w4×h4'],
+  ['#chart-source-daily',  'bar',      'w12×h4'],
+  ['#chart-ops',           'line',     'w12×h4'],
+  ['#top-sku',             'bar',      'w8×h5'],
+  ['#donut-carrier',       'pie',      'w4×h2'],
+  ['#donut-payment',       'pie',      'w4×h2'],
+  ['#donut-platform',      'pie',      'w4×h2'],
+];
+
+function tagWidget(card, type, grid){
+  if(!card || card.classList.contains('wdg')) return;
+  card.classList.add('wdg');
+  const chip = document.createElement('span');
+  chip.className = 'wdg-chip';
+  chip.innerHTML = `⠿ <b>${type}</b><span>${grid}</span>
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7">
+      <circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>`;
+  chip.title = `Widget loại "${type}" · ô lưới ${grid} — bấm ⋯ để sửa cấu hình, nhân bản hoặc gỡ khỏi bảng`;
+  card.appendChild(chip);
+}
+
+WIDGET_MAP.forEach(([sel, type, grid])=>{
+  const el = document.querySelector(sel);
+  if(!el) return;
+  // leo lên thẻ card gần nhất (khối bo góc có viền)
+  const card = el.closest('.rounded-2xl') || el.closest('.rounded-xl') || el.parentElement;
+  tagWidget(card, type, grid);
+});
+// 18 thẻ chỉ số đều là widget kpi
+document.querySelectorAll('#kpi-revenue > div, #kpi-ops > div, #kpi-customer > div')
+  .forEach(c => tagWidget(c, 'kpi', 'w2×h2'));
+
+const bodyEl = document.body;
+document.getElementById('mode-arrange').addEventListener('click', ()=>{
+  bodyEl.classList.add('arrange');
+  setMode(true);
+});
+document.getElementById('mode-view').addEventListener('click', ()=>{
+  bodyEl.classList.remove('arrange');
+  setMode(false);
+});
+function setMode(arranging){
+  const on  = 'bg-white text-slate-900 rounded-md shadow-sm font-bold';
+  const off = 'rounded-md hover:text-slate-900 transition';
+  const v = document.getElementById('mode-view'), a = document.getElementById('mode-arrange');
+  v.className = `px-2.5 py-1.5 inline-flex items-center gap-1.5 ${arranging ? off : on}`;
+  a.className = `px-2.5 py-1.5 inline-flex items-center gap-1.5 ${arranging ? on : off}`;
+  document.getElementById('arrange-hint').classList.toggle('hidden', !arranging);
+}
+
+/* ═══════════════ PHỤ LỤC KHẢ THI ═══════════════
+   'have'  = widget đã có trong danh mục, lắp là chạy
+   'part'  = loại có sẵn nhưng thiếu tuỳ chọn / cách tính phải sửa
+   'build' = phải dựng loại biểu đồ mới                              */
+const FEASIBILITY = [
+  ['Thẻ tiến độ mục tiêu (GMV · NMV · Quảng cáo)','w3 × h3','Đồng hồ <code>gauge</code>','build','Loại mới ① — chỉ số + mục tiêu, chọn được từ màn cấu hình'],
+  ['Thẻ nhịp độ so với kỳ vọng','w3 × h3','Thanh tiến độ <code>progress</code>','build','Loại mới ② — không chia chiều thì ra <strong>một</strong> thanh'],
+  ['Tiến độ mục tiêu từng nguồn','w4 × h4','Thanh tiến độ <code>progress</code>','build','<strong>Cùng loại ②</strong> — chia chiều theo nguồn bán thì ra <strong>nhiều</strong> thanh'],
+  ['Diễn biến doanh số &amp; mục tiêu / ngày','w12 × h5','Cột + đường <code>combo</code>','build','Loại mới ③ — cột thực hiện, cột mục tiêu, đường luỹ kế ở trục phải'],
+  ['18 thẻ chỉ số (3 nhóm)','w2 × h2','Thẻ số <code>kpi</code>','part','Loại đã có — bật thêm tuỳ chọn biểu đồ tí hon + sửa cách tính so kỳ trước'],
+  ['Doanh số theo nguồn bán / ngày','w12 × h4','Cột <code>bar</code>','part','Loại đã có — bật tuỳ chọn <em>cột chồng</em>'],
+  ['Top SKU bán chạy','w8 × h5','Cột <code>bar</code>','part','Loại đã có — bật tuỳ chọn <em>nằm ngang</em> (mã đã hỗ trợ, chỉ thiếu nút bấm)'],
+  ['Chỉ số vận hành / ngày','w12 × h4','Đường <code>line</code>','part','Loại đã có — bật tuỳ chọn <em>trục phụ</em> cho chỉ số dải nhỏ'],
+  ['Tỉ trọng theo gian hàng','w4 × h4','Tròn <code>pie</code>','part','Loại đã có — bật tuỳ chọn <em>khoét giữa</em>'],
+  ['Tỉ trọng theo nguồn bán','w4 × h4','Tròn <code>pie</code>','part','Như trên — thêm nữa là nguồn dữ liệu chưa có'],
+  ['Vận chuyển · Thanh toán · Kênh sàn','w4 × h2','Tròn <code>pie</code>','part','Như trên'],
+];
+const FEAS_TONE = {
+  have : ['src-ok','LẮP ĐƯỢC NGAY'],
+  part : ['src-mix','MỞ TUỲ CHỌN CẤU HÌNH'],
+  build: ['src-new','LOẠI BIỂU ĐỒ MỚI'],
+};
+document.getElementById('feasibility-rows').innerHTML = FEASIBILITY.map(([name,grid,type,state,note])=>{
+  const [cls,txt] = FEAS_TONE[state];
+  return `<tr class="align-top">
+    <td class="py-2.5 pr-3 font-semibold text-slate-700">${name}</td>
+    <td class="py-2.5 pr-3 tabular-nums text-slate-400 whitespace-nowrap">${grid}</td>
+    <td class="py-2.5 pr-3 text-slate-600 whitespace-nowrap">${type}</td>
+    <td class="py-2.5">
+      <span class="src ${cls}"><i></i>${txt}</span>
+      <span class="block text-[11px] text-slate-400 mt-1 leading-snug">${note}</span>
+    </td>
+  </tr>`;
+}).join('');
 
 /* ═══════════════ HIỆU ỨNG: ĐẾM SỐ, THANH, XUẤT HIỆN ═══════════════ */
 function animateCount(el){
