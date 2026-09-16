@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tiến độ dự án ERP Ecochic P2.1 – P2.2</title>
+<title>Báo cáo tiến độ dự án Ecochic — Giai đoạn 2.1 và 2.2</title>
+<link rel="icon" href="https://i.ibb.co/whjWXQHz/756038333-2257427511659106-983398695096725696-n.jpg">
 <style>
 :root{--nen:#FBFBFC;--the:#FFF;--muc:#1A1D23;--nhat:#5C6370;--mo:#8A909C;--ke:#E3E5EA;--ke2:#CBD0D8;
  --nhan:#0F6E62;--nhanN:#E6F0EE;--dat:#2E7D5B;--datN:#7CC39C;--cho:#C98A1E;--choN:#FBF4E6;--lam:#3B6EA5;--lamN:#EAF0F7;--xam:#B4BAC4}
@@ -21,6 +22,9 @@ h1{font-size:2.1rem;line-height:1.14;letter-spacing:-.015em}h2{font-size:1.3rem}
 p{margin:0 0 12px;max-width:66ch}
 .nn{font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;color:var(--mo);font-weight:600}
 header{border-bottom:2px solid var(--muc);padding-bottom:18px;margin-bottom:30px}
+.hd{display:flex;align-items:flex-start;gap:16px}
+.lg{width:52px;height:52px;flex:0 0 52px;object-fit:cover;border-radius:5px;border:1px solid var(--ke)}
+@media (max-width:720px){.lg{width:42px;height:42px;flex-basis:42px}}
 .meta{display:flex;flex-wrap:wrap;gap:5px 24px;margin-top:10px;font-size:.85rem;color:var(--nhat)}
 .meta b{color:var(--muc)}
 section{margin-top:38px}
@@ -69,6 +73,7 @@ tr.nh td{font-family:Georgia,serif;font-weight:600;border-top:2px solid var(--ke
 .b6{background:var(--nhanN);color:var(--nhan);border-color:var(--nhan)}
 .ma{font-family:Georgia,serif;color:var(--mo);font-size:.81rem;white-space:nowrap}
 .p22{font-size:.68rem;color:var(--nhan);border:1px solid var(--nhan);padding:0 5px;margin-left:6px;white-space:nowrap}
+.uu{font-size:.68rem;background:var(--cho);color:#fff;padding:1px 6px;margin-left:6px;white-space:nowrap;font-weight:600}
 .ptabs{display:flex;gap:8px;margin:26px 0 0}
 .ptabs label{flex:1;text-align:center;padding:11px 10px;font-size:.95rem;font-weight:700;cursor:pointer;color:var(--nhat);border:1px solid var(--ke2);background:var(--the)}
 #ph1:checked~.ptabs label[for=ph1],#ph2:checked~.ptabs label[for=ph2]{color:var(--nhan);border-color:var(--nhan);background:var(--nhanN)}
@@ -88,9 +93,14 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
 <div class="trang">
 
 <header>
+  <div class="hd">
+    <img class="lg" src="https://i.ibb.co/whjWXQHz/756038333-2257427511659106-983398695096725696-n.jpg" alt="Ecochic">
+    <div>
   <div class="nn">Công ty Cổ phần New Match · Dự án hệ thống ERP Ecochic</div>
   <h1 style="margin-top:7px">Báo cáo tiến độ Giai đoạn 2.1 và các hạng mục ưu tiên phát sinh (2.2)</h1>
   <div class="meta"><span>Số liệu đến <b>15/09/2026</b></span><span>Khởi động <b>25/05/2026</b></span><span>GĐ 2.1 <b>41 hạng mục</b></span><span>GĐ 2.2 <b>15 hạng mục báo giá</b></span></div>
+    </div>
+  </div>
 </header>
 
 <input class="rt" type="radio" name="ph" id="ph1" checked>
@@ -100,7 +110,7 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
 <div class="phz z1">
 <section>
   <div class="dm"><span class="so">1</span><h2>Tình hình chung</h2></div>
-  <p><b>28 trên 41 hạng mục đã hoàn thiện xây dựng — 68%.</b> Không còn hạng mục nào chưa khởi động.
+  <p><b>28 trên 41 hạng mục đã hoàn thiện xây dựng — 68%.</b> Toàn bộ hạng mục trong phạm vi báo cáo đều đã khởi động.
   Trọng tâm đã chuyển từ xây dựng sang kiểm thử và lấy phản hồi từ các phòng ban Ecochic.</p>
 
   <div class="the4">
@@ -114,10 +124,10 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
   <div class="nb" style="border-left-color:var(--cho);background:var(--choN)"><p><b>Ưu tiên cao nhất hiện nay:
   hoàn thiện báo cáo điều hành theo bộ dashboard mới của Ecochic.</b> Nền báo cáo đã bàn giao và trình bày từ
   Giai đoạn 1; yêu cầu mới bổ sung các chỉ số phải xử lý và tính toán lại từ dữ liệu gốc, kèm làm mới toàn bộ
-  giao diện Report (đã gửi bản design để feedback).</p></div>
+  giao diện báo cáo (đã gửi bản thiết kế để Ecochic góp ý).</p></div>
 
   <div class="nb"><p><b>Đã triển khai trước 5 hạng mục thuộc Giai đoạn 2.2</b> dù chưa ký hợp đồng, theo
-  ưu tiên vận hành của Ecochic: kho hàng, nhà máy sản xuất, hoá đơn điện tử đầu vào — đầu ra và chữ ký số</p></div>
+  ưu tiên vận hành của Ecochic: kho hàng, nhà máy sản xuất, hoá đơn điện tử đầu vào — đầu ra và chữ ký số. Tính cả các hạng mục mới ở giai đoạn đầu xây dựng thì đã có 10 trên 15 hạng mục Giai đoạn 2.2 khởi động — chi tiết ở thẻ Giai đoạn 2.2</p></div>
 </section>
 
 <section>
@@ -186,7 +196,7 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
       <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Trang bán hàng thương hiệu</b></td><td>Chạy chính thức trên tên miền Ecochic</td></tr>
       <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Quản trị nội dung &amp; SEO bài viết</b></td><td>Đội nội dung tự chủ đăng bài</td></tr>
       <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Giao diện, trang đích chiến dịch</b></td><td>Đã bàn giao, đang xử lý góp ý hiệu ứng</td></tr>
-      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Vòng đời đơn hàng ba sàn</b></td><td>Cập nhật thời gian thực, đã đối soát số liệu</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Vòng đời đơn hàng đa kênh</b></td><td>Cập nhật thời gian thực; đang đối soát số liệu cùng Ecochic</td></tr>
       <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Đơn hoàn hàng</b></td><td>Màn riêng, hành trình hai chiều</td></tr>
       <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Tự kết nối gian hàng</b></td><td>Ecochic tự thao tác</td></tr>
       <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Quản lý sản phẩm nội bộ</b></td><td>Độc lập với dữ liệu sàn</td></tr>
@@ -206,7 +216,7 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
       <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Bán hàng trực tuyến trên web</b></td><td>Luồng đặt hàng đã thông từ đầu đến cuối</td></tr>
       <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Cảnh báo đơn tồn đọng</b></td><td>Chuyển trạng thái tự động và cảnh báo quá hạn</td></tr>
       <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Kế toán hiệu chỉnh phân loại</b></td><td>Kiểm quyền riêng, bắt buộc nhập lý do</td></tr>
-      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Phê duyệt sản phẩm hai cấp</b></td><td>Duyệt theo lô, hẹn giờ đăng — đã xử lý lỗi, chờ kiểm lại</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Phê duyệt sản phẩm hai cấp</b></td><td>Duyệt theo lô, hẹn giờ đăng — chờ vòng kiểm thử</td></tr>
       <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Thuộc tính sản phẩm theo ngành hàng</b></td><td>Trục thuộc tính khai báo được</td></tr>
       <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Giám sát đồng bộ &amp; cảnh báo lỗi</b></td><td>Trạng thái kết nối, lịch sử đồng bộ</td></tr>
       <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Kiến trúc kho, sơ đồ kho</b></td><td>Kho, khu, vị trí kèm sơ đồ trực quan</td></tr>
@@ -218,7 +228,7 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
       <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Xuất báo cáo tuỳ chỉnh theo kỳ</b><span class="p22">nền GĐ 1</span></td><td>Chọn chỉ số, chọn kỳ, xuất tệp</td></tr>
 
       <tr class="nh"><td colspan="3">Đang hoàn thiện phần cuối — 8</td></tr>
-      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Dashboard điều hành theo bộ chỉ số mới</b><span class="p22">Ưu tiên cao nhất</span></td><td>Bổ sung chỉ số mới, tính toán lại từ dữ liệu gốc, làm mới giao diện</td></tr>
+      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Dashboard điều hành theo bộ chỉ số mới</b><span class="p22">nền GĐ 1</span><span class="uu">Ưu tiên cao nhất</span></td><td>Bổ sung chỉ số mới, tính toán lại từ dữ liệu gốc, làm mới giao diện</td></tr>
       <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Chữ ký số — tích hợp trọn luồng duyệt chi</b><span class="p22">GĐ 2.2</span></td><td>Phần nền đã xong, đang ghép nốt vào phân hệ tài chính</td></tr>
       <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Đồng bộ hai chiều với sàn</b></td><td>Chiều nhận về ổn định</td></tr>
       <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Kho số hoá tách theo sàn</b></td><td>Ghép kho sàn đã chạy</td></tr>
@@ -228,7 +238,7 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
       <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Lệnh sản xuất liên kết mã hàng</b></td><td>Đang hoàn thiện giao diện</td></tr>
 
       <tr class="nh"><td colspan="3">Chờ Ecochic cung cấp đầu vào — 5</td></tr>
-      <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Mẫu chứng từ và biểu mẫu in</b></td><td>Cần biểu mẫu phiếu chuẩn của Ecochic</td></tr>
+      <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Mẫu chứng từ, biểu mẫu phiếu tái sử dụng</b></td><td>Cần biểu mẫu phiếu chuẩn của Ecochic</td></tr>
       <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Xuất dữ liệu cho phần mềm kế toán</b></td><td>Cần biểu mẫu xuất chuẩn đối chiếu thuế</td></tr>
       <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Danh mục, mã hàng, biến thể</b></td><td>Chờ Ecochic quy hoạch cây danh mục chuẩn</td></tr>
       <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Doanh thu ngoài sàn</b></td><td>Chờ kế toán xác nhận phương án ghi nhận</td></tr>
@@ -294,7 +304,7 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
       <tr><td class="ma">—</td><td>Báo cáo doanh thu, đơn hàng theo kênh bán<span class="p22">nền GĐ 1</span></td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
       <tr><td class="ma">—</td><td>Báo cáo đơn hoàn, đơn huỷ<span class="p22">nền GĐ 1</span></td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
       <tr><td class="ma">—</td><td>Xuất báo cáo tuỳ chỉnh theo kỳ<span class="p22">nền GĐ 1</span></td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
-      <tr><td class="ma">—</td><td>Dashboard điều hành theo bộ chỉ số mới<span class="p22">Ưu tiên cao nhất</span></td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
+      <tr><td class="ma">—</td><td>Dashboard điều hành theo bộ chỉ số mới<span class="p22">nền GĐ 1</span><span class="uu">Ưu tiên cao nhất</span></td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
     </tbody>
   </table></div>
   </div>
@@ -306,7 +316,7 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
     <thead><tr><th style="width:170px">Mốc</th><th>Nội dung</th><th style="width:180px">Trạng thái</th></tr></thead>
     <tbody>
       <tr><td>Khởi động</td><td>Ký hợp đồng và khởi động dự án</td><td><span class="bg b1">Hoàn thành</span> 25/05/2026</td></tr>
-      <tr><td><b>Trình bày tiến độ + tính năng</b></td><td><b>Demo cơ bản các tính năng theo kế hoạch</b></td><td><span class="bg b1">Hoàn thành</span> </br>Buổi trình bày ngày 07/09</td></tr>
+      <tr><td><b>Trình bày tiến độ + tính năng</b></td><td><b>Demo cơ bản các tính năng theo kế hoạch</b></td><td><span class="bg b1">Hoàn thành</span> <br>Buổi trình bày ngày 07/09</td></tr>
       <tr><td>Nghiệm thu bàn giao</td><td>Nghiệm thu và bàn giao sản phẩm</td><td>Dự kiến tháng 10, cần Ecochic sử dụng, phản hồi hoàn thiện hệ thống</td></tr>
     </tbody>
   </table></div>
@@ -317,14 +327,14 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
 <section>
   <div class="dm"><span class="so">1</span><h2>Tình hình chung</h2></div>
   <p><b>Đã chủ động xây dựng trước 10 trên 15 hạng mục của Giai đoạn 2.2 — đạt khoảng 40% khối lượng</b>
-  (tính theo tỷ trọng giá trị hạng mục), dù hợp đồng đang ở bước trao đổi báo giá.
-  Phần đã xây chưa tính kiểm thử — vòng kiểm thử bắt đầu sau khi khép Giai đoạn 2.1.</p>
+  (tính theo tỷ trọng khối lượng hạng mục), dù hợp đồng đang ở bước trao đổi - chưa kí kết. 
+  Phần đã xây chưa tính kiểm thử - sẽ phân bổ nhân sự Kiểm thử ưu tiên cho hạng mục cần thiết</p>
 
   <div class="the4">
     <div class="tk"><div class="nn">Hạng mục báo giá</div><div class="cs">15</div><div class="dv">5 nhóm chức năng</div></div>
     <div class="tk k3"><div class="nn">Đang xây dựng trước</div><div class="cs">10</div><div class="dv">theo ưu tiên vận hành</div></div>
     <div class="tk"><div class="nn">Chưa khởi động</div><div class="cs">5</div><div class="dv">chờ ký và xếp lịch</div></div>
-    <div class="tk k2"><div class="nn">Khối lượng đã xây</div><div class="cs">≈40%</div><div class="dv">theo tỷ trọng giá trị</div></div>
+    <div class="tk k2"><div class="nn">Khối lượng đã xây</div><div class="cs">≈40%</div><div class="dv">theo tỷ trọng khối lượng</div></div>
   </div>
 </section>
 
@@ -341,9 +351,10 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
       <text x="100" y="116" text-anchor="middle" font-size="10" style="fill:var(--nhat)">khối lượng đã xây</text>
     </svg>
     <ul class="cg">
-      <li><i style="background:var(--cho)"></i><span>Khối lượng đã xây dựng — 10 trên 15 hạng mục đã khởi động</span><b>40%</b></li>
-      <li><i style="background:var(--xam)"></i><span>Phần còn lại — 5 hạng mục chưa khởi động</span><b>60%</b></li>
-      <li><i style="background:var(--datN)"></i><span>Đã qua kiểm thử — bắt đầu sau khi khép Giai đoạn 2.1</span><b>0%</b></li>
+      <li><i style="background:var(--cho)"></i><span>Khối lượng đã xây dựng</span><b>40%</b></li>
+      <li><i style="background:var(--xam)"></i><span>Khối lượng còn lại</span><b>60%</b></li>
+      <li><i style="background:transparent"></i><span>Hạng mục đã khởi động, trên tổng 15</span><b>10</b></li>
+      <li><i style="background:transparent"></i><span>Đã qua kiểm thử — bắt đầu sau khi khép Giai đoạn 2.1</span><b>0</b></li>
     </ul>
   </div>
 </section>
@@ -365,7 +376,7 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
   <div class="ct">
     <span><i style="background:var(--cho)"></i>Khối lượng đã xây dựng</span>
     <span><i style="background:var(--ke)"></i>Phần còn lại</span>
-    <span>% tính theo tỷ trọng giá trị hạng mục trong nhóm</span>
+    <span>% tính theo tỷ trọng khối lượng hạng mục trong nhóm</span>
   </div>
 </section>
 
@@ -436,11 +447,11 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
 
 <section>
   <div class="dm"><span class="so">5</span><h2>Phạm vi Giai đoạn 2.2</h2></div>
-  <p>Giai đoạn 2.2 gồm <b>các hạng mục còn lại của Phase 2 tổng</b> đã cùng Ecochic bàn bạc từ đầu dự án
-  nhưng được tách ra khi chia nhỏ khối lượng, <b>cộng với các hạng mục, đầu việc và tính năng phát sinh</b>
-  hình thành trong quá trình vận hành thực tế và được hai bên thống nhất ưu tiên qua các buổi làm việc gần đây.</p>
-  <p>Vì vậy nhiều hạng mục đã được đội dự án triển khai trước theo nhu cầu vận hành của Ecochic, không chờ
-  đến khi ký phụ lục.</p>
+  <p>Giai đoạn 2.2 gồm <b>các hạng mục đã cùng Ecochic thống nhất định hướng từ đầu dự án nhưng được xếp
+  triển khai sau</b>, <b>cộng với các hạng mục, đầu việc và tính năng phát sinh</b> hình thành trong quá trình
+  vận hành thực tế và được hai bên thống nhất ưu tiên qua các buổi làm việc gần đây.</p>
+  <p>Một số hạng mục được đội dự án triển khai sớm để hoạt động của Ecochic không bị gián đoạn; khối lượng
+  này sẽ được ghi nhận khi hai bên ký phụ lục.</p>
   </section>
 </div>
 
@@ -448,10 +459,11 @@ footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size
   Báo cáo lập ngày 15/09/2026 · Công ty Cổ phần New Match<br>
   Thẻ Giai đoạn 2.1: tổng 41 hạng mục gồm 32 hạng mục Giai đoạn 2.1, 5 hạng mục Giai đoạn 2.2 đã triển khai
   trước theo ưu tiên vận hành, và 4 hạng mục báo cáo điều hành (nền đã bàn giao ở Giai đoạn 1, đang bổ sung
-  theo yêu cầu mới). Chờ kiểm thử là đã dựng xong, đang chờ đội kiểm thử nội bộ; chờ nghiệm thu là đã kiểm thử đạt,
+  theo yêu cầu mới). Hợp đồng Giai đoạn 2.1 gồm 37 hạng mục; 5 hạng mục thuộc nhóm thiết bị cầm tay và in tem
+  gắn với đối tác cung cấp phần cứng hiện được trình bày tách riêng — New Match đã đề nghị điều chỉnh phạm vi
+  nhóm này, hai bên chưa ký xác nhận nên chưa tính vào tỷ lệ. Chờ kiểm thử là đã dựng xong, đang chờ đội kiểm thử nội bộ; chờ nghiệm thu là đã kiểm thử đạt,
   chờ trình bày và xác nhận cùng Ecochic. Thẻ Giai đoạn 2.2: 15 hạng mục theo phụ lục báo giá đang trao đổi; tỷ lệ phần trăm
-  tính theo tỷ trọng giá trị hạng mục, không phải theo số lượng hạng mục, và chưa bao gồm kiểm thử. Nhóm hạng mục gắn đối tác Avery Dennison đang chờ văn bản điều chỉnh
-  phạm vi, không tính trong báo cáo.
+  tính theo tỷ trọng khối lượng hạng mục, không phải theo số lượng hạng mục, và chưa bao gồm kiểm thử.
 </footer>
 
 </div>
