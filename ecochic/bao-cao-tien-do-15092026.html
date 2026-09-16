@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiến độ dự án ERP Ecochic P2.1 – P2.2</title>
+<style>
+:root{--nen:#FBFBFC;--the:#FFF;--muc:#1A1D23;--nhat:#5C6370;--mo:#8A909C;--ke:#E3E5EA;--ke2:#CBD0D8;
+ --nhan:#0F6E62;--nhanN:#E6F0EE;--dat:#2E7D5B;--datN:#7CC39C;--cho:#C98A1E;--choN:#FBF4E6;--lam:#3B6EA5;--lamN:#EAF0F7;--xam:#B4BAC4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nen:#14161A;--the:#1B1E24;--muc:#EDEEF1;
+ --nhat:#A2A9B6;--mo:#767D8A;--ke:#2A2E36;--ke2:#3A404A;--nhan:#4FBFAC;--nhanN:#16302C;--dat:#5FBF8E;
+ --datN:#2F6B50;--cho:#D9A441;--choN:#2C2314;--lam:#6FA3DC;--lamN:#1B2733;--xam:#4A515C}}
+:root[data-theme="dark"]{--nen:#14161A;--the:#1B1E24;--muc:#EDEEF1;--nhat:#A2A9B6;--mo:#767D8A;--ke:#2A2E36;
+ --ke2:#3A404A;--nhan:#4FBFAC;--nhanN:#16302C;--dat:#5FBF8E;--datN:#2F6B50;--cho:#D9A441;--choN:#2C2314;
+ --lam:#6FA3DC;--lamN:#1B2733;--xam:#4A515C}
+*{box-sizing:border-box}
+body{margin:0;background:var(--nen);color:var(--muc);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+.trang{max-width:960px;margin:0 auto;padding:48px 32px 72px}
+h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:600;margin:0;text-wrap:balance}
+h1{font-size:2.1rem;line-height:1.14;letter-spacing:-.015em}h2{font-size:1.3rem}
+p{margin:0 0 12px;max-width:66ch}
+.nn{font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;color:var(--mo);font-weight:600}
+header{border-bottom:2px solid var(--muc);padding-bottom:18px;margin-bottom:30px}
+.meta{display:flex;flex-wrap:wrap;gap:5px 24px;margin-top:10px;font-size:.85rem;color:var(--nhat)}
+.meta b{color:var(--muc)}
+section{margin-top:38px}
+.dm{display:flex;align-items:baseline;gap:13px;padding-bottom:9px;border-bottom:1px solid var(--ke2);margin-bottom:18px}
+.so{font-family:Georgia,serif;font-size:1.02rem;color:var(--nhan);font-weight:600;min-width:1.3em}
+.the4{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--ke);border:1px solid var(--ke);margin:20px 0}
+.tk{background:var(--the);padding:15px 12px;border-top:3px solid var(--xam)}
+.tk .cs{font-family:Georgia,serif;font-size:2.2rem;line-height:1;margin:5px 0 1px}
+.tk .dv{font-size:.75rem;color:var(--nhat);line-height:1.35}
+.k1{border-top-color:var(--dat)}.k1 .cs{color:var(--dat)}
+.k2{border-top-color:var(--datN)}.k2 .cs{color:var(--datN)}
+.k3{border-top-color:var(--cho)}.k3 .cs{color:var(--cho)}
+.k4{border-top-color:var(--lam)}.k4 .cs{color:var(--lam)}
+.k5{border-top-color:var(--nhan)}.k5 .cs{color:var(--nhan)}
+.tq{display:grid;grid-template-columns:220px 1fr;gap:30px;align-items:center;margin:22px 0}
+.cg{list-style:none;margin:0;padding:0}
+.cg li{display:grid;grid-template-columns:13px 1fr auto;gap:11px;align-items:center;padding:8px 0;border-bottom:1px solid var(--ke);font-size:.89rem}
+.cg li:last-child{border-bottom:none}
+.cg i{width:13px;height:13px;display:block}.cg b{font-family:Georgia,serif;font-size:1.05rem}
+.bd{display:flex;flex-direction:column;gap:11px;margin:20px 0}
+.hg{display:grid;grid-template-columns:200px 1fr 42px;gap:13px;align-items:center}
+.hg .tn{font-size:.87rem}
+.th{display:flex;height:24px;background:var(--ke);overflow:hidden}
+.hg .pc{font-size:.85rem;font-weight:600;text-align:right;font-family:Georgia,serif}
+.ct{display:flex;flex-wrap:wrap;gap:14px;font-size:.76rem;color:var(--nhat);margin-top:9px}
+.ct i{display:inline-block;width:11px;height:11px;margin-right:5px;vertical-align:-1px}
+.nb{background:var(--nhanN);border-left:3px solid var(--nhan);padding:14px 18px;margin:18px 0}
+.nb p{margin:0;max-width:none}
+.rt{position:absolute;opacity:0;pointer-events:none}
+.tabs{display:flex;border-bottom:1px solid var(--ke2);margin:18px 0 0}
+.tabs label{padding:9px 19px;font-size:.86rem;font-weight:600;cursor:pointer;color:var(--mo);border-bottom:2px solid transparent;margin-bottom:-1px}
+#t1:checked~.tabs label[for=t1],#t2:checked~.tabs label[for=t2],#t3:checked~.tabs label[for=t3],#t4:checked~.tabs label[for=t4]{color:var(--nhan);border-bottom-color:var(--nhan)}
+.pane{display:none}
+#t1:checked~.pane.p1,#t2:checked~.pane.p2,#t3:checked~.pane.p3,#t4:checked~.pane.p4{display:block}
+.cu{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--ke);vertical-align:middle}
+th{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mo);font-weight:600;border-bottom:1px solid var(--ke2);white-space:nowrap}
+tr.mh td{background:var(--nhanN);font-weight:600;font-family:Georgia,serif;font-size:.89rem}
+tr.nh td{font-family:Georgia,serif;font-weight:600;border-top:2px solid var(--ke2);font-size:.95rem;padding-top:15px}
+.bg{display:inline-block;padding:2px 10px;font-size:.72rem;font-weight:600;border-radius:2px;white-space:nowrap;border:1px solid transparent}
+.b1{background:var(--dat);color:#fff}
+.b2{background:var(--datN);color:#12351F}
+.b3{background:var(--choN);color:var(--cho);border-color:var(--cho)}
+.b4{background:var(--lamN);color:var(--lam);border-color:var(--lam)}
+.b6{background:var(--nhanN);color:var(--nhan);border-color:var(--nhan)}
+.ma{font-family:Georgia,serif;color:var(--mo);font-size:.81rem;white-space:nowrap}
+.p22{font-size:.68rem;color:var(--nhan);border:1px solid var(--nhan);padding:0 5px;margin-left:6px;white-space:nowrap}
+.ptabs{display:flex;gap:8px;margin:26px 0 0}
+.ptabs label{flex:1;text-align:center;padding:11px 10px;font-size:.95rem;font-weight:700;cursor:pointer;color:var(--nhat);border:1px solid var(--ke2);background:var(--the)}
+#ph1:checked~.ptabs label[for=ph1],#ph2:checked~.ptabs label[for=ph2]{color:var(--nhan);border-color:var(--nhan);background:var(--nhanN)}
+.phz{display:none}
+#ph1:checked~.phz.z1,#ph2:checked~.phz.z2{display:block}
+.b5{background:var(--ke);color:var(--nhat);border-color:var(--ke2)}
+footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--ke);font-size:.77rem;color:var(--mo)}
+@media (max-width:720px){.trang{padding:28px 15px 48px}h1{font-size:1.6rem}
+ .the4{grid-template-columns:repeat(2,1fr)}.tq{grid-template-columns:1fr;gap:16px}
+ .hg{grid-template-columns:1fr;gap:4px}.hg .pc{text-align:left}}
+@media print{body{background:#fff;color:#000;font-size:9.5pt}.trang{max-width:none;padding:0}
+ .pane{display:block!important}.tabs{display:none}.phz{display:block!important}.ptabs{display:none}.phz.z2{break-before:page}
+ .dm,table,.the4,.nb,.tq{break-inside:avoid}tr{break-inside:avoid}@page{margin:14mm}}
+</style>
+</head>
+<body>
+<div class="trang">
+
+<header>
+  <div class="nn">Công ty Cổ phần New Match · Dự án hệ thống ERP Ecochic</div>
+  <h1 style="margin-top:7px">Báo cáo tiến độ Giai đoạn 2.1 và các hạng mục ưu tiên phát sinh (2.2)</h1>
+  <div class="meta"><span>Số liệu đến <b>15/09/2026</b></span><span>Khởi động <b>25/05/2026</b></span><span>GĐ 2.1 <b>41 hạng mục</b></span><span>GĐ 2.2 <b>15 hạng mục báo giá</b></span></div>
+</header>
+
+<input class="rt" type="radio" name="ph" id="ph1" checked>
+<input class="rt" type="radio" name="ph" id="ph2">
+<div class="ptabs"><label for="ph1">Giai đoạn 2.1 — đang triển khai</label><label for="ph2">Giai đoạn 2.2 — chưa ký, có làm trước</label></div>
+
+<div class="phz z1">
+<section>
+  <div class="dm"><span class="so">1</span><h2>Tình hình chung</h2></div>
+  <p><b>28 trên 41 hạng mục đã hoàn thiện xây dựng — 68%.</b> Không còn hạng mục nào chưa khởi động.
+  Trọng tâm đã chuyển từ xây dựng sang kiểm thử và lấy phản hồi từ các phòng ban Ecochic.</p>
+
+  <div class="the4">
+    <div class="tk k1"><div class="nn">Đang vận hành</div><div class="cs">12</div><div class="dv">dùng thật hằng ngày</div></div>
+    <div class="tk k2"><div class="nn">Chờ nghiệm thu</div><div class="cs">4</div><div class="dv">kiểm thử đạt, chờ chốt cùng Ecochic</div></div>
+    <div class="tk k5"><div class="nn">Chờ kiểm thử</div><div class="cs">12</div><div class="dv">dựng xong, chờ đội kiểm thử</div></div>
+    <div class="tk k3"><div class="nn">Đang hoàn thiện</div><div class="cs">8</div><div class="dv">phần lõi đã chạy</div></div>
+    <div class="tk k4"><div class="nn">Chờ Ecochic</div><div class="cs">5</div><div class="dv">cần đầu vào phối hợp</div></div>
+  </div>
+
+  <div class="nb" style="border-left-color:var(--cho);background:var(--choN)"><p><b>Ưu tiên cao nhất hiện nay:
+  hoàn thiện báo cáo điều hành theo bộ dashboard mới của Ecochic.</b> Nền báo cáo đã bàn giao và trình bày từ
+  Giai đoạn 1; yêu cầu mới bổ sung các chỉ số phải xử lý và tính toán lại từ dữ liệu gốc, kèm làm mới toàn bộ
+  giao diện Report (đã gửi bản design để feedback).</p></div>
+
+  <div class="nb"><p><b>Đã triển khai trước 5 hạng mục thuộc Giai đoạn 2.2</b> dù chưa ký hợp đồng, theo
+  ưu tiên vận hành của Ecochic: kho hàng, nhà máy sản xuất, hoá đơn điện tử đầu vào — đầu ra và chữ ký số</p></div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">2</span><h2>Toàn cảnh</h2></div>
+  <div class="tq">
+    <svg viewBox="0 0 200 200" width="220" height="220" role="img" aria-label="Vòng tròn tiến độ">
+      <circle cx="100" cy="100" r="80" fill="none" style="stroke:var(--ke)" stroke-width="28"/>
+      <g transform="rotate(-90 100 100)">
+        <circle cx="100" cy="100" r="80" fill="none" style="stroke:var(--dat)"  stroke-width="28" stroke-dasharray="147.12 355.53" stroke-dashoffset="0"/>
+        <circle cx="100" cy="100" r="80" fill="none" style="stroke:var(--datN)" stroke-width="28" stroke-dasharray="49.04 453.61"  stroke-dashoffset="-147.12"/>
+        <circle cx="100" cy="100" r="80" fill="none" style="stroke:var(--nhan)" stroke-width="28" stroke-dasharray="147.12 355.53" stroke-dashoffset="-196.16"/>
+        <circle cx="100" cy="100" r="80" fill="none" style="stroke:var(--cho)"  stroke-width="28" stroke-dasharray="98.08 404.57"  stroke-dashoffset="-343.28"/>
+        <circle cx="100" cy="100" r="80" fill="none" style="stroke:var(--lam)"  stroke-width="28" stroke-dasharray="61.29 441.36"  stroke-dashoffset="-441.36"/>
+      </g>
+      <text x="100" y="95" text-anchor="middle" font-family="Georgia,serif" font-size="36" font-weight="600" style="fill:var(--muc)">68%</text>
+      <text x="100" y="116" text-anchor="middle" font-size="10" style="fill:var(--nhat)">đã hoàn thiện</text>
+    </svg>
+    <ul class="cg">
+      <li><i style="background:var(--dat)"></i><span>Đang vận hành trên dữ liệu thật</span><b>12</b></li>
+      <li><i style="background:var(--datN)"></i><span>Đã kiểm thử đạt — chờ nghiệm thu cùng Ecochic</span><b>4</b></li>
+      <li><i style="background:var(--nhan)"></i><span>Dựng xong — chờ đội kiểm thử nội bộ</span><b>12</b></li>
+      <li><i style="background:var(--cho)"></i><span>Đang hoàn thiện phần cuối</span><b>8</b></li>
+      <li><i style="background:var(--lam)"></i><span>Chờ Ecochic cung cấp đầu vào</span><b>5</b></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">3</span><h2>Theo nhóm chức năng</h2></div>
+  <div class="bd">
+    <div class="hg"><div class="tn">Website &amp; Nội dung</div>
+      <div class="th"><span style="background:var(--dat);width:75%"></span><span style="background:var(--nhan);width:12.5%"></span><span style="background:var(--lam);width:12.5%"></span></div><div class="pc">88%</div></div>
+    <div class="hg"><div class="tn">Báo cáo &amp; Dashboard</div>
+      <div class="th"><span style="background:var(--nhan);width:75%"></span><span style="background:var(--cho);width:25%"></span></div><div class="pc">75%</div></div>
+    <div class="hg"><div class="tn">FNM — Tài chính &amp; Hoá đơn</div>
+      <div class="th"><span style="background:var(--dat);width:10%"></span><span style="background:var(--datN);width:30%"></span><span style="background:var(--nhan);width:30%"></span><span style="background:var(--cho);width:10%"></span><span style="background:var(--lam);width:20%"></span></div><div class="pc">70%</div></div>
+    <div class="hg"><div class="tn">CRM Product — Sản phẩm</div>
+      <div class="th"><span style="background:var(--dat);width:16.67%"></span><span style="background:var(--datN);width:16.67%"></span><span style="background:var(--nhan);width:33.33%"></span><span style="background:var(--cho);width:16.67%"></span><span style="background:var(--lam);width:16.67%"></span></div><div class="pc">67%</div></div>
+    <div class="hg"><div class="tn">CRM Marketplace — Đồng bộ sàn</div>
+      <div class="th"><span style="background:var(--dat);width:33.33%"></span><span style="background:var(--nhan);width:33.33%"></span><span style="background:var(--cho);width:33.33%"></span></div><div class="pc">67%</div></div>
+    <div class="hg"><div class="tn">CRM Order — Đơn hàng</div>
+      <div class="th"><span style="background:var(--dat);width:40%"></span><span style="background:var(--nhan);width:20%"></span><span style="background:var(--cho);width:20%"></span><span style="background:var(--lam);width:20%"></span></div><div class="pc">60%</div></div>
+    <div class="hg"><div class="tn">Kho hàng &amp; Nhà máy</div>
+      <div class="th"><span style="background:var(--dat);width:20%"></span><span style="background:var(--nhan);width:20%"></span><span style="background:var(--cho);width:60%"></span></div><div class="pc">40%</div></div>
+  </div>
+  <div class="ct">
+    <span><i style="background:var(--dat)"></i>Đang vận hành</span>
+    <span><i style="background:var(--datN)"></i>Chờ nghiệm thu</span>
+    <span><i style="background:var(--nhan)"></i>Chờ kiểm thử</span>
+    <span><i style="background:var(--cho)"></i>Đang hoàn thiện</span>
+    <span><i style="background:var(--lam)"></i>Chờ Ecochic</span>
+  </div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">4</span><h2>Chi tiết hạng mục</h2></div>
+  <input class="rt" type="radio" name="tb" id="t1" checked>
+  <input class="rt" type="radio" name="tb" id="t2">
+  <div class="tabs"><label for="t1">Theo trạng thái</label><label for="t2">Theo nhóm chức năng</label></div>
+
+  <div class="pane p1">
+  <div class="cu"><table>
+    <thead><tr><th style="width:150px">Trạng thái</th><th>Hạng mục</th><th>Ghi chú</th></tr></thead>
+    <tbody>
+      <tr class="nh"><td colspan="3">Đang vận hành trên dữ liệu thật — 12</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Trang bán hàng thương hiệu</b></td><td>Chạy chính thức trên tên miền Ecochic</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Quản trị nội dung &amp; SEO bài viết</b></td><td>Đội nội dung tự chủ đăng bài</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Giao diện, trang đích chiến dịch</b></td><td>Đã bàn giao, đang xử lý góp ý hiệu ứng</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Vòng đời đơn hàng ba sàn</b></td><td>Cập nhật thời gian thực, đã đối soát số liệu</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Đơn hoàn hàng</b></td><td>Màn riêng, hành trình hai chiều</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Tự kết nối gian hàng</b></td><td>Ecochic tự thao tác</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Quản lý sản phẩm nội bộ</b></td><td>Độc lập với dữ liệu sàn</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Tài khoản &amp; giao dịch sàn TMĐT</b></td><td>Ví sàn, quyết toán, dòng tiền theo gian hàng</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Tài khoản khách hàng trên web</b></td><td>Đăng ký, lịch sử đơn, sổ địa chỉ</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Kết nối web với hệ thống quản trị</b></td><td>Danh mục, sản phẩm, khách hàng đã liên thông</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Nền tảng SEO kỹ thuật</b></td><td>Chạy cùng website trên môi trường thật</td></tr>
+      <tr><td><span class="bg b1">Đang vận hành</span></td><td><b>Kho hàng — vận hành nhập xuất</b><span class="p22">GĐ 2.2</span></td><td>Phiếu nhập, xuất, chuyển kho, kiểm kho</td></tr>
+
+      <tr class="nh"><td colspan="3">Đã kiểm thử đạt — chờ nghiệm thu cùng Ecochic — 4</td></tr>
+      <tr><td><span class="bg b2">Chờ nghiệm thu</span></td><td><b>Phê duyệt tài chính đa cấp</b></td><td>8 loại phiếu, duyệt theo vai trò và phòng ban</td></tr>
+      <tr><td><span class="bg b2">Chờ nghiệm thu</span></td><td><b>Tự động sinh giao dịch, số dư quỹ</b></td><td>Ghi số dư trước và sau mỗi biến động</td></tr>
+      <tr><td><span class="bg b2">Chờ nghiệm thu</span></td><td><b>Kiểm quỹ, đối soát chênh lệch</b></td><td>Có duyệt và lưu vết giải trình</td></tr>
+      <tr><td><span class="bg b2">Chờ nghiệm thu</span></td><td><b>Nhận diện sản phẩm chưa định danh</b></td><td>Chạy trên mã hàng thật ba sàn</td></tr>
+
+      <tr class="nh"><td colspan="3">Dựng xong — chờ đội kiểm thử nội bộ — 12</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Bán hàng trực tuyến trên web</b></td><td>Luồng đặt hàng đã thông từ đầu đến cuối</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Cảnh báo đơn tồn đọng</b></td><td>Chuyển trạng thái tự động và cảnh báo quá hạn</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Kế toán hiệu chỉnh phân loại</b></td><td>Kiểm quyền riêng, bắt buộc nhập lý do</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Phê duyệt sản phẩm hai cấp</b></td><td>Duyệt theo lô, hẹn giờ đăng — đã xử lý lỗi, chờ kiểm lại</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Thuộc tính sản phẩm theo ngành hàng</b></td><td>Trục thuộc tính khai báo được</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Giám sát đồng bộ &amp; cảnh báo lỗi</b></td><td>Trạng thái kết nối, lịch sử đồng bộ</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Kiến trúc kho, sơ đồ kho</b></td><td>Kho, khu, vị trí kèm sơ đồ trực quan</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Hoá đơn điện tử đầu vào — đầu ra</b><span class="p22">GĐ 2.2</span></td><td>Ba loại hoá đơn, cảnh báo tồn, nhập đầu vào từ tệp</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Chữ ký số trên chứng từ và phiếu duyệt</b><span class="p22">GĐ 2.2</span></td><td>Ký trên máy tính và điện thoại — phần nền đã dựng xong</td></tr>
+
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Báo cáo doanh thu, đơn hàng theo kênh bán</b><span class="p22">nền GĐ 1</span></td><td>Bộ chỉ số nền đã bàn giao, kiểm lại cùng dữ liệu mới</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Báo cáo đơn hoàn, đơn huỷ</b><span class="p22">nền GĐ 1</span></td><td>Đã bàn giao và trình bày từ Giai đoạn 1</td></tr>
+      <tr><td><span class="bg b6">Chờ kiểm thử</span></td><td><b>Xuất báo cáo tuỳ chỉnh theo kỳ</b><span class="p22">nền GĐ 1</span></td><td>Chọn chỉ số, chọn kỳ, xuất tệp</td></tr>
+
+      <tr class="nh"><td colspan="3">Đang hoàn thiện phần cuối — 8</td></tr>
+      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Dashboard điều hành theo bộ chỉ số mới</b><span class="p22">Ưu tiên cao nhất</span></td><td>Bổ sung chỉ số mới, tính toán lại từ dữ liệu gốc, làm mới giao diện</td></tr>
+      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Chữ ký số — tích hợp trọn luồng duyệt chi</b><span class="p22">GĐ 2.2</span></td><td>Phần nền đã xong, đang ghép nốt vào phân hệ tài chính</td></tr>
+      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Đồng bộ hai chiều với sàn</b></td><td>Chiều nhận về ổn định</td></tr>
+      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Kho số hoá tách theo sàn</b></td><td>Ghép kho sàn đã chạy</td></tr>
+      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Hiệu năng xử lý đơn quy mô lớn</b></td><td>Đo tải chính thức trước nghiệm thu</td></tr>
+      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Bảng giá riêng theo kênh bán</b></td><td>Đang dựng màn quản lý</td></tr>
+      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Nhà máy — quản lý sản xuất</b><span class="p22">GĐ 2.2</span></td><td>Lệnh sản xuất, tiến độ, nhận hàng theo lô</td></tr>
+      <tr><td><span class="bg b3">Đang hoàn thiện</span></td><td><b>Lệnh sản xuất liên kết mã hàng</b></td><td>Đang hoàn thiện giao diện</td></tr>
+
+      <tr class="nh"><td colspan="3">Chờ Ecochic cung cấp đầu vào — 5</td></tr>
+      <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Mẫu chứng từ và biểu mẫu in</b></td><td>Cần biểu mẫu phiếu chuẩn của Ecochic</td></tr>
+      <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Xuất dữ liệu cho phần mềm kế toán</b></td><td>Cần biểu mẫu xuất chuẩn đối chiếu thuế</td></tr>
+      <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Danh mục, mã hàng, biến thể</b></td><td>Chờ Ecochic quy hoạch cây danh mục chuẩn</td></tr>
+      <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Doanh thu ngoài sàn</b></td><td>Chờ kế toán xác nhận phương án ghi nhận</td></tr>
+      <tr><td><span class="bg b4">Chờ Ecochic</span></td><td><b>Kết nối BigSeller</b></td><td>Chiều đẩy đơn đã đạt, chiều về chờ mở kết nối</td></tr>
+    </tbody>
+  </table></div>
+  </div>
+
+  <div class="pane p2">
+  <div class="cu"><table>
+    <thead><tr><th style="width:44px">Mã</th><th>Hạng mục</th><th style="width:150px">Trạng thái</th></tr></thead>
+    <tbody>
+      <tr class="mh"><td colspan="3">FNM — Tài chính &amp; Hoá đơn</td></tr>
+      <tr><td class="ma">1.1</td><td>Phê duyệt tài chính đa cấp theo phòng ban</td><td><span class="bg b2">Chờ nghiệm thu</span></td></tr>
+      <tr><td class="ma">1.2</td><td>Mẫu chứng từ, biểu mẫu phiếu tái sử dụng</td><td><span class="bg b4">Chờ Ecochic</span></td></tr>
+      <tr><td class="ma">1.3</td><td>Kế toán hiệu chỉnh phân loại ở bước duyệt cuối</td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">1.4</td><td>Tự động sinh giao dịch, cập nhật số dư quỹ</td><td><span class="bg b2">Chờ nghiệm thu</span></td></tr>
+      <tr><td class="ma">1.5</td><td>Tài khoản và giao dịch sàn TMĐT</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">1.6</td><td>Doanh thu ngoài sàn</td><td><span class="bg b4">Chờ Ecochic</span></td></tr>
+      <tr><td class="ma">1.7</td><td>Kiểm quỹ, đối soát chênh lệch</td><td><span class="bg b2">Chờ nghiệm thu</span></td></tr>
+      <tr><td class="ma">—</td><td>Hoá đơn điện tử đầu vào — đầu ra<span class="p22">GĐ 2.2</span></td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">—</td><td>Chữ ký số trên chứng từ và phiếu duyệt<span class="p22">GĐ 2.2</span></td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">—</td><td>Chữ ký số — tích hợp trọn luồng duyệt chi<span class="p22">GĐ 2.2</span></td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
+
+      <tr class="mh"><td colspan="3">CRM Order — Đơn hàng</td></tr>
+      <tr><td class="ma">2.1</td><td>Quản lý đơn hoàn hàng</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">2.2</td><td>Xuất dữ liệu cho phần mềm kế toán</td><td><span class="bg b4">Chờ Ecochic</span></td></tr>
+      <tr><td class="ma">2.3</td><td>Hiệu năng xử lý đơn quy mô lớn</td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
+      <tr><td class="ma">2.4</td><td>Vòng đời đơn hàng đa kênh</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">2.5</td><td>Tự động chuyển trạng thái, cảnh báo tồn đọng</td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+
+      <tr class="mh"><td colspan="3">CRM Product — Sản phẩm</td></tr>
+      <tr><td class="ma">3.1</td><td>Quản lý sản phẩm nội bộ</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">3.2</td><td>Phê duyệt sản phẩm hai cấp</td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">3.3</td><td>Danh mục, mã hàng, biến thể</td><td><span class="bg b4">Chờ Ecochic</span></td></tr>
+      <tr><td class="ma">3.4</td><td>Thuộc tính sản phẩm theo ngành hàng</td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">3.5</td><td>Bảng giá riêng theo kênh bán</td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
+      <tr><td class="ma">3.6</td><td>Nhận diện sản phẩm chưa định danh</td><td><span class="bg b2">Chờ nghiệm thu</span></td></tr>
+
+      <tr class="mh"><td colspan="3">CRM Marketplace — Đồng bộ sàn</td></tr>
+      <tr><td class="ma">4.1</td><td>Tự kết nối gian hàng ba sàn</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">4.2</td><td>Đồng bộ hai chiều với sàn</td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
+      <tr><td class="ma">4.3</td><td>Giám sát đồng bộ và cảnh báo lỗi</td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+
+      <tr class="mh"><td colspan="3">Kho hàng &amp; Nhà máy</td></tr>
+      <tr><td class="ma">5.1</td><td>Kiến trúc kho, sơ đồ kho trực quan</td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">5.2</td><td>Kho số hoá tách theo sàn</td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
+      <tr><td class="ma">8.1</td><td>Lệnh sản xuất liên kết mã hàng</td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
+      <tr><td class="ma">—</td><td>Kho hàng — vận hành nhập xuất, kiểm kho<span class="p22">GĐ 2.2</span></td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">—</td><td>Nhà máy — quản lý sản xuất<span class="p22">GĐ 2.2</span></td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
+
+      <tr class="mh"><td colspan="3">Website &amp; Nội dung</td></tr>
+      <tr><td class="ma">7.1</td><td>Trang bán hàng thương hiệu</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">7.2</td><td>Giao diện, trang đích theo chiến dịch</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">7.3</td><td>Bán hàng trực tuyến</td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">7.4</td><td>Tài khoản khách hàng</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">7.5</td><td>Kết nối web với hệ thống quản trị</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">7.6</td><td>Kết nối BigSeller</td><td><span class="bg b4">Chờ Ecochic</span></td></tr>
+      <tr><td class="ma">7.7</td><td>Nền tảng SEO kỹ thuật</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+      <tr><td class="ma">7.8</td><td>Quản trị nội dung và SEO bài viết</td><td><span class="bg b1">Đang vận hành</span></td></tr>
+
+      <tr class="mh"><td colspan="3">Báo cáo &amp; Dashboard</td></tr>
+      <tr><td class="ma">—</td><td>Báo cáo doanh thu, đơn hàng theo kênh bán<span class="p22">nền GĐ 1</span></td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">—</td><td>Báo cáo đơn hoàn, đơn huỷ<span class="p22">nền GĐ 1</span></td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">—</td><td>Xuất báo cáo tuỳ chỉnh theo kỳ<span class="p22">nền GĐ 1</span></td><td><span class="bg b6">Chờ kiểm thử</span></td></tr>
+      <tr><td class="ma">—</td><td>Dashboard điều hành theo bộ chỉ số mới<span class="p22">Ưu tiên cao nhất</span></td><td><span class="bg b3">Đang hoàn thiện</span></td></tr>
+    </tbody>
+  </table></div>
+  </div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">5</span><h2>Mốc theo hợp đồng</h2></div>
+  <div class="cu"><table>
+    <thead><tr><th style="width:170px">Mốc</th><th>Nội dung</th><th style="width:180px">Trạng thái</th></tr></thead>
+    <tbody>
+      <tr><td>Khởi động</td><td>Ký hợp đồng và khởi động dự án</td><td><span class="bg b1">Hoàn thành</span> 25/05/2026</td></tr>
+      <tr><td><b>Trình bày tiến độ + tính năng</b></td><td><b>Demo cơ bản các tính năng theo kế hoạch</b></td><td><span class="bg b1">Hoàn thành</span> </br>Buổi trình bày ngày 07/09</td></tr>
+      <tr><td>Nghiệm thu bàn giao</td><td>Nghiệm thu và bàn giao sản phẩm</td><td>Dự kiến tháng 10, cần Ecochic sử dụng, phản hồi hoàn thiện hệ thống</td></tr>
+    </tbody>
+  </table></div>
+</section>
+</div>
+
+<div class="phz z2">
+<section>
+  <div class="dm"><span class="so">1</span><h2>Tình hình chung</h2></div>
+  <p><b>Đã chủ động xây dựng trước 10 trên 15 hạng mục của Giai đoạn 2.2 — đạt khoảng 40% khối lượng</b>
+  (tính theo tỷ trọng giá trị hạng mục), dù hợp đồng đang ở bước trao đổi báo giá.
+  Phần đã xây chưa tính kiểm thử — vòng kiểm thử bắt đầu sau khi khép Giai đoạn 2.1.</p>
+
+  <div class="the4">
+    <div class="tk"><div class="nn">Hạng mục báo giá</div><div class="cs">15</div><div class="dv">5 nhóm chức năng</div></div>
+    <div class="tk k3"><div class="nn">Đang xây dựng trước</div><div class="cs">10</div><div class="dv">theo ưu tiên vận hành</div></div>
+    <div class="tk"><div class="nn">Chưa khởi động</div><div class="cs">5</div><div class="dv">chờ ký và xếp lịch</div></div>
+    <div class="tk k2"><div class="nn">Khối lượng đã xây</div><div class="cs">≈40%</div><div class="dv">theo tỷ trọng giá trị</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">2</span><h2>Toàn cảnh</h2></div>
+  <div class="tq">
+    <svg viewBox="0 0 200 200" width="220" height="220" role="img" aria-label="Vòng tròn tiến độ Giai đoạn 2.2">
+      <circle cx="100" cy="100" r="80" fill="none" style="stroke:var(--ke)" stroke-width="28"/>
+      <g transform="rotate(-90 100 100)">
+        <circle cx="100" cy="100" r="80" fill="none" style="stroke:var(--cho)" stroke-width="28" stroke-dasharray="199.06 303.59" stroke-dashoffset="0"/>
+        <circle cx="100" cy="100" r="80" fill="none" style="stroke:var(--xam)" stroke-width="28" stroke-dasharray="303.59 199.06" stroke-dashoffset="-199.06"/>
+      </g>
+      <text x="100" y="95" text-anchor="middle" font-family="Georgia,serif" font-size="36" font-weight="600" style="fill:var(--muc)">40%</text>
+      <text x="100" y="116" text-anchor="middle" font-size="10" style="fill:var(--nhat)">khối lượng đã xây</text>
+    </svg>
+    <ul class="cg">
+      <li><i style="background:var(--cho)"></i><span>Khối lượng đã xây dựng — 10 trên 15 hạng mục đã khởi động</span><b>40%</b></li>
+      <li><i style="background:var(--xam)"></i><span>Phần còn lại — 5 hạng mục chưa khởi động</span><b>60%</b></li>
+      <li><i style="background:var(--datN)"></i><span>Đã qua kiểm thử — bắt đầu sau khi khép Giai đoạn 2.1</span><b>0%</b></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">3</span><h2>Theo nhóm chức năng</h2></div>
+  <div class="bd">
+    <div class="hg"><div class="tn">Marketing — khuyến mãi, chiến dịch</div>
+      <div class="th"><span style="background:var(--cho);width:60%"></span></div><div class="pc">60%</div></div>
+    <div class="hg"><div class="tn">Hạng mục phát sinh theo vận hành</div>
+      <div class="th"><span style="background:var(--cho);width:49%"></span></div><div class="pc">49%</div></div>
+    <div class="hg"><div class="tn">Mở rộng kho &amp; website</div>
+      <div class="th"><span style="background:var(--cho);width:44%"></span></div><div class="pc">44%</div></div>
+    <div class="hg"><div class="tn">Ứng dụng di động Kho &amp; Nhà máy</div>
+      <div class="th"><span style="background:var(--cho);width:30%"></span></div><div class="pc">30%</div></div>
+    <div class="hg"><div class="tn">Sản xuất &amp; in tem tự chủ</div>
+      <div class="th"><span style="background:var(--cho);width:26%"></span></div><div class="pc">26%</div></div>
+  </div>
+  <div class="ct">
+    <span><i style="background:var(--cho)"></i>Khối lượng đã xây dựng</span>
+    <span><i style="background:var(--ke)"></i>Phần còn lại</span>
+    <span>% tính theo tỷ trọng giá trị hạng mục trong nhóm</span>
+  </div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">4</span><h2>Chi tiết hạng mục</h2></div>
+  <input class="rt" type="radio" name="tb2" id="t3" checked>
+  <input class="rt" type="radio" name="tb2" id="t4">
+  <div class="tabs"><label for="t3">Theo trạng thái</label><label for="t4">Theo nhóm chức năng</label></div>
+
+  <div class="pane p3">
+  <div class="cu"><table>
+    <thead><tr><th style="width:140px">Trạng thái</th><th>Hạng mục</th><th style="width:70px">Đã xây</th><th>Ghi chú</th></tr></thead>
+    <tbody>
+      <tr class="nh"><td colspan="4">Đang xây dựng trước — 10</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Đa pháp nhân, phiếu chi mở rộng</b></td><td>75%</td><td>Tách sổ theo pháp nhân chạy trên bản thử</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Kho tài liệu, quy trình nội bộ</b></td><td>70%</td><td>Cây thư mục theo phòng ban, tải lên và tra cứu</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Hoá đơn điện tử, quản trị thuế</b></td><td>60%</td><td>Ba loại hoá đơn gốc — thay thế — điều chỉnh đã dựng</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Báo cáo tài chính nâng cao, đối soát</b></td><td>60%</td><td>Cập nhật hệ thống báo cáo, đối soát theo phiên</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Chữ ký số</b></td><td>60%</td><td>Ký trên máy tính và điện thoại đã chạy thử</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Khuyến mãi, chiến dịch, Live Campaign</b></td><td>60%</td><td>Đồng bộ chương trình khuyến mãi từ sàn, áp dụng trên website bán hàng</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Kho — vận hành đầy đủ</b></td><td>50%</td><td>Nhập — xuất — chuyển — kiểm kho đã vận hành thật</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Hệ thống quản lý sản xuất nhà máy</b></td><td>40%</td><td>Lệnh sản xuất, nhận hàng theo lô đã dựng</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Ứng dụng di động Kho</b></td><td>30%</td><td>Nền tảng đọc thẻ dùng chung hai ứng dụng</td></tr>
+      <tr><td><span class="bg b3">Đang xây dựng</span></td><td><b>Ứng dụng di động Nhà máy</b></td><td>30%</td><td>Chạy chung nền tảng với ứng dụng kho</td></tr>
+
+      <tr class="nh"><td colspan="4">Chưa khởi động — 5</td></tr>
+      <tr><td><span class="bg b5">Chưa khởi động</span></td><td><b>Website mở rộng</b></td><td>—</td><td>Yêu thích, đánh giá sản phẩm, gợi ý liên quan</td></tr>
+      <tr><td><span class="bg b5">Chưa khởi động</span></td><td><b>In tem trực tiếp đến máy in</b></td><td>—</td><td>Tem sản phẩm, tem thùng kiện, phiếu giao hàng</td></tr>
+      <tr><td><span class="bg b5">Chưa khởi động</span></td><td><b>Quy trình phát triển sản phẩm xuyên phòng ban</b></td><td>—</td><td>Từ tài liệu kỹ thuật đến duyệt mã hàng</td></tr>
+      <tr><td><span class="bg b5">Chưa khởi động</span></td><td><b>Phiếu xuất kho kiêm vận chuyển nội bộ</b></td><td>—</td><td>Chứng từ luân chuyển giữa kho và cửa hàng</td></tr>
+      <tr><td><span class="bg b5">Chưa khởi động</span></td><td><b>Đấu nối tồn kho vận hành — tồn kho tài chính</b></td><td>—</td><td>Chuyển giao một lần khi đưa vào vận hành</td></tr>
+    </tbody>
+  </table></div>
+  </div>
+
+  <div class="pane p4">
+  <div class="cu"><table>
+    <thead><tr><th style="width:52px">Mã</th><th>Hạng mục</th><th style="width:70px">Đã xây</th><th style="width:140px">Trạng thái</th></tr></thead>
+    <tbody>
+      <tr class="mh"><td colspan="4">Nhóm 1 — Mở rộng kho &amp; website</td></tr>
+      <tr><td class="ma">1.1</td><td>Kho — vận hành đầy đủ (cảnh báo tồn, kho ảo, nhập xuất số hoá, kiểm kê)</td><td>50%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+      <tr><td class="ma">1.2</td><td>Website mở rộng (yêu thích, đánh giá, gợi ý sản phẩm)</td><td>—</td><td><span class="bg b5">Chưa khởi động</span></td></tr>
+
+      <tr class="mh"><td colspan="4">Nhóm 2A — Ứng dụng di động Kho &amp; Nhà máy</td></tr>
+      <tr><td class="ma">2A.1</td><td>Ứng dụng di động Kho — đọc thẻ, đếm tồn, nhập xuất kiểm trên thiết bị</td><td>30%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+      <tr><td class="ma">2A.2</td><td>Ứng dụng di động Nhà máy — quét thẻ theo lệnh sản xuất, bàn giao lô</td><td>30%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+
+      <tr class="mh"><td colspan="4">Nhóm 2B — Sản xuất &amp; in tem tự chủ</td></tr>
+      <tr><td class="ma">2B.1</td><td>Hệ thống quản lý sản xuất nhà máy (lệnh, tiến độ, nhận hàng theo lô)</td><td>40%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+      <tr><td class="ma">2B.2</td><td>In tem và phiếu trực tiếp đến máy in</td><td>—</td><td><span class="bg b5">Chưa khởi động</span></td></tr>
+
+      <tr class="mh"><td colspan="4">Nhóm 3 — Hạng mục phát sinh theo vận hành</td></tr>
+      <tr><td class="ma">3.1</td><td>Hoá đơn điện tử và quản trị thuế</td><td>60%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+      <tr><td class="ma">3.2</td><td>Đa pháp nhân và phiếu chi mở rộng</td><td>75%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+      <tr><td class="ma">3.3</td><td>Báo cáo tài chính nâng cao và đối soát</td><td>60%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+      <tr><td class="ma">3.4</td><td>Quy trình phát triển sản phẩm xuyên phòng ban</td><td>—</td><td><span class="bg b5">Chưa khởi động</span></td></tr>
+      <tr><td class="ma">3.5</td><td>Phiếu xuất kho kiêm vận chuyển nội bộ</td><td>—</td><td><span class="bg b5">Chưa khởi động</span></td></tr>
+      <tr><td class="ma">3.6</td><td>Chữ ký số trên chứng từ và phiếu duyệt</td><td>60%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+      <tr><td class="ma">3.7</td><td>Kho tài liệu và quy trình nội bộ</td><td>70%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+      <tr><td class="ma">3.8</td><td>Đấu nối tồn kho vận hành với tồn kho tài chính</td><td>—</td><td><span class="bg b5">Chưa khởi động</span></td></tr>
+
+      <tr class="mh"><td colspan="4">Nhóm 4 — Marketing: khuyến mãi và chiến dịch</td></tr>
+      <tr><td class="ma">4.1</td><td>Quản lý khuyến mãi, chiến dịch và Live Campaign</td><td>60%</td><td><span class="bg b3">Đang xây dựng</span></td></tr>
+    </tbody>
+  </table></div>
+  </div>
+</section>
+
+<section>
+  <div class="dm"><span class="so">5</span><h2>Phạm vi Giai đoạn 2.2</h2></div>
+  <p>Giai đoạn 2.2 gồm <b>các hạng mục còn lại của Phase 2 tổng</b> đã cùng Ecochic bàn bạc từ đầu dự án
+  nhưng được tách ra khi chia nhỏ khối lượng, <b>cộng với các hạng mục, đầu việc và tính năng phát sinh</b>
+  hình thành trong quá trình vận hành thực tế và được hai bên thống nhất ưu tiên qua các buổi làm việc gần đây.</p>
+  <p>Vì vậy nhiều hạng mục đã được đội dự án triển khai trước theo nhu cầu vận hành của Ecochic, không chờ
+  đến khi ký phụ lục.</p>
+  </section>
+</div>
+
+<footer>
+  Báo cáo lập ngày 15/09/2026 · Công ty Cổ phần New Match<br>
+  Thẻ Giai đoạn 2.1: tổng 41 hạng mục gồm 32 hạng mục Giai đoạn 2.1, 5 hạng mục Giai đoạn 2.2 đã triển khai
+  trước theo ưu tiên vận hành, và 4 hạng mục báo cáo điều hành (nền đã bàn giao ở Giai đoạn 1, đang bổ sung
+  theo yêu cầu mới). Chờ kiểm thử là đã dựng xong, đang chờ đội kiểm thử nội bộ; chờ nghiệm thu là đã kiểm thử đạt,
+  chờ trình bày và xác nhận cùng Ecochic. Thẻ Giai đoạn 2.2: 15 hạng mục theo phụ lục báo giá đang trao đổi; tỷ lệ phần trăm
+  tính theo tỷ trọng giá trị hạng mục, không phải theo số lượng hạng mục, và chưa bao gồm kiểm thử. Nhóm hạng mục gắn đối tác Avery Dennison đang chờ văn bản điều chỉnh
+  phạm vi, không tính trong báo cáo.
+</footer>
+
+</div>
+</body>
+</html>
