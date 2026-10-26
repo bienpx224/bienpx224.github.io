@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex, nofollow, noarchive">
+	<title>Danh mục trang</title>
+	<link rel="icon" type="image/png" href="../assets/home/brian-favicon.png">
+	<style>
+		/* Self-contained page: tokens mirror the homepage palette, nothing shared */
+		:root { --bg: #070b18; --bg-2: #0b1124; --line: rgba(255,255,255,.09); --text: #e8ecf6; --muted: #96a0ba; --accent: #f0907a; --peach: #ffc28a; --ok: #5ee39b; color-scheme: dark; }
+		* { box-sizing: border-box; }
+		body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.55 "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif; }
+		main { width: min(920px, 100% - 32px); margin: 48px auto 80px; }
+		h1 { font-size: 1.9rem; margin: 0 0 6px; letter-spacing: -.02em; }
+		.sub { color: var(--muted); margin: 0 0 24px; }
+		.bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; position: sticky; top: 0; padding: 12px 0; background: var(--bg); z-index: 2; }
+		input[type=search] { flex: 1 1 260px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg-2); color: var(--text); font: inherit; }
+		input[type=search]:focus { outline: 2px solid var(--peach); outline-offset: 1px; }
+		button { padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg-2); color: var(--text); font: inherit; font-size: .88rem; cursor: pointer; }
+		button:hover { border-color: rgba(255,255,255,.25); }
+		:focus-visible { outline: 2px solid var(--peach); outline-offset: 2px; }
+		.status { color: var(--muted); font-size: .88rem; margin-bottom: 14px; }
+		.status.err { color: var(--accent); }
+		details { border: 1px solid var(--line); border-radius: 14px; margin-bottom: 12px; background: rgba(255,255,255,.02); }
+		summary { padding: 14px 18px; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; gap: 12px; list-style: none; }
+		summary::-webkit-details-marker { display: none; }
+		summary::before { content: "▸" / ""; color: var(--accent); margin-right: 8px; transition: transform .2s; display: inline-block; }
+		details[open] summary::before { transform: rotate(90deg); }
+		summary .name { flex: 1; }
+		summary .count { color: var(--muted); font-weight: 500; font-size: .85rem; }
+		ul { list-style: none; margin: 0; padding: 0 10px 10px; }
+		li { display: flex; align-items: center; gap: 12px; padding: 10px 10px; border-radius: 10px; }
+		li:hover { background: rgba(255,255,255,.04); }
+		li .info { flex: 1; min-width: 0; }
+		li a.title { color: var(--text); text-decoration: none; font-weight: 500; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+		li a.title:hover { color: var(--peach); }
+		li .path { color: var(--muted); font: 12px ui-monospace, "JetBrains Mono", monospace; overflow-wrap: anywhere; }
+		li button { padding: 6px 10px; font-size: .8rem; flex-shrink: 0; }
+		li button.copied { color: var(--ok); border-color: var(--ok); }
+		mark { background: rgba(255,194,138,.25); color: inherit; border-radius: 3px; }
+		.empty { color: var(--muted); text-align: center; padding: 30px 0; }
+		@media (max-width: 560px) { main { margin-top: 24px; } li { flex-wrap: wrap; } li .info { flex-basis: 100%; } }
+	</style>
+</head>
+<body>
+	<main>
+		<h1>Danh mục trang</h1>
+		<p class="sub">Tất cả trang HTML trên bienpx224.github.io, tự cập nhật theo nhánh <code>cv</code>.</p>
+		<div class="bar">
+			<input type="search" id="q" placeholder="Tìm theo tiêu đề hoặc đường dẫn… (phím /)" autocomplete="off" aria-label="Tìm trang">
+			<button type="button" id="open-all">Mở hết</button>
+			<button type="button" id="close-all">Thu hết</button>
+		</div>
+		<p class="status" id="status" role="status">Đang tải danh sách…</p>
+		<div id="groups"></div>
+	</main>
+
+	<script>
+	(function () {
+		'use strict';
+		var REPO_TREE = 'https://api.github.com/repos/bienpx224/bienpx224.github.io/git/trees/cv?recursive=1';
+		var SELF = 'pages/index.html';
+		var ROOT_GROUP = '(trang gốc)';
+		var pages = [];
+		var statusNote = '';
+		var CACHE_KEY = 'pages-index-cache';
+		var openState = Object.create(null); // remembers which folders the user opened, across re-renders
+		var $ = function (id) { return document.getElementById(id); };
+
+		// Lowercase + strip Vietnamese diacritics so "bao cao" matches "Báo cáo"
+		function fold(s) {
+			return (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd').toLowerCase();
+		}
+
+		function setStatus(text, isError) {
+			$('status').textContent = text;
+			$('status').classList.toggle('err', !!isError);
+		}
+
+		// Page URL relative to this /pages/ folder
+		function hrefOf(path) { return '../' + path.split('/').map(encodeURIComponent).join('/'); }
+
+		function copyLink(btn, path) {
+			var url = new URL(hrefOf(path), location.href).href;
+			var done = function () {
+				btn.textContent = 'Đã chép';
+				btn.classList.add('copied');
+				setTimeout(function () { btn.textContent = 'Chép link'; btn.classList.remove('copied'); }, 1500);
+			};
+			if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(done, function () { prompt('Link:', url); });
+			else prompt('Link:', url);
+		}
+
+		function render() {
+			var q = fold($('q').value.trim());
+			var groups = Object.create(null);
+			var shown = 0;
+			pages.forEach(function (p) {
+				if (q && fold(p.title + ' ' + p.path).indexOf(q) === -1) return;
+				(groups[p.group] = groups[p.group] || []).push(p);
+				shown++;
+			});
+			var names = Object.keys(groups).sort(function (a, b) {
+				if (a === ROOT_GROUP) return -1;
+				if (b === ROOT_GROUP) return 1;
+				return a.localeCompare(b);
+			});
+			var box = $('groups');
+			box.textContent = '';
+			if (q) setStatus(shown + ' / ' + pages.length + ' trang khớp');
+			else if (pages.length) setStatus(pages.length + ' trang' + statusNote);
+			if (!names.length) {
+				if (q) box.innerHTML = '<p class="empty">Không có trang nào khớp.</p>';
+				return;
+			}
+			names.forEach(function (name) {
+				var det = document.createElement('details');
+				det.open = q ? true : !!openState[name]; // closed by default, open while searching
+				// Only record user toggles from the unfiltered view; ignore late events from removed nodes
+				det.addEventListener('toggle', function () { if (!q && det.isConnected) openState[name] = det.open; });
+				var sum = document.createElement('summary');
+				sum.innerHTML = '<span class="name"></span><span class="count"></span>';
+				sum.querySelector('.name').textContent = name === ROOT_GROUP ? 'Trang gốc' : name + '/';
+				sum.querySelector('.count').textContent = groups[name].length + ' trang';
+				var ul = document.createElement('ul');
+				ul.setAttribute("role", "list");
+				groups[name].forEach(function (p) {
+					var li = document.createElement('li');
+					li.innerHTML = '<div class="info"><a class="title" target="_blank" rel="noopener"></a><div class="path"></div></div><button type="button">Chép link</button>';
+					var a = li.querySelector('a');
+					a.href = hrefOf(p.path);
+					a.textContent = p.title || p.path.split('/').pop();
+					a.title = a.textContent;
+					li.querySelector('.path').textContent = '/' + p.path;
+					var btn = li.querySelector('button');
+					btn.setAttribute('aria-label', 'Chép link: ' + a.textContent);
+					btn.addEventListener('click', function () { copyLink(btn, p.path); });
+					ul.appendChild(li);
+				});
+				det.appendChild(sum);
+				det.appendChild(ul);
+				box.appendChild(det);
+			});
+		}
+
+		// Read each page's <title> (same origin, not rate limited); failures keep the file name
+		function loadTitles() {
+			Promise.all(pages.map(function (p) {
+				return fetch(hrefOf(p.path)).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+					var m = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(html);
+					if (!m) return;
+					var t = document.createElement('textarea');
+					t.innerHTML = m[1].trim(); // decode entities safely
+					p.title = t.value;
+				}).catch(function () {});
+			})).then(render);
+		}
+
+		function show(tree, note) {
+			pages = tree.filter(function (t) {
+				return t.type === 'blob' && /\.html?$/i.test(t.path) && t.path !== SELF;
+			}).map(function (t) {
+				var i = t.path.lastIndexOf('/');
+				return { path: t.path, group: i === -1 ? ROOT_GROUP : t.path.slice(0, i), title: '' };
+			});
+			statusNote = note || '';
+			render();
+			loadTitles();
+		}
+
+		function readCache() {
+			try { return JSON.parse(localStorage.getItem(CACHE_KEY)); } catch (e) { return null; }
+		}
+
+		// Live list from GitHub; on failure (rate limit 60/h per IP, offline) fall back to the last good list
+		function load() {
+			fetch(REPO_TREE).then(function (r) {
+				if (!r.ok) {
+					var reset = r.headers.get('x-ratelimit-reset');
+					var limited = (r.status === 403 || r.status === 429) && r.headers.get('x-ratelimit-remaining') === '0';
+					throw new Error(limited ? 'GitHub giới hạn lượt gọi, thử lại sau ' + new Date(reset * 1000).toLocaleTimeString('vi-VN') : 'GitHub API ' + r.status);
+				}
+				return r.json();
+			}).then(function (data) {
+				try { localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), tree: data.tree })); } catch (e) { /* storage blocked */ }
+				show(data.tree, data.truncated ? ' (danh sách bị cắt bớt)' : '');
+			}).catch(function (err) {
+				var cache = readCache();
+				if (cache && cache.tree) {
+					show(cache.tree, ' · dữ liệu cũ lúc ' + new Date(cache.at).toLocaleString('vi-VN') + ' (' + err.message + ')');
+				} else {
+					setStatus('Không tải được danh sách: ' + err.message, true);
+				}
+			});
+		}
+
+		$('q').addEventListener('input', render);
+		function setAll(open) { document.querySelectorAll('details').forEach(function (d) { d.open = open; }); }
+		$('open-all').addEventListener('click', function () { setAll(true); });
+		$('close-all').addEventListener('click', function () { setAll(false); });
+		document.addEventListener('keydown', function (e) {
+			if (e.key === '/' && document.activeElement !== $('q')) { e.preventDefault(); $('q').focus(); }
+		});
+		load();
+	})();
+	</script>
+</body>
+</html>
