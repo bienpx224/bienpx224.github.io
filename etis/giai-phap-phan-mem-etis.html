@@ -3,338 +3,425 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ETIS · Kế hoạch giải pháp vận hành</title>
-<meta name="description" content="Upnet trình bày kế hoạch giải pháp con người, quy trình và hệ thống cho ETIS.">
+<title>ETIS · Kế hoạch vận hành</title>
+<meta name="description" content="Upnet trình bày với lãnh đạo ETIS: một nguồn số liệu, đo được hiệu quả, nắm dòng tiền, lãnh đạo bớt việc, sẵn sàng mở rộng.">
 <link rel="icon" href="assets/logo-etis.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/gia-tri.css">
+<link rel="stylesheet" href="assets/css/phu-luc.css">
 </head>
 <body>
 
-<div class="progress"><span></span></div>
-<header class="topbar">
-  <img src="assets/logo-etis.png" alt="ETIS">
-  <div class="who">Kế hoạch giải pháp vận hành · <b>Upnet</b></div>
-</header>
-<nav class="dots" aria-label="Điều hướng"></nav>
-<div class="help"><kbd>←</kbd> <kbd>→</kbd> chuyển trang · <kbd>F</kbd> toàn màn hình</div>
+<div class="bar-top"><span></span></div>
+<main class="deck">
 
 <!-- 1. MỞ ĐẦU -->
 <section class="slide dark hero" id="mo-dau" data-label="Mở đầu">
-  <div class="wrap">
+  <div class="hero-grid">
     <div>
-      <img class="hero-logo reveal" src="assets/logo-etis.png" alt="ETIS">
-      <h1 class="reveal d1">Việc <span>tự chạy</span>.<br>Chủ <span>nhìn thấy</span>.</h1>
-      <p class="lead reveal d2">Kế hoạch giải pháp vận hành cho ETIS — con người, quy trình và một hệ thống chung, để công ty lớn lên mà hai người đứng đầu không phải gánh hết.</p>
-      <div class="hero-meta reveal d3">
-        <span class="chip"><i class="fa-solid fa-calendar"></i>27/10/2026</span>
+      <img class="hero-logo" src="assets/logo-etis.png" alt="ETIS">
+      <h1>Lãnh đạo <span>bớt việc</span>.<br>Số liệu <span>rõ ràng</span>.<br>Sẵn sàng <span>mở rộng</span>.</h1>
+      <p class="lead">Kế hoạch vận hành Upnet đề xuất cho ETIS: đúng người, rõ quy trình, một hệ thống chung.</p>
+      <div class="chips">
+        <span class="chip"><i class="fa-solid fa-user-group"></i>Dành cho Ban lãnh đạo ETIS</span>
         <span class="chip"><i class="fa-solid fa-handshake"></i>Upnet × ETIS</span>
-        <span class="chip"><i class="fa-solid fa-leaf"></i>Bản đề xuất để cùng thống nhất</span>
       </div>
     </div>
-    <div class="stage reveal d2">
+    <div class="stage-prod">
       <div class="prod p1"><img src="assets/san-pham/sp-1.webp" alt="Giấy ăn vuông ETIS"></div>
       <div class="prod p2"><img src="assets/san-pham/sp-3.webp" alt="Khăn giấy lau đa năng ETIS"></div>
       <div class="prod p3"><img src="assets/san-pham/sp-5.jpg" alt="Giấy cuộn ETIS"></div>
     </div>
   </div>
-  <div class="scroll-hint"><i class="fa-solid fa-chevron-down"></i><br>Bấm → để bắt đầu</div>
 </section>
 
-<!-- 2. HIỂU ETIS -->
-<section class="slide" id="hieu-etis" data-label="Hiểu ETIS">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-magnifying-glass"></i> Chúng tôi đã hiểu</span>
-    <h2 class="title reveal d1">ETIS hôm nay: <em>bán tốt</em>, nhưng chạy bằng sức người</h2>
-    <p class="lead reveal d2">Hàng cồng kềnh, lãi mỏng, khách sỉ là chính, tự giao bằng xe nhà. Mỗi chuyến xe, mỗi lần nhập lại đơn đều là chi phí.</p>
-    <div class="grid g4">
-      <div class="card stat reveal d1"><div class="num">13–<span data-to="14">0</span><small>tỷ</small></div><div class="lbl">doanh số mỗi tháng · Tết 15–16 tỷ</div></div>
-      <div class="card stat reveal d2"><div class="num"><span data-to="2">0</span><small>kho</small></div><div class="lbl">Hà Nội (chính) · Sài Gòn</div></div>
-      <div class="card stat reveal d3"><div class="num">~<span data-to="80">0</span><small>%</small></div><div class="lbl">doanh số do hai người đứng đầu tự bán</div></div>
-      <div class="card stat reveal d4"><div class="num">~<span data-to="8">0</span><small>sale</small></div><div class="lbl">đội kinh doanh hiện tại</div></div>
-    </div>
-    <div class="chain reveal d3">
-      <div class="node"><i class="fa-solid fa-industry"></i><b>Xưởng gia công</b><span>+ làng nghề (túi bóng)</span></div>
-      <div class="arrow"></div>
-      <div class="node"><i class="fa-solid fa-warehouse"></i><b>Kho Hà Nội · Sài Gòn</b><span>nhập · soạn · xuất</span></div>
-      <div class="arrow"></div>
-      <div class="node"><i class="fa-solid fa-truck"></i><b>Xe ETIS tự giao</b><span>đặt hôm trước, giao hôm sau</span></div>
-      <div class="arrow"></div>
-      <div class="node"><i class="fa-solid fa-building"></i><b>Khách sỉ</b><span>tòa nhà · nhà máy · trường · bệnh viện</span></div>
-    </div>
-    <p class="note reveal d4" style="justify-content:center"><i class="fa-solid fa-store"></i> Song song: kênh online Shopee, TikTok Shop, website — đi đơn vị vận chuyển.</p>
-  </div>
-</section>
-
-<!-- 3. NỖI ĐAU -->
-<section class="slide alt" id="noi-dau" data-label="Nỗi đau">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-heart-crack"></i> Nỗi đau hôm nay</span>
-    <h2 class="title reveal d1">Việc vẫn chạy — nhưng <em>chạy nhờ hai người</em></h2>
-    <p class="lead reveal d2">Không thiếu người chăm chỉ. Thiếu chỗ để thông tin chảy qua, và thiếu người đúng việc.</p>
-    <div class="grid g3">
-      <div class="card pain reveal d1"><div class="icon"><i class="fa-solid fa-eye-slash"></i></div><h3>Phải hỏi mới biết</h3><p>Đơn đâu, đóng chưa, ai làm gì — gọi điện, nhắn Zalo. Vắng vài ngày, việc chững.</p></div>
-      <div class="card pain reveal d2"><div class="icon"><i class="fa-solid fa-copy"></i></div><h3>Một đơn, nhập nhiều lần</h3><p>Excel, Zalo, ảnh chụp → chép vào máy → in lại phiếu. Mỗi lần chép là một lần dễ sai.</p></div>
-      <div class="card pain reveal d3"><div class="icon"><i class="fa-solid fa-boxes-stacked"></i></div><h3>Tồn trên máy ≠ tồn thật</h3><p>Không kiểm kê. Xếp xe mới biết thiếu hàng, chuyến phải chờ.</p></div>
-      <div class="card pain reveal d4"><div class="icon"><i class="fa-solid fa-truck-ramp-box"></i></div><h3>Xe chưa chạy hết sức</h3><p>Không có số đơn, số giờ mỗi chuyến. Không biết để cải thiện, khó khoán.</p></div>
-      <div class="card pain reveal d5"><div class="icon"><i class="fa-solid fa-calculator"></i></div><h3>Kế toán ôm việc vận hành</h3><p>Lên đơn, in phiếu, gọi hàng, sổ tiền mặt dồn về một phòng. Sài Gòn chờ Hà Nội gửi đơn.</p></div>
-      <div class="card pain reveal d6"><div class="icon"><i class="fa-solid fa-users-slash"></i></div><h3>Kinh doanh thiếu người dẫn dắt</h3><p>Chưa có quản lý, chưa có mục tiêu. Thông tin khách nằm trong điện thoại riêng.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 4. GỐC RỄ: BA LỚP -->
-<section class="slide dark" id="goc-re" data-label="Ba lớp giải pháp">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-seedling"></i> Gốc rễ & cách tiếp cận</span>
-    <h2 class="title reveal d1">Phần mềm chỉ là <em>một phần ba</em> lời giải</h2>
-    <p class="lead reveal d2">Mua phần mềm mà giữ nguyên cách làm — sẽ thêm một chỗ phải nhập. Upnet đi cả ba lớp cùng lúc.</p>
-    <div class="layers">
-      <div class="layer reveal d1"><div class="lic"><i class="fa-solid fa-people-group"></i></div>
-        <div><h3>Con người</h3><p>Mỗi việc một người chịu trách nhiệm. Vị trí rõ việc, có mục tiêu, được đào tạo trên việc thật.</p></div><span class="pct">Làm trước</span></div>
-      <div class="layer reveal d2"><div class="lic"><i class="fa-solid fa-arrows-spin"></i></div>
-        <div><h3>Quy trình</h3><p>Đơn → kho → chuyến xe → giao → thu tiền → hóa đơn. Ai làm bước nào, khi nào, căn cứ gì.</p></div><span class="pct">Làm cùng</span></div>
-      <div class="layer soft reveal d3"><div class="lic"><i class="fa-solid fa-mobile-screen-button"></i></div>
-        <div><h3>Hệ thống</h3><p>Một nơi chung cho bán hàng, kho, giao hàng, tiền, nhân sự, báo cáo. Xem được trên điện thoại.</p></div><span class="pct">Công cụ giữ nhịp</span></div>
-    </div>
-    <p class="quote reveal d4">"Người trước, máy sau. Đo được trước và sau. Bật từng phần."</p>
-  </div>
-</section>
-
-<!-- 5. BÀI TOÁN → CÁCH XỬ LÝ -->
-<section class="slide" id="bai-toan" data-label="Cách xử lý">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-lightbulb"></i> Từng bài toán, từng cách xử lý</span>
-    <h2 class="title reveal d1">Hôm nay thế nào → <em>làm mới ra sao</em> → đo bằng gì</h2>
-    <p class="lead reveal d2">Mỗi bài toán trả lời ba câu: ai làm, làm thế nào, dùng công cụ gì. Bấm từng bài toán để xem.</p>
-    <div class="tabs reveal d2" id="pb-tabs"></div>
-    <div id="pb-panel" class="reveal d3"></div>
-  </div>
-</section>
-
-<!-- 6. TỔ CHỨC -->
-<section class="slide alt" id="to-chuc" data-label="Tổ chức">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-sitemap"></i> Lớp con người</span>
-    <h2 class="title reveal d1">Mỗi việc — <em>một người chịu trách nhiệm</em></h2>
-    <p class="lead reveal d2">Chủ làm việc qua người quản lý và báo cáo, không qua từng người. Sơ đồ theo vị trí; người cụ thể do ETIS chọn.</p>
-    <div class="org reveal d3">
-      <div class="node boss"><i class="fa-solid fa-user-tie"></i><b>Chủ doanh nghiệp</b><span>khách lớn · chiến lược · đọc báo cáo · duyệt</span></div>
-      <div class="org-line"></div>
-      <div class="org-row">
-        <div class="org-col">
-          <div class="head"><i class="fa-solid fa-warehouse"></i>VẬN HÀNH<small>Quản lý vận hành</small></div>
-          <div class="role"><i class="fa-solid fa-clipboard-list"></i><div><b>Quản kho / điều phối</b><span>hàng cho đơn ngày mai, ghép chuyến</span></div></div>
-          <div class="role"><i class="fa-solid fa-dolly"></i><div><b>Thủ kho Hà Nội · Sài Gòn</b><span>nhập, soạn, xuất, kiểm kê</span></div></div>
-          <div class="role"><i class="fa-solid fa-truck-fast"></i><div><b>Tài xế</b><span>giao, chụp biên nhận, nộp tiền</span></div></div>
+<!-- 2. HÔM NAY → NGÀY MAI -->
+<section class="slide" id="hom-nay" data-label="Hôm nay → ngày mai">
+  <div class="split">
+    <div class="split-text">
+      <div class="swap">
+        <div class="swap-a">
+          <span class="kicker"><i class="fa-solid fa-magnifying-glass"></i> ETIS hôm nay</span>
+          <h2 class="title">Bán tốt. Nhưng mọi việc <em>đi qua lãnh đạo</em>.</h2>
+          <div class="facts">
+            <div><b>13–<span data-to="14">0</span> tỷ</b><span>doanh số mỗi tháng</span></div>
+            <div><b>70–<span data-to="80">0</span>%</b><span>doanh số do lãnh đạo tự bán</span></div>
+            <div><b>3–4 ngày</b><span>lãnh đạo vắng là việc chững</span></div>
+          </div>
         </div>
-        <div class="org-col">
-          <div class="head"><i class="fa-solid fa-chart-line"></i>KINH DOANH<small>Quản lý kinh doanh</small></div>
-          <div class="role"><i class="fa-solid fa-handshake"></i><div><b>Sale</b><span>khách của mình, đơn, thu nợ</span></div></div>
-          <div class="role"><i class="fa-solid fa-user-pen"></i><div><b>Trợ lý kinh doanh</b><span>lên đơn thay chủ, báo giá</span></div></div>
-          <div class="role"><i class="fa-solid fa-store"></i><div><b>Online</b><span>Shopee, TikTok, website</span></div></div>
-        </div>
-        <div class="org-col">
-          <div class="head"><i class="fa-solid fa-calculator"></i>KẾ TOÁN<small>Đúng việc kế toán</small></div>
-          <div class="role"><i class="fa-solid fa-scale-balanced"></i><div><b>Thu chi · công nợ</b><span>theo biên nhận, theo sao kê</span></div></div>
-          <div class="role"><i class="fa-solid fa-file-invoice"></i><div><b>Hóa đơn</b><span>xuất sau khi có biên nhận</span></div></div>
-          <div class="role"><i class="fa-solid fa-building-columns"></i><div><b>Kế toán thuế</b><span>vẫn làm trên MISA như cũ</span></div></div>
+        <div class="swap-b" data-step="1">
+          <span class="kicker"><i class="fa-solid fa-seedling"></i> ETIS ngày mai</span>
+          <h2 class="title">Mọi người làm trên <em>một hệ thống</em>. Lãnh đạo <em>xem và quyết</em>.</h2>
+          <ul class="ticks big">
+            <li><i class="fa-solid fa-circle-check"></i>Số liệu tự chảy về, không cần hỏi</li>
+            <li><i class="fa-solid fa-circle-check"></i>Mỗi việc có một người chịu trách nhiệm</li>
+            <li><i class="fa-solid fa-circle-check"></i>Đi vắng một tuần, việc vẫn chạy</li>
+          </ul>
         </div>
       </div>
     </div>
-    <p class="note reveal d4"><i class="fa-solid fa-circle-info"></i> Đi kèm: mô tả công việc từng vị trí · lương tách cơ bản – phụ cấp – thưởng theo kết quả · bài đào tạo theo vị trí.</p>
-  </div>
-</section>
-
-<!-- 7. HÀNH TRÌNH ĐƠN HÀNG -->
-<section class="slide" id="hanh-trinh" data-label="Hành trình đơn">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-route"></i> Lớp quy trình</span>
-    <h2 class="title reveal d1">Hành trình <em>một đơn hàng sỉ</em></h2>
-    <p class="lead reveal d2">Từ lúc khách gọi tới lúc chủ xem báo cáo — mỗi bước một người, một nút bấm, không chép lại.</p>
-    <div class="journey reveal d2">
-      <div class="track" id="j-track"><span></span></div>
-      <div class="steps" id="j-steps"></div>
-    </div>
-    <div class="jdetail" id="j-detail"></div>
-    <div class="ctrl">
-      <button class="btn" id="j-prev"><i class="fa-solid fa-arrow-left"></i></button>
-      <button class="btn primary" id="j-play"><i class="fa-solid fa-play"></i> Tự chạy</button>
-      <button class="btn" id="j-next"><i class="fa-solid fa-arrow-right"></i></button>
-    </div>
-  </div>
-</section>
-
-<!-- 8. MỘT NGÀY THEO VỊ TRÍ -->
-<section class="slide alt" id="mot-ngay" data-label="Một ngày mới">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-sun"></i> Một ngày làm việc mới</span>
-    <h2 class="title reveal d1">Mỗi vị trí <em>làm gì, bớt được gì</em></h2>
-    <p class="lead reveal d2">Chọn một vị trí để xem một ngày của người đó.</p>
-    <div class="roles reveal d3">
-      <div class="rlist" id="r-list"></div>
-      <div class="day" id="r-day"></div>
-    </div>
-  </div>
-</section>
-
-<!-- 9. HỆ THỐNG -->
-<section class="slide" id="he-thong" data-label="Hệ thống">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-layer-group"></i> Lớp hệ thống</span>
-    <h2 class="title reveal d1">Sáu ứng dụng — <em>một tài khoản</em>, một nguồn số liệu</h2>
-    <p class="lead reveal d2">Đã dựng sẵn bản thử cho ETIS, mang sản phẩm thật của ETIS. Bấm ảnh để phóng to.</p>
-    <div class="mods">
-      <div class="mod reveal d1"><div class="shot" data-zoom="assets/demo/crm.jpg" data-cap="crm.etis.vn · dữ liệu minh họa"><div class="bar"><i></i><i></i><i></i><em>crm.etis.vn</em></div><img src="assets/demo/crm.jpg" alt="Bán hàng" loading="lazy"></div>
-        <div class="body"><h3><i class="fa-solid fa-cart-shopping"></i> Bán hàng</h3><p>Khách, đơn, sản phẩm, bảng giá theo kênh: sỉ · đại lý · online.</p></div></div>
-      <div class="mod reveal d2"><div class="shot" data-zoom="assets/demo/wms.jpg" data-cap="wms.etis.vn · dữ liệu minh họa"><div class="bar"><i></i><i></i><i></i><em>wms.etis.vn</em></div><img src="assets/demo/wms.jpg" alt="Kho" loading="lazy"></div>
-        <div class="body"><h3><i class="fa-solid fa-warehouse"></i> Kho</h3><p>Tồn hai kho Hà Nội, Sài Gòn. Nhập, xuất, chuyển kho, soạn hàng, kiểm kê.</p></div></div>
-      <div class="mod reveal d3"><div class="shot" data-zoom="assets/demo/fnm.jpg" data-cap="fnm.etis.vn · dữ liệu minh họa"><div class="bar"><i></i><i></i><i></i><em>fnm.etis.vn</em></div><img src="assets/demo/fnm.jpg" alt="Tài chính" loading="lazy"></div>
-        <div class="body"><h3><i class="fa-solid fa-sack-dollar"></i> Tài chính</h3><p>Quỹ, ngân hàng, thu chi, công nợ, tạm ứng, phiếu đề nghị có duyệt.</p></div></div>
-      <div class="mod reveal d1"><div class="shot" data-zoom="assets/demo/hrm-org.jpg" data-cap="hrm.etis.vn · dữ liệu minh họa"><div class="bar"><i></i><i></i><i></i><em>hrm.etis.vn</em></div><img src="assets/demo/hrm-org.jpg" alt="Nhân sự" loading="lazy"></div>
-        <div class="body"><h3><i class="fa-solid fa-id-badge"></i> Nhân sự</h3><p>Hồ sơ, phòng ban, sơ đồ tổ chức. Nền cho lương và thưởng theo kết quả.</p></div></div>
-      <div class="mod reveal d2"><div class="shot" data-zoom="assets/demo/rp-stock.jpg" data-cap="report.etis.vn · dữ liệu minh họa"><div class="bar"><i></i><i></i><i></i><em>report.etis.vn</em></div><img src="assets/demo/rp-stock.jpg" alt="Báo cáo" loading="lazy"></div>
-        <div class="body"><h3><i class="fa-solid fa-chart-pie"></i> Báo cáo</h3><p>Bán hàng, kho, tài chính. Ngày, tuần, tháng — cho chủ và cho từng quản lý.</p></div></div>
-      <div class="mod reveal d3"><div class="shot" style="cursor:default"><div class="bar"><i></i><i></i><i></i><em>App tài xế</em></div>
-          <div style="aspect-ratio:16/9.6;display:grid;place-items:center;background:linear-gradient(135deg,#eaf5db,#f5faf3)"><i class="fa-solid fa-truck-fast" style="font-size:64px;color:#237a5c"></i></div></div>
-        <div class="body"><h3><i class="fa-solid fa-camera"></i> App tài xế <span class="tag soon">Đang hoàn thiện</span></h3><p>Chuyến hôm nay, chụp ảnh giao và biên nhận, tiền thu.</p></div></div>
-    </div>
-    <p class="note reveal"><i class="fa-solid fa-circle-info"></i> Ảnh chụp từ bản thử của ETIS. Số liệu là minh họa, chưa phải số thật.</p>
-  </div>
-</section>
-
-<!-- 10. ĐIỆN THOẠI: TÀI XẾ & CHỦ -->
-<section class="slide dark" id="dien-thoai" data-label="Trên điện thoại">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-mobile-screen"></i> Ngay trên điện thoại</span>
-    <h2 class="title reveal d1">Tài xế <em>chụp ảnh là xong</em>. Chủ <em>mở máy là thấy</em>.</h2>
-    <p class="lead reveal d2">Điện thoại Android phổ thông là đủ. Chữ to, ít nút, mạng yếu vẫn gửi được.</p>
-    <div class="phones phones3">
-      <div class="reveal d1">
-        <div class="phone"><div class="screen">
-          <div class="app-h"><small>Chuyến sáng · Tuyến Thanh Trì – Cầu Giấy</small><b>5 điểm giao · còn 3</b></div>
-          <div class="stop done"><span class="n">1</span><b>Tòa nhà A</b> — đã giao · có biên nhận</div>
-          <div class="stop done"><span class="n">2</span><b>Nhà máy B</b> — đã giao · thu tiền mặt</div>
-          <div class="stop now"><span class="n">3</span><b>Trường C</b><br><small>20 thùng giấy cuộn · 5 thùng khăn lau</small>
-            <div class="acts"><span><i class="fa-solid fa-camera"></i> Ảnh hàng</span><span><i class="fa-solid fa-file-signature"></i> Biên nhận</span><span class="go">Đã giao</span></div></div>
-          <div class="stop"><span class="n">4</span><b>Bệnh viện D</b></div>
-          <div class="stop"><span class="n">5</span><b>Đại lý E</b></div>
-          <div class="flash"></div>
-        </div></div>
-        <p class="phone-cap">App tài xế — hình minh họa, đang hoàn thiện</p>
+    <div class="hub morph" id="hub" data-step="1">
+      <svg class="hub-lines" viewBox="0 0 720 640" aria-hidden="true"></svg>
+      <div class="hub-core">
+        <div class="core-a"><i class="fa-solid fa-user-group"></i><b>Ban lãnh đạo</b><small>hỏi · nhắc · lên đơn · điều phối</small></div>
+        <div class="core-b"><i class="fa-solid fa-layer-group"></i><b>Một hệ thống ETIS</b><small>đơn · kho · xe · tiền · người</small></div>
       </div>
-      <ul class="feat reveal d2" style="align-self:center">
-        <li><i class="fa-solid fa-list-ol"></i><div><b>Chuyến hôm nay</b><span>Thứ tự điểm giao, địa chỉ bấm là mở bản đồ.</span></div></li>
-        <li><i class="fa-solid fa-camera"></i><div><b>Ảnh giao + biên nhận</b><span>Căn cứ thu tiền, xuất hóa đơn. Về văn phòng ngay.</span></div></li>
-        <li><i class="fa-solid fa-money-bill-wave"></i><div><b>Tiền thu</b><span>Ghi ngay tại điểm giao, nộp về là khớp.</span></div></li>
-        <li><i class="fa-solid fa-bell"></i><div><b>Báo ngay</b><span>Chuyến mới, đơn gấp, phiếu chờ duyệt.</span></div></li>
-        <li><i class="fa-solid fa-chart-line"></i><div><b>Chủ xem toàn cảnh</b><span>Đơn, xe, tiền, tồn — ở đâu cũng xem được.</span></div></li>
+      <div class="hub-owner"><i class="fa-solid fa-mobile-screen-button"></i><div><b>Lãnh đạo</b><small>xem số · duyệt · quyết</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. GIÁ TRỊ 1: MỘT NGUỒN SỐ LIỆU -->
+<section class="slide value" id="gt-so-lieu" data-label="Một nguồn số liệu" data-value="0">
+  <header class="vhead"><span class="kicker">Giá trị 1</span><h2 class="title">Một nguồn số liệu. <em>Mở máy là thấy.</em></h2></header>
+  <div class="vbody">
+    <aside class="today">
+      <h4><i class="fa-solid fa-triangle-exclamation"></i> Hôm nay</h4>
+      <p class="pain-main">Muốn biết số phải gọi hỏi, chờ người báo lại.</p>
+      <ul class="pain-minor"><li>Một đơn chép 3–4 lần</li><li>Excel · Zalo · sổ tay · MISA</li><li>Tồn trên máy ≠ tồn thật</li><li>Tiền thu ghi sổ tay</li><li>Sài Gòn chờ file từ Hà Nội</li></ul>
+    </aside>
+    <div class="visual flow morph" data-step="1">
+      <div class="src s1"><i class="fa-solid fa-file-excel"></i>Excel</div>
+      <div class="src s2"><i class="fa-solid fa-comments"></i>Zalo</div>
+      <div class="src s3"><i class="fa-solid fa-book"></i>Sổ tay</div>
+      <div class="src s4"><i class="fa-solid fa-desktop"></i>Máy văn phòng</div>
+      <div class="src s5"><i class="fa-solid fa-camera"></i>Ảnh tin nhắn</div>
+      <div class="phone mini live">
+        <div class="screen">
+          <div class="app-h"><small>Hôm nay · <span class="clock">09:42</span></small><b>ETIS toàn công ty</b><em><i></i> trực tiếp</em></div>
+          <div class="tiles">
+            <div><small>Đơn mới</small><b data-live="46">46</b></div>
+            <div><small>Đang giao</small><b data-live="18">18</b></div>
+            <div><small>Đã giao</small><b data-live="21">21</b></div>
+            <div><small>Tiền thu</small><b><span data-live="312">312</span>tr</b></div>
+            <div class="warn"><small>Sắp hết hàng</small><b>3 mã</b></div>
+            <div class="warn"><small>Nợ quá hạn</small><b>5 khách</b></div>
+          </div>
+          <p class="demo-note">Số minh họa</p>
+        </div>
+      </div>
+    </div>
+    <div class="gain-card" data-step="2">
+      <small>Lãnh đạo được</small>
+      <div class="big">1 lần</div>
+      <p class="big-sub">nhập. Ai cần đều thấy ngay.</p>
+      <ul class="ticks">
+        <li><i class="fa-solid fa-bolt"></i>Số cập nhật từng phút, không chờ báo cáo</li>
+        <li><i class="fa-solid fa-scale-balanced"></i>Đơn – kho – tiền tự khớp nhau</li>
+        <li><i class="fa-solid fa-fingerprint"></i>Ai sửa gì đều lưu dấu: bớt sai lệch, thất thoát</li>
       </ul>
-      <div class="reveal d3">
-        <div class="phone"><div class="screen"><img class="scroller" src="assets/demo/m-crm.jpg" alt="Tổng quan bán hàng trên điện thoại"></div></div>
-        <p class="phone-cap">Màn tổng quan trên điện thoại — bản thử ETIS</p>
+    </div>
+  </div>
+  <footer class="extras" data-step="2"><b>Đi kèm</b><span>MISA giữ nguyên làm thuế</span><span>Ảnh biên nhận về ngay</span><span>Cảnh báo sắp hết hàng</span><span>Duyệt chi trên điện thoại</span></footer>
+</section>
+
+<!-- 4. GIÁ TRỊ 2: ĐO ĐƯỢC HIỆU QUẢ -->
+<section class="slide value" id="gt-hieu-qua" data-label="Đo được hiệu quả" data-value="1">
+  <header class="vhead"><span class="kicker">Giá trị 2</span><h2 class="title">Đo được hiệu quả. <em>Biết ai làm tốt.</em></h2></header>
+  <div class="vbody">
+    <aside class="today">
+      <h4><i class="fa-solid fa-triangle-exclamation"></i> Hôm nay</h4>
+      <p class="pain-main">Ai làm tốt, xe nào chạy vơi: đang đánh giá bằng cảm giác.</p>
+      <ul class="pain-minor"><li>Xe chạy ~60–70% sức</li><li>Sale chưa có mục tiêu</li><li>Lương gộp một cục</li><li>Khách nằm trong máy sale</li><li>Kho chưa có báo cáo</li></ul>
+    </aside>
+    <div class="visual score morph" data-step="1">
+      <div class="sc"><h5><i class="fa-solid fa-handshake"></i> Sale</h5>
+        <div class="bars"><i style="--h:92%"></i><i style="--h:74%"></i><i style="--h:58%"></i><i style="--h:41%"></i><i style="--h:27%"></i></div>
+        <p>Doanh số · khách mới · tiền thu về</p></div>
+      <div class="sc"><h5><i class="fa-solid fa-truck"></i> Xe</h5>
+        <div class="gauge"><div class="lbl"><span class="ga">~65%</span><span class="gb"><span data-to="90">0</span>%</span></div><div class="gtrack"><div class="fill"></div></div></div>
+        <p>Độ đầy xe · đơn mỗi chuyến · giờ về</p></div>
+      <div class="sc"><h5><i class="fa-solid fa-warehouse"></i> Kho</h5>
+        <div class="bars two"><i style="--h:80%" class="bad"></i><i style="--h:14%"></i></div>
+        <p>Lệch tồn trước → sau kiểm kê</p></div>
+      <div class="sc"><h5><i class="fa-solid fa-building"></i> Văn phòng</h5>
+        <div class="bars"><i style="--h:66%"></i><i style="--h:82%"></i><i style="--h:71%"></i></div>
+        <p>Đơn xử lý · phiếu chờ duyệt · trễ hạn</p></div>
+      <p class="demo-note">Hình minh họa</p>
+    </div>
+    <div class="gain-card" data-step="2">
+      <small>Lãnh đạo được</small>
+      <div class="big">+25–40%</div>
+      <p class="big-sub">đơn mỗi xe khi ghép chuyến đầy <em>(ước tính)</em></p>
+      <ul class="ticks">
+        <li><i class="fa-solid fa-medal"></i>Lương thưởng theo kết quả, có số làm căn cứ</li>
+        <li><i class="fa-solid fa-user-check"></i>Biết ai đáng thưởng, ai cần kèm</li>
+        <li><i class="fa-solid fa-chart-column"></i>Doanh số theo sale · kênh · khách, theo ngày</li>
+      </ul>
+    </div>
+  </div>
+  <footer class="extras" data-step="2"><b>Đi kèm</b><span>Mục tiêu theo vị trí</span><span>Giao ban bằng số</span><span>Đội sale mới có quản lý</span><span>Định mức giờ chuyến, nhiên liệu</span></footer>
+</section>
+
+<!-- 5. GIÁ TRỊ 3: NẮM DÒNG TIỀN, THẤY RỦI RO -->
+<section class="slide value" id="gt-dong-tien" data-label="Nắm dòng tiền" data-value="2">
+  <header class="vhead"><span class="kicker">Giá trị 3</span><h2 class="title">Nắm dòng tiền. <em>Thấy rủi ro sớm.</em></h2></header>
+  <div class="vbody">
+    <aside class="today">
+      <h4><i class="fa-solid fa-triangle-exclamation"></i> Hôm nay</h4>
+      <p class="pain-main">Tiền ở đâu, ai còn nợ: phải chờ kế toán tổng hợp.</p>
+      <ul class="pain-minor"><li>Tiền mặt ghi sổ tay</li><li>Tài xế cầm tiền thu hộ</li><li>Sale tự theo dõi nợ khách</li><li>Đối chiếu ngân hàng bằng tay</li><li>Kho chưa kiểm kê</li></ul>
+    </aside>
+    <div class="visual cash morph" data-step="1">
+      <div class="cc flow7"><h5><i class="fa-solid fa-money-bill-trend-up"></i> Tiền vào · tiền ra 7 ngày</h5>
+        <div class="pairs">
+          <div><i style="--h:62%"></i><i class="out" style="--h:48%"></i></div><div><i style="--h:78%"></i><i class="out" style="--h:55%"></i></div>
+          <div><i style="--h:54%"></i><i class="out" style="--h:60%"></i></div><div><i style="--h:88%"></i><i class="out" style="--h:42%"></i></div>
+          <div><i style="--h:70%"></i><i class="out" style="--h:52%"></i></div><div><i style="--h:94%"></i><i class="out" style="--h:63%"></i></div>
+          <div><i style="--h:66%"></i><i class="out" style="--h:45%"></i></div>
+        </div>
+        <p><span class="lg in"></span>Thu <span class="lg out"></span>Chi</p></div>
+      <div class="cc debt"><h5><i class="fa-solid fa-file-invoice-dollar"></i> Công nợ khách</h5>
+        <div class="stack"><i style="--w:68%"></i><i class="mid" style="--w:22%"></i><i class="late" style="--w:10%"></i></div>
+        <ul><li><span class="lg in"></span>Trong hạn</li><li><span class="lg mid"></span>Quá 30 ngày</li><li><span class="lg late"></span>Quá 60 ngày</li></ul></div>
+      <div class="cc alert"><h5><i class="fa-solid fa-bell"></i> Cảnh báo hôm nay</h5>
+        <ul><li><b>5</b> khách nợ quá hạn</li><li><b>2</b> chuyến chưa nộp tiền</li><li><b>3</b> phiếu chi chờ duyệt</li><li><b>1</b> mã lệch tồn</li></ul></div>
+      <p class="demo-note">Hình minh họa</p>
+    </div>
+    <div class="gain-card" data-step="2">
+      <small>Lãnh đạo được</small>
+      <div class="big">Mỗi ngày</div>
+      <p class="big-sub">biết tiền vào, tiền ra, ai còn nợ</p>
+      <ul class="ticks">
+        <li><i class="fa-solid fa-bell"></i>Cảnh báo sớm: nợ quá hạn, tiền chưa nộp, lệch tồn</li>
+        <li><i class="fa-solid fa-file-signature"></i>Mọi khoản chi có phiếu, có người duyệt</li>
+        <li><i class="fa-solid fa-truck-fast"></i>Tiền thu hộ khớp với từng chuyến xe</li>
+      </ul>
+    </div>
+  </div>
+  <footer class="extras" data-step="2"><b>Đi kèm</b><span>Đối chiếu ngân hàng</span><span>Hóa đơn gắn biên nhận</span><span>Phân quyền theo vị trí</span><span>Sao lưu hằng ngày</span></footer>
+</section>
+
+<!-- 6. GIÁ TRỊ 4: LÃNH ĐẠO BỚT VIỆC -->
+<section class="slide value" id="gt-bot-viec" data-label="Lãnh đạo bớt việc" data-value="3">
+  <header class="vhead"><span class="kicker">Giá trị 4</span><h2 class="title">Lãnh đạo bớt việc. <em>Công ty vẫn chạy.</em></h2></header>
+  <div class="vbody">
+    <aside class="today">
+      <h4><i class="fa-solid fa-triangle-exclamation"></i> Hôm nay</h4>
+      <p class="pain-main">Phần lớn doanh số và mọi quyết định đều chờ lãnh đạo.</p>
+      <ul class="pain-minor"><li>Vắng 3–4 ngày là việc chững</li><li>Lãnh đạo tự điều phối kho</li><li>Lãnh đạo tự đòi nợ khách lớn</li><li>Kế toán ôm việc vận hành</li></ul>
+    </aside>
+    <div class="visual handover morph" data-step="1">
+      <div class="ho-head"><span>Việc lãnh đạo đang tự làm</span><span>Chuyển cho</span></div>
+      <div class="ho-list" id="ho-list"></div>
+      <div class="ho-keep"><i class="fa-solid fa-crown"></i> Lãnh đạo giữ: <b>khách lớn · định hướng · duyệt</b></div>
+    </div>
+    <div class="gain-card" data-step="2">
+      <small>Lãnh đạo được</small>
+      <div class="big">6 việc</div>
+      <p class="big-sub">về đúng người, mỗi việc có người chịu trách nhiệm</p>
+      <ul class="ticks">
+        <li><i class="fa-solid fa-plane-departure"></i>Đi vắng một tuần, việc vẫn chạy</li>
+        <li><i class="fa-solid fa-mobile-screen-button"></i>Duyệt trên điện thoại, ở đâu cũng được</li>
+        <li><i class="fa-solid fa-people-arrows"></i>Làm việc qua người quản lý, không qua từng người</li>
+      </ul>
+    </div>
+  </div>
+  <footer class="extras" data-step="2"><b>Đi kèm</b><span>Mô tả việc từng vị trí</span><span>Đúng người đúng phòng</span><span>Đào tạo trên việc thật</span><span>Người điều hành chuyên nghiệp</span></footer>
+</section>
+
+<!-- 7. GIÁ TRỊ 5: SẴN SÀNG MỞ RỘNG -->
+<section class="slide value" id="gt-mo-rong" data-label="Sẵn sàng mở rộng" data-value="4">
+  <header class="vhead"><span class="kicker">Giá trị 5</span><h2 class="title">Sẵn sàng mở rộng. <em>Không thêm việc cho lãnh đạo.</em></h2></header>
+  <div class="vbody">
+    <aside class="today">
+      <h4><i class="fa-solid fa-triangle-exclamation"></i> Hôm nay</h4>
+      <p class="pain-main">Mở thêm gì cũng thêm việc cho lãnh đạo.</p>
+      <ul class="pain-minor"><li>Sài Gòn chờ Hà Nội gửi đơn</li><li>Đang đặt thêm 2 xe</li><li>Sắp mở TikTok Shop</li><li>Khó tuyển người tại chỗ</li></ul>
+    </aside>
+    <div class="visual grow morph" data-step="1">
+      <svg class="grow-lines" viewBox="0 0 600 540" aria-hidden="true"></svg>
+      <div class="grow-core"><i class="fa-solid fa-leaf"></i><b>Một cách làm ETIS</b><small>một hệ thống · một quy trình</small></div>
+      <div class="grow-nodes" id="grow-nodes"></div>
+      <p class="demo-note">Thêm kho, thêm kênh, thêm người = thêm một dòng cài đặt</p>
+    </div>
+    <div class="gain-card" data-step="2">
+      <small>Lãnh đạo được</small>
+      <div class="big">1 cách làm</div>
+      <p class="big-sub">cho mọi kho, mọi kênh, mọi người mới</p>
+      <ul class="ticks">
+        <li><i class="fa-solid fa-location-dot"></i>Sài Gòn tự nhận đơn, tự giao, không chờ Hà Nội</li>
+        <li><i class="fa-solid fa-user-plus"></i>Người mới có quy trình, có bài học, làm được ngay</li>
+        <li><i class="fa-solid fa-truck-fast"></i>Chạy đầy xe trước, mua xe sau: 5 xe đầy hơn ≈ thêm 1 xe</li>
+      </ul>
+    </div>
+  </div>
+  <footer class="extras" data-step="2"><b>Đi kèm</b><span>Dữ liệu là của ETIS</span><span>Bảng giá chung theo kênh</span><span>Đơn sàn về chung một chỗ</span><span>Khách là của công ty</span></footer>
+</section>
+
+<!-- 8. CÁCH ĐI -->
+<section class="slide alt" id="cach-di" data-label="Cách đi">
+  <span class="kicker"><i class="fa-solid fa-route"></i> Cách đi</span>
+  <h2 class="title">Người trước, máy sau. <em>Bật từng phần.</em></h2>
+  <div class="howgo">
+    <div class="layers3">
+      <div class="l3"><i class="fa-solid fa-people-group"></i><div><b>Con người</b><span>Đúng người đúng việc, có mục tiêu</span></div></div>
+      <div class="l3"><i class="fa-solid fa-arrows-spin"></i><div><b>Quy trình</b><span>Ai làm bước nào, khi nào</span></div></div>
+      <div class="l3 soft"><i class="fa-solid fa-mobile-screen-button"></i><div><b>Hệ thống</b><span>Công cụ giữ nhịp, xem trên điện thoại</span></div></div>
+    </div>
+    <div class="road3" data-step="1">
+      <div class="r3"><div class="pin"><i class="fa-solid fa-truck-fast"></i></div><time>Tháng 11</time><b>Kho – giao hàng</b><span>Hà Nội · chọn quản kho · kiểm kê đầu kỳ · tài xế chụp biên nhận</span></div>
+      <div class="r3"><div class="pin"><i class="fa-solid fa-calculator"></i></div><time>Tháng 12</time><b>Kế toán – Sài Gòn</b><span>Hết chép đơn · tiền, công nợ trên hệ thống · Sài Gòn tự chạy</span></div>
+      <div class="r3"><div class="pin"><i class="fa-solid fa-chart-line"></i></div><time>Tháng 1 → Tết</time><b>Kinh doanh – báo cáo</b><span>Đội sale có mục tiêu · thưởng theo kết quả · lãnh đạo xem trên điện thoại</span></div>
+    </div>
+  </div>
+  <div class="with" data-step="2">
+    <span><i class="fa-solid fa-headset"></i>Hỗ trợ tận tình 24/7</span>
+    <span><i class="fa-solid fa-shield-halved"></i>Hệ thống ổn định, sao lưu hằng ngày</span>
+    <span><i class="fa-solid fa-ruler-combined"></i>Đo trước – sau mỗi bước</span>
+    <span><i class="fa-solid fa-calendar-check"></i>Tránh dồn việc mùa cao điểm</span>
+  </div>
+</section>
+
+<!-- 9. XEM THẬT -->
+<section class="slide" id="demo" data-label="Xem thật">
+  <span class="kicker"><i class="fa-solid fa-display"></i> Xem thật</span>
+  <h2 class="title">Bản thử <em>dành riêng cho ETIS</em></h2>
+  <div class="demo6" id="demo6"></div>
+  <p class="note"><i class="fa-solid fa-circle-info"></i> Bấm ảnh để phóng to, bấm <b>&nbsp;Mở bản thử&nbsp;</b> để vào hệ thống. Số liệu là minh họa, mang sản phẩm thật của ETIS.</p>
+</section>
+
+<!-- 10. GIÁ TRỊ LÂU DÀI -->
+<section class="slide alt" id="gia-tri-lau-dai" data-label="Giá trị lâu dài">
+  <span class="kicker"><i class="fa-solid fa-gem"></i> Giá trị lâu dài</span>
+  <h2 class="title">Hơn một phần mềm: <em>một ETIS chuyên nghiệp</em></h2>
+  <div class="long">
+    <div class="soon">
+      <h4>Thấy ngay sau 3 tháng <em>(ước tính, chốt sau 2 tuần đo)</em></h4>
+      <div class="nr"><i class="fa-solid fa-truck"></i><b>+25–40%</b><span>đơn mỗi xe</span></div>
+      <div class="nr"><i class="fa-solid fa-copy"></i><b>1 lần</b><span>nhập mỗi đơn, hết chép tay</span></div>
+      <div class="nr"><i class="fa-solid fa-sack-dollar"></i><b>Mỗi ngày</b><span>nắm dòng tiền, công nợ</span></div>
+      <div class="nr"><i class="fa-solid fa-user-clock"></i><b>Lãnh đạo</b><span>thôi tự lên đơn, điều phối, hỏi số</span></div>
+    </div>
+    <div class="goal" data-step="1">
+      <h4>Mục tiêu lớn hơn</h4>
+      <div class="tiles6">
+        <div><i class="fa-solid fa-microchip"></i><b>Chuyển đổi số toàn diện</b><span>Bán hàng, kho, giao hàng, tiền, người trên một hệ thống</span></div>
+        <div><i class="fa-solid fa-gears"></i><b>Vận hành tự động, trơn tru</b><span>Việc tự chuyển bước, không chờ người nhắc</span></div>
+        <div><i class="fa-solid fa-award"></i><b>Hình ảnh chuyên nghiệp</b><span>Báo giá, biên nhận, hóa đơn chuẩn; giao đúng hẹn</span></div>
+        <div><i class="fa-solid fa-handshake-angle"></i><b>Uy tín, đáng tin cậy</b><span>Số liệu rõ ràng khi làm việc với khách lớn, ngân hàng, đối tác</span></div>
+        <div><i class="fa-solid fa-database"></i><b>Dữ liệu là tài sản</b><span>Khách hàng, bảng giá, lịch sử bán thuộc về công ty</span></div>
+        <div><i class="fa-solid fa-seedling"></i><b>Phát triển bền vững</b><span>Nền vững để thêm kho, thêm kênh, thêm thị trường</span></div>
       </div>
+      <p class="more">Và nhiều giá trị khác: quyết định nhanh hơn, giữ chân người giỏi, khách quay lại nhiều hơn.</p>
     </div>
   </div>
 </section>
 
-<!-- 11. ĐO TRƯỚC – SAU -->
-<section class="slide" id="do-luong" data-label="Đo lường">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-ruler-combined"></i> Đo được mới tin được</span>
-    <h2 class="title reveal d1">Mỗi thay đổi có <em>một con số đi kèm</em></h2>
-    <p class="lead reveal d2">Đo hiện trạng trong 1–2 tuần đầu. Mục tiêu chốt cùng ETIS sau khi có số. Mỗi giai đoạn báo cáo trước – sau.</p>
-    <div class="grid g3">
-      <div class="kpi reveal d1"><div class="m"><i class="fa-solid fa-phone"></i> Số lần chủ phải hỏi việc / ngày</div><div class="b">Đo tuần đầu</div><div class="to">→</div><div class="a">Giảm rõ</div></div>
-      <div class="kpi reveal d2"><div class="m"><i class="fa-solid fa-copy"></i> Số lần nhập một đơn</div><div class="b">Nhiều lần</div><div class="to">→</div><div class="a">1 lần</div></div>
-      <div class="kpi reveal d3"><div class="m"><i class="fa-solid fa-boxes-stacked"></i> Lệch tồn sau kiểm kê</div><div class="b">Chưa kiểm kê</div><div class="to">→</div><div class="a">Trong ngưỡng cho phép</div></div>
-      <div class="kpi reveal d1"><div class="m"><i class="fa-solid fa-truck"></i> Đơn / xe / ngày</div><div class="b">~12–20, chưa đo đều</div><div class="to">→</div><div class="a">Tăng, có định mức</div></div>
-      <div class="kpi reveal d2"><div class="m"><i class="fa-solid fa-hourglass-half"></i> Ngày từ giao hàng tới thu tiền</div><div class="b">Đo tuần đầu</div><div class="to">→</div><div class="a">Giảm</div></div>
-      <div class="kpi reveal d3"><div class="m"><i class="fa-solid fa-address-book"></i> Khách có trên hệ thống</div><div class="b">Nằm ở điện thoại sale</div><div class="to">→</div><div class="a">100% khách đang mua</div></div>
+<!-- 11. CHỐT GIẢI PHÁP · XIN CẢM ƠN -->
+<section class="slide dark" id="bat-dau" data-label="Xin cảm ơn">
+  <span class="kicker"><i class="fa-solid fa-handshake"></i> Giải pháp Upnet cho ETIS</span>
+  <h2 class="title">Hệ thống <em>phần mềm ERP doanh nghiệp</em></h2>
+  <div class="erp">
+    <div class="erp-mods">
+      <div><i class="fa-solid fa-cart-shopping"></i><b>Bán hàng</b><span>Khách, đơn, bảng giá theo kênh</span></div>
+      <div><i class="fa-solid fa-warehouse"></i><b>Kho</b><span>Hai kho, nhập xuất, kiểm kê</span></div>
+      <div><i class="fa-solid fa-truck-fast"></i><b>Giao hàng</b><span>Chuyến xe, biên nhận, tiền thu hộ</span></div>
+      <div><i class="fa-solid fa-sack-dollar"></i><b>Tài chính</b><span>Thu chi, công nợ, hóa đơn</span></div>
+      <div><i class="fa-solid fa-id-badge"></i><b>Nhân sự</b><span>Vị trí, mục tiêu, lương thưởng</span></div>
+      <div><i class="fa-solid fa-chart-pie"></i><b>Báo cáo điều hành</b><span>Số liệu tức thời trên điện thoại</span></div>
+    </div>
+    <div class="erp-with">
+      <h4>Upnet đồng hành</h4>
+      <ul class="ticks">
+        <li><i class="fa-solid fa-layer-group"></i>Phần mềm ERP trọn gói, một tài khoản cho mọi bộ phận</li>
+        <li><i class="fa-solid fa-arrows-spin"></i>Tư vấn chuẩn hóa quy trình vận hành</li>
+        <li><i class="fa-solid fa-person-chalkboard"></i>Đào tạo từng vị trí trên việc thật</li>
+        <li><i class="fa-solid fa-headset"></i>Hỗ trợ 24/7, hệ thống vận hành ổn định</li>
+      </ul>
+    </div>
+  </div>
+  <div class="thanks" data-step="1">
+    <p>Xin trân trọng cảm ơn!</p>
+    <span>ETIS: vận hành chuyên nghiệp · minh bạch · phát triển bền vững</span>
+    <small><i class="fa-solid fa-leaf"></i> Choose green, live clean</small>
+  </div>
+</section>
+
+<!-- PHỤ LỤC (phím A) -->
+<section class="slide appendix" id="pl-don-hang" data-label="Phụ lục · Một đơn đi thế nào" data-appendix>
+  <span class="kicker"><i class="fa-solid fa-route"></i> Phụ lục</span>
+  <h2 class="title">Một đơn sỉ <em>đi thế nào</em></h2>
+  <div class="journey"><div class="track" id="j-track"><span></span></div><div class="steps" id="j-steps"></div></div>
+  <div class="jdetail" id="j-detail"></div>
+</section>
+
+<section class="slide appendix alt" id="pl-to-chuc" data-label="Phụ lục · Tổ chức" data-appendix>
+  <span class="kicker"><i class="fa-solid fa-sitemap"></i> Phụ lục</span>
+  <h2 class="title">Mỗi việc <em>một người chịu trách nhiệm</em></h2>
+  <div class="org">
+    <div class="node boss"><i class="fa-solid fa-user-tie"></i><b>Chủ doanh nghiệp</b><span>khách lớn · định hướng · đọc báo cáo · duyệt</span></div>
+    <div class="org-line"></div>
+    <div class="org-row">
+      <div class="org-col"><div class="head"><i class="fa-solid fa-warehouse"></i>VẬN HÀNH</div>
+        <div class="role"><i class="fa-solid fa-clipboard-list"></i><div><b>Quản kho / điều phối</b><span>hàng cho đơn ngày mai, ghép chuyến</span></div></div>
+        <div class="role"><i class="fa-solid fa-dolly"></i><div><b>Thủ kho Hà Nội · Sài Gòn</b><span>nhập, soạn, xuất, kiểm kê</span></div></div>
+        <div class="role"><i class="fa-solid fa-truck-fast"></i><div><b>Tài xế</b><span>giao, chụp biên nhận, nộp tiền</span></div></div></div>
+      <div class="org-col"><div class="head"><i class="fa-solid fa-chart-line"></i>KINH DOANH</div>
+        <div class="role"><i class="fa-solid fa-handshake"></i><div><b>Sale</b><span>khách của mình, đơn, thu nợ</span></div></div>
+        <div class="role"><i class="fa-solid fa-user-pen"></i><div><b>Trợ lý kinh doanh</b><span>lên đơn thay chủ, báo giá</span></div></div>
+        <div class="role"><i class="fa-solid fa-store"></i><div><b>Online</b><span>Shopee, TikTok, website</span></div></div></div>
+      <div class="org-col"><div class="head"><i class="fa-solid fa-calculator"></i>KẾ TOÁN</div>
+        <div class="role"><i class="fa-solid fa-scale-balanced"></i><div><b>Thu chi · công nợ</b><span>theo biên nhận, theo sao kê</span></div></div>
+        <div class="role"><i class="fa-solid fa-file-invoice"></i><div><b>Hóa đơn</b><span>xuất sau khi có biên nhận</span></div></div>
+        <div class="role"><i class="fa-solid fa-building-columns"></i><div><b>Kế toán thuế</b><span>vẫn làm trên MISA như cũ</span></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- 12. LỘ TRÌNH -->
-<section class="slide alt" id="lo-trinh" data-label="Lộ trình">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-flag-checkered"></i> Lộ trình đề xuất</span>
-    <h2 class="title reveal d1">Bật <em>từng phần</em> — vì cuối năm là mùa bận nhất</h2>
-    <p class="lead reveal d2">Khoảng một quý, từ nay tới Tết. Mỗi giai đoạn có điều kiện "xong khi" rõ ràng.</p>
-    <div class="road">
-      <div class="phase reveal d1"><div class="pin"><i class="fa-solid fa-handshake"></i></div><div class="when">Cuối T10 – đầu T11</div><h3>Thống nhất</h3>
-        <ul><li>Trình bày cách làm</li><li>Nhận số liệu, đo hiện trạng</li><li>Quan sát tại chỗ</li></ul><div class="done-when">Xong khi: ký, có số hiện trạng</div></div>
-      <div class="phase reveal d2"><div class="pin"><i class="fa-solid fa-truck-fast"></i></div><div class="when">Tháng 11</div><h3>Đơn – kho – giao (Hà Nội)</h3>
-        <ul><li>Chọn quản kho / điều phối</li><li>Kiểm kê đầu kỳ</li><li>Sale lên đơn, tài xế dùng app</li></ul><div class="done-when">Xong khi: mọi đơn sỉ Hà Nội có trên hệ thống, có biên nhận</div></div>
-      <div class="phase reveal d3"><div class="pin"><i class="fa-solid fa-calculator"></i></div><div class="when">Tháng 12</div><h3>Kế toán – Sài Gòn</h3>
-        <ul><li>Xếp lại việc phòng kế toán</li><li>Thu chi, công nợ trên hệ thống</li><li>Kho Sài Gòn tự chạy</li></ul><div class="done-when">Xong khi: không còn chép đơn; Sài Gòn không qua trung gian</div></div>
-      <div class="phase reveal d4"><div class="pin"><i class="fa-solid fa-chart-line"></i></div><div class="when">Tháng 1 → Tết</div><h3>Kinh doanh – báo cáo</h3>
-        <ul><li>Đội kinh doanh mới, quản lý</li><li>Lương, thưởng theo kết quả</li><li>Báo cáo cho chủ</li></ul><div class="done-when">Xong khi: chủ xem báo cáo trên điện thoại</div></div>
-    </div>
-    <p class="note reveal d4"><i class="fa-solid fa-champagne-glasses"></i> Dịp tổng kết cuối năm: ETIS công bố cách làm mới cho năm 2027, dựa trên số trước – sau.</p>
+<section class="slide appendix dark" id="pl-tai-xe" data-label="Phụ lục · Tài xế" data-appendix>
+  <span class="kicker"><i class="fa-solid fa-mobile-screen"></i> Phụ lục</span>
+  <h2 class="title">Tài xế <em>chụp ảnh là xong</em></h2>
+  <div class="phones">
+    <div><div class="phone"><div class="screen">
+      <div class="app-h"><small>Chuyến sáng · Thanh Trì – Cầu Giấy</small><b>5 điểm giao · còn 3</b></div>
+      <div class="stop done"><span class="n">1</span><b>Tòa nhà A</b> · đã giao · có biên nhận</div>
+      <div class="stop done"><span class="n">2</span><b>Nhà máy B</b> · đã giao · thu tiền mặt</div>
+      <div class="stop now"><span class="n">3</span><b>Trường C</b><br><small>20 thùng giấy cuộn · 5 thùng khăn lau</small>
+        <div class="acts"><span><i class="fa-solid fa-camera"></i> Ảnh hàng</span><span><i class="fa-solid fa-file-signature"></i> Biên nhận</span><span class="go">Đã giao</span></div></div>
+      <div class="stop"><span class="n">4</span><b>Bệnh viện D</b></div>
+      <div class="flash"></div>
+    </div></div><p class="phone-cap">Hình minh họa · đang hoàn thiện</p></div>
+    <ul class="feat">
+      <li><i class="fa-solid fa-list-ol"></i><div><b>Chuyến hôm nay</b><span>Thứ tự điểm giao, bấm địa chỉ là mở bản đồ</span></div></li>
+      <li><i class="fa-solid fa-camera"></i><div><b>Ảnh giao + biên nhận</b><span>Căn cứ thu tiền, xuất hóa đơn. Về văn phòng ngay</span></div></li>
+      <li><i class="fa-solid fa-money-bill-wave"></i><div><b>Tiền thu</b><span>Ghi ngay tại điểm giao, nộp về là khớp</span></div></li>
+      <li><i class="fa-solid fa-bell"></i><div><b>Báo ngay</b><span>Chuyến mới, đơn gấp</span></div></li>
+    </ul>
   </div>
 </section>
 
-<!-- 13. DỮ LIỆU AN TOÀN -->
-<section class="slide" id="du-lieu" data-label="Dữ liệu">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-shield-halved"></i> Dữ liệu của ETIS</span>
-    <h2 class="title reveal d1">Dữ liệu <em>là của ETIS</em> — an toàn, rõ ràng</h2>
-    <p class="lead reveal d2">Cam kết đề xuất, ghi rõ vào hợp đồng.</p>
-    <div class="grid g3">
-      <div class="card reveal d1"><div class="icon"><i class="fa-solid fa-key"></i></div><h3>Thuộc về ETIS</h3><p>Upnet chỉ vận hành hệ thống. Dữ liệu là tài sản của ETIS.</p></div>
-      <div class="card reveal d2"><div class="icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><h3>Sao lưu hằng ngày</h3><p>Nhiều bản sao, kiểm thử khôi phục định kỳ.</p></div>
-      <div class="card reveal d3"><div class="icon"><i class="fa-solid fa-user-lock"></i></div><h3>Ai xem nấy</h3><p>Phân quyền theo vị trí. Sale không xem được khách của sale khác.</p></div>
-      <div class="card reveal d1"><div class="icon"><i class="fa-solid fa-clock-rotate-left"></i></div><h3>Ghi lại ai sửa gì</h3><p>Đơn, phiếu kho, phiếu thu chi đều có dấu vết.</p></div>
-      <div class="card reveal d2"><div class="icon"><i class="fa-solid fa-file-export"></i></div><h3>Ngừng là trả đủ</h3><p>Ngừng hợp tác: xuất toàn bộ dữ liệu giao lại ETIS.</p></div>
-      <div class="card reveal d3"><div class="icon"><i class="fa-solid fa-building-columns"></i></div><h3>MISA vẫn như cũ</h3><p>Kế toán thuế vẫn làm trên MISA. Hệ thống xuất dữ liệu cho kế toán.</p></div>
-    </div>
+<section class="slide appendix" id="pl-du-lieu" data-label="Phụ lục · Dữ liệu và đồng hành" data-appendix>
+  <span class="kicker"><i class="fa-solid fa-shield-halved"></i> Phụ lục</span>
+  <h2 class="title">Dữ liệu <em>là của ETIS</em>. Upnet <em>làm cùng tới khi chạy</em>.</h2>
+  <div class="grid g3">
+    <div class="card"><i class="fa-solid fa-key ic"></i><h3>Thuộc về ETIS</h3><p>Upnet chỉ vận hành hệ thống. Ngừng hợp tác: trả đủ dữ liệu.</p></div>
+    <div class="card"><i class="fa-solid fa-cloud-arrow-up ic"></i><h3>Sao lưu hằng ngày</h3><p>Nhiều bản sao, thử khôi phục định kỳ.</p></div>
+    <div class="card"><i class="fa-solid fa-user-lock ic"></i><h3>Ai xem nấy</h3><p>Phân quyền theo vị trí. Sale không xem khách của sale khác.</p></div>
+    <div class="card"><i class="fa-solid fa-building-columns ic"></i><h3>MISA như cũ</h3><p>Kế toán thuế vẫn làm trên MISA. Hệ thống xuất dữ liệu cho kế toán.</p></div>
+    <div class="card"><i class="fa-solid fa-laptop-code ic"></i><h3>Gói phần mềm</h3><p>Bán hàng, kho, giao hàng, tài chính, nhân sự, báo cáo, app tài xế. Cập nhật, hỗ trợ đi kèm.</p></div>
+    <div class="card"><i class="fa-solid fa-user-gear ic"></i><h3>Đồng hành vận hành</h3><p>Chuẩn hóa quy trình, mô tả việc, thưởng theo kết quả, đào tạo từng vị trí. Hỗ trợ tận tình 24/7.</p></div>
   </div>
 </section>
 
-<!-- 14. ĐỒNG HÀNH -->
-<section class="slide alt" id="dong-hanh" data-label="Đồng hành">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-people-carry-box"></i> Cách Upnet đồng hành</span>
-    <h2 class="title reveal d1">Không giao phần mềm rồi đi. <em>Làm cùng tới khi chạy.</em></h2>
-    <p class="lead reveal d2">Hai gói đi cùng nhau: một gói giữ hệ thống chạy, một gói giữ con người và quy trình chạy.</p>
-    <div class="grid g2">
-      <div class="card reveal d1"><div class="icon"><i class="fa-solid fa-laptop-code"></i></div><h3>Gói phần mềm</h3>
-        <p>Toàn bộ hệ thống: bán hàng, kho, giao hàng, tài chính, nhân sự, báo cáo, app tài xế. Thuê bao — cập nhật, sửa lỗi, hỗ trợ đi kèm. Làm thêm phần riêng cho ETIS.</p></div>
-      <div class="card reveal d2"><div class="icon"><i class="fa-solid fa-user-gear"></i></div><h3>Gói tư vấn vận hành</h3>
-        <p>Người của Upnet làm việc tại ETIS định kỳ: chuẩn hóa quy trình, mô tả công việc, lương thưởng theo kết quả, đào tạo từng vị trí trên việc thật, báo cáo trước – sau mỗi giai đoạn.</p></div>
-    </div>
-    <div class="grid g4" style="margin-top:20px">
-      <div class="card reveal d1"><h3><i class="fa-solid fa-person-chalkboard" style="color:#237a5c"></i> Đào tạo tại chỗ</h3><p>Mỗi vị trí một trang hướng dẫn, một video ngắn, làm thử đơn thật có người kèm.</p></div>
-      <div class="card reveal d2"><h3><i class="fa-solid fa-user-check" style="color:#237a5c"></i> Đầu mối mỗi khối</h3><p>Mỗi khối ETIS có một người nắm hệ thống, hỏi đầu tiên khi vướng.</p></div>
-      <div class="card reveal d3"><h3><i class="fa-solid fa-code-compare" style="color:#237a5c"></i> Chạy song song ngắn</h3><p>Tuần đầu mỗi giai đoạn chạy song song. Sau đó: không có đơn trên hệ thống thì không xuất hàng.</p></div>
-      <div class="card reveal d4"><h3><i class="fa-solid fa-headset" style="color:#237a5c"></i> Hỗ trợ online</h3><p>Vướng lúc nào, gọi lúc đó.</p></div>
-    </div>
-  </div>
-</section>
+</main>
 
-<!-- 15. BƯỚC TIẾP -->
-<section class="slide dark" id="buoc-tiep" data-label="Bước tiếp">
-  <div class="wrap">
-    <span class="kicker reveal"><i class="fa-solid fa-forward"></i> Bước tiếp theo</span>
-    <h2 class="title reveal d1">Bốn bước để <em>bắt đầu tháng 11</em></h2>
-    <p class="lead reveal d2">Bắt đầu từ số liệu thật của ETIS.</p>
-    <div class="next">
-      <div class="card reveal d1"><h3>Thống nhất cách làm</h3><p>Ba lớp, lộ trình, thứ tự ưu tiên: kho → kế toán → kinh doanh.</p></div>
-      <div class="card reveal d2"><h3>ETIS gửi số liệu</h3><p>Danh sách vị trí và việc, bảng lương thực nhận, dữ liệu bán hàng tháng 9, một tuần vận hành xe – kho.</p></div>
-      <div class="card reveal d3"><h3>Đo hiện trạng</h3><p>Upnet phân tích số liệu, quan sát tại chỗ, ra con số "trước".</p></div>
-      <div class="card reveal d4"><h3>Chốt và khởi động</h3><p>Chốt gói tư vấn, ký, chọn quản kho, kiểm kê đầu kỳ.</p></div>
-    </div>
-    <p class="slogan reveal d4"><i class="fa-solid fa-leaf"></i> Choose green, live clean — vận hành gọn, chủ nhẹ đầu.</p>
-  </div>
-</section>
-
+<nav class="ctrl" aria-label="Điều hướng">
+  <button class="cb" id="c-prev" title="Lùi (←)"><i class="fa-solid fa-chevron-left"></i></button>
+  <span class="cnum" id="c-num">1 / 11</span>
+  <button class="cb" id="c-next" title="Tiếp (→)"><i class="fa-solid fa-chevron-right"></i></button>
+  <button class="cb" id="c-notes" title="Ghi chú người nói (N)"><i class="fa-solid fa-comment-dots"></i></button>
+  <button class="cb" id="c-app" title="Phụ lục (A)"><i class="fa-solid fa-folder-open"></i></button>
+</nav>
+<div class="pager" id="pager"></div>
 <div class="lightbox" role="dialog" aria-label="Ảnh phóng to"><div><img alt=""><p></p></div></div>
 
 <script src="assets/js/noi-dung.js"></script>
+<script src="assets/js/hieu-ung.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
 </html>

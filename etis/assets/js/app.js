@@ -1,131 +1,128 @@
-/* Tương tác trang trình bày ETIS: điều hướng theo slide, hiệu ứng xuất hiện,
-   đếm số, tab bài toán, hành trình đơn, một ngày theo vị trí, phóng to ảnh. */
+/* Điều khiển trang trình bày: từng slide một, bấm → mở từng bước (như PowerPoint),
+   cửa sổ ghi chú người nói (N), phụ lục (A), toàn màn hình (F), phóng to ảnh.
+   Màn hẹp (điện thoại) chuyển sang chế độ cuộn, hiện đủ mọi bước. */
 (() => {
-  const D = window.ETIS;
+  const D = window.ETIS, HU = window.HU;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const IMG = "assets/demo/";
+  const W = 1600, H = 900;
 
-  // Khung trình duyệt nhỏ bao quanh ảnh demo
-  const shot = (file, url) => file
-    ? `<div class="shot" data-zoom="${IMG + file}" data-cap="${url} · dữ liệu minh họa">
-         <div class="bar"><i></i><i></i><i></i><em>${url}</em></div>
-         <img src="${IMG + file}" alt="Màn hình ${url}" loading="lazy"></div>`
-    : `<div class="card" style="text-align:center;padding:48px 24px">
-         <div class="icon" style="margin:0 auto 14px"><i class="fa-solid fa-mobile-screen"></i></div>
-         <h3>${url}</h3><p>Xem mô phỏng ở phần "Tài xế: chụp ảnh là xong"</p>
-         <span class="tag soon" style="margin-top:10px">Đang hoàn thiện</span></div>`;
+  const all = $$("section.slide");
+  const main = all.filter(s => !s.hasAttribute("data-appendix"));
+  const apx = all.filter(s => s.hasAttribute("data-appendix"));
+  const maxStep = s => Math.max(0, ...$$("[data-step]", s).map(e => +e.dataset.step));
 
-  // Tên ảnh "wms-inventory.jpg" → "wms.etis.vn"; ảnh báo cáo bắt đầu bằng "rp"
-  const appUrl = file => {
-    if (!file) return "App tài xế — đang hoàn thiện";
-    const app = file.replace(/\.jpg$/, "").split("-")[0];
-    return (app === "rp" ? "report" : app) + ".etis.vn";
-  };
+  let seq = main, idx = 0, at = 0, flow = false;
 
-  /* ---------- Bài toán → cách xử lý ---------- */
-  const tabs = $("#pb-tabs"), panel = $("#pb-panel");
-  function showProblem(i) {
-    const p = D.problems[i];
-    $$("button", tabs).forEach((b, k) => b.classList.toggle("on", k === i));
-    panel.innerHTML = `<div class="solve panel">
-      <div class="card before"><h4><i class="fa-solid fa-triangle-exclamation"></i> Hôm nay</h4>
-        <p class="big">${p.tab}</p><p>${p.before}</p></div>
-      <div class="card after"><h4><i class="fa-solid fa-seedling"></i> Cách làm mới</h4>
-        <p class="big">${p.after}</p>
-        <div class="trio">
-          <div><b><i class="fa-solid fa-user-check"></i> Ai làm</b><p>${p.who}</p></div>
-          <div><b><i class="fa-solid fa-arrows-spin"></i> Làm thế nào</b><p>${p.how}</p></div>
-          <div><b><i class="fa-solid fa-mobile-screen-button"></i> Công cụ</b><p>${p.tool}</p></div>
-        </div>
-        <div class="measure"><i class="fa-solid fa-ruler"></i> Đo bằng: ${p.measure}</div></div></div>`;
+  /* ---------- Khung: co giãn 1600×900 vừa màn hình, hoặc cuộn trên điện thoại ---------- */
+  function layout() {
+    flow = innerWidth < 860;
+    document.body.classList.toggle("flow", flow);
+    if (flow) {
+      $$("[data-step]").forEach(e => e.classList.add("on"));
+      // Sơ đồ vẽ theo toạ độ cố định: thu nhỏ theo bề ngang màn
+      [[".hub", 720], [".grow", 600]].forEach(([q, w]) => $(q).style.setProperty("--hz", Math.min(1, (innerWidth - 32) / w)));
+      HU.count(document);
+      return;
+    }
+    document.documentElement.style.setProperty("--s", Math.min(innerWidth / W, innerHeight / H));
+    show(idx, at, true);
   }
-  tabs.innerHTML = D.problems.map((p, i) => `<button data-i="${i}"><i class="fa-solid ${p.icon}"></i> ${p.tab}</button>`).join("");
-  tabs.addEventListener("click", e => { const b = e.target.closest("button"); if (b) showProblem(+b.dataset.i); });
-  showProblem(0);
 
-  /* ---------- Hành trình đơn hàng (tự chạy khi thấy) ---------- */
-  const steps = $("#j-steps"), detail = $("#j-detail"), bar = $("#j-track span");
-  steps.innerHTML = D.journey.map((s, i) => `<div class="step" data-i="${i}">
-      <div class="bub"><i class="fa-solid ${s.icon}"></i></div><b>${s.name}</b><small>${s.sub}</small></div>`).join("");
-  let jIdx = 0, jTimer = null;
-  function showStep(i) {
-    jIdx = (i + D.journey.length) % D.journey.length;
-    const s = D.journey[jIdx];
-    $$(".step", steps).forEach((el, k) => { el.classList.toggle("on", k === jIdx); el.classList.toggle("done", k < jIdx); });
-    bar.style.width = (jIdx / (D.journey.length - 1)) * 100 + "%";
-    detail.innerHTML = `<div class="panel"><span class="who"><i class="fa-solid fa-user"></i> ${s.who}</span>
-        <h3>${s.title}</h3><ul>${s.pts.map(t => `<li><i class="fa-solid fa-circle-check"></i>${t}</li>`).join("")}</ul></div>
-      <div class="panel">${shot(s.img, s.url)}</div>`;
+  /* ---------- Hiện slide i, mở tới bước a ---------- */
+  function show(i, a = 0, quiet = false) {
+    i = Math.max(0, Math.min(seq.length - 1, i));
+    const s = seq[i], changed = s !== seq[idx] || !s.classList.contains("active");
+    a = Math.max(0, Math.min(maxStep(s), a));
+    if (changed) {
+      all.forEach(x => x.classList.remove("active", "back"));
+      if (!quiet && i < idx) s.classList.add("back");
+      s.classList.add("active");
+      HU.resetCount(s);
+    }
+    idx = i; at = a;
+    $$("[data-step]", s).forEach(e => e.classList.toggle("on", +e.dataset.step <= at));
+    s.dataset.at = at;
+    document.body.classList.toggle("on-dark", s.classList.contains("dark"));
+    HU.count(s);
+
+    const inApx = seq === apx;
+    $("#c-num").textContent = (inApx ? "Phụ lục " : "") + (idx + 1) + " / " + seq.length;
+    $(".bar-top span").style.width = ((idx + (maxStep(s) ? at / (maxStep(s) + 1) : 0)) / (seq.length - 1 || 1)) * 100 + "%";
+    $("#c-app").classList.toggle("on", inApx);
+    $$("#pager a").forEach((p, k) => p.classList.toggle("on", !inApx && k === idx));
+    history.replaceState(null, "", "#" + s.id + (at ? "/" + at : ""));
+    notes.render();
   }
-  const play = () => { stop(); jTimer = setInterval(() => showStep(jIdx + 1), 5200); $("#j-play").innerHTML = '<i class="fa-solid fa-pause"></i> Dừng'; };
-  const stop = () => { clearInterval(jTimer); jTimer = null; $("#j-play").innerHTML = '<i class="fa-solid fa-play"></i> Tự chạy'; };
-  steps.addEventListener("click", e => { const s = e.target.closest(".step"); if (s) { stop(); showStep(+s.dataset.i); } });
-  $("#j-prev").onclick = () => { stop(); showStep(jIdx - 1); };
-  $("#j-next").onclick = () => { stop(); showStep(jIdx + 1); };
-  $("#j-play").onclick = () => (jTimer ? stop() : play());
-  showStep(0);
-  new IntersectionObserver(([e]) => { if (e.isIntersecting && !jTimer) play(); else if (!e.isIntersecting) stop(); }, { threshold: .4 }).observe($("#hanh-trinh"));
 
-  /* ---------- Một ngày theo vị trí ---------- */
-  const rlist = $("#r-list"), rday = $("#r-day");
-  rlist.innerHTML = D.roles.map((r, i) => `<button data-i="${i}"><i class="fa-solid ${r.icon}"></i>${r.name}</button>`).join("");
-  function showRole(i) {
-    const r = D.roles[i];
-    $$("button", rlist).forEach((b, k) => b.classList.toggle("on", k === i));
-    rday.innerHTML = `<div class="panel"><ol class="timeline">${r.day.map(([t, d]) => `<li><time>${t}</time><p>${d}</p></li>`).join("")}</ol>
-        <div class="gain"><b>Bớt được:</b> ${r.gain}</div></div>
-      <div class="panel">${shot(r.img, appUrl(r.img))}</div>`;
+  const next = () => (at < maxStep(seq[idx]) ? show(idx, at + 1) : idx < seq.length - 1 && show(idx + 1, 0));
+  const prev = () => (at > 0 ? show(idx, at - 1) : idx > 0 && show(idx - 1, maxStep(seq[idx - 1])));
+  function toggleAppendix() {
+    if (seq === apx) { seq = main; show(main.length - 1, maxStep(main[main.length - 1])); }
+    else { seq = apx; show(0); }
   }
-  rlist.addEventListener("click", e => { const b = e.target.closest("button"); if (b) showRole(+b.dataset.i); });
-  showRole(0);
 
-  /* ---------- Hiệu ứng xuất hiện + đếm số ---------- */
-  const countUp = el => {
-    const end = +el.dataset.to, dec = +(el.dataset.dec || 0), t0 = performance.now(), dur = 1400;
-    const tick = now => {
-      const k = Math.min(1, (now - t0) / dur), v = end * (1 - Math.pow(1 - k, 3));
-      el.textContent = v.toFixed(dec).replace(".", ",");
-      if (k < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add("in");
-    $$("[data-to]", e.target).forEach(countUp);
-    io.unobserve(e.target);
-  }), { threshold: .15 });
-  $$(".reveal").forEach(el => io.observe(el));
+  /* ---------- Cửa sổ ghi chú người nói ---------- */
+  const notes = (() => {
+    let win = null, t0 = Date.now(), tSlide = Date.now(), lastId = "";
+    const fmt = ms => { const s = Math.floor(ms / 1000); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+    const css = `body{font:16px/1.5 "Be Vietnam Pro",system-ui,sans-serif;margin:0;padding:20px;background:#0f241e;color:#eaf5db}
+      h1{font-size:22px;margin:4px 0 2px;color:#fff}.m{color:#92c347;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+      .t{display:flex;gap:16px;margin:12px 0;font-size:28px;font-weight:800}.t span{background:#17332b;border-radius:12px;padding:6px 14px}
+      .t small{display:block;font-size:11px;font-weight:600;color:#9fc3b2}.over{color:#f0a37f}
+      ul{padding-left:20px}li{margin:8px 0;font-size:19px}.ask{background:#f5e199;color:#17332b;border-radius:12px;padding:10px 14px;font-weight:600;margin-top:12px}
+      .nx{margin-top:18px;color:#9fc3b2;font-size:14px}.k{margin-top:18px;font-size:12px;color:#6f9483}`;
+    function render() {
+      if (!win || win.closed) return;
+      const s = seq[idx], n = D.notes[s.id] || { say: [] };
+      if (s.id !== lastId) { tSlide = Date.now(); lastId = s.id; }
+      const nx = at < maxStep(s) ? "Bước tiếp trên slide này" : (seq[idx + 1] ? seq[idx + 1].dataset.label : "Hết");
+      win.document.body.innerHTML = `<div class="m">Slide ${idx + 1}/${seq.length} · bước ${at}/${maxStep(s)}</div>
+        <h1>${s.dataset.label}</h1>
+        <div class="t"><span id="tt"><small>Tổng</small>${fmt(Date.now() - t0)}</span><span id="ts"><small>Slide này · gợi ý ${n.min || 0}′</small>${fmt(Date.now() - tSlide)}</span></div>
+        <ul>${n.say.map(x => `<li>${x}</li>`).join("")}</ul>${n.ask ? `<div class="ask">Hỏi lãnh đạo: ${n.ask}</div>` : ""}
+        <div class="nx">Tiếp theo: ${nx}</div><div class="k">→ / ← chuyển · R đặt lại giờ · A phụ lục</div>`;
+    }
+    setInterval(() => {
+      if (!win || win.closed) return;
+      const tt = win.document.getElementById("tt"), ts = win.document.getElementById("ts"), n = D.notes[seq[idx].id] || {};
+      if (tt) tt.lastChild.textContent = fmt(Date.now() - t0);
+      if (ts) { ts.lastChild.textContent = fmt(Date.now() - tSlide); ts.classList.toggle("over", n.min && Date.now() - tSlide > n.min * 60000); }
+    }, 1000);
+    function open() {
+      if (win && !win.closed) { win.focus(); return; }
+      win = window.open("", "etis-nguoi-noi", "width=560,height=780");
+      if (!win) { alert("Trình duyệt chặn cửa sổ mới. Cho phép cửa sổ bật lên rồi bấm N lại."); return; }
+      win.document.title = "Ghi chú người nói · ETIS";
+      const st = win.document.createElement("style"); st.textContent = css; win.document.head.appendChild(st);
+      win.addEventListener("keydown", onKey);
+      t0 = tSlide = Date.now(); lastId = ""; render();
+    }
+    return { render, open, reset: () => { t0 = tSlide = Date.now(); render(); } };
+  })();
 
-  /* ---------- Thanh tiến độ, chấm điều hướng, phím tắt ---------- */
-  const slides = $$("section.slide");
-  const dots = $(".dots");
-  dots.innerHTML = slides.map(s => `<a href="#${s.id}" data-label="${s.dataset.label}"></a>`).join("");
-  const dotLinks = $$("a", dots);
-  let cur = 0;
-  const slideObs = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    cur = slides.indexOf(e.target);
-    dotLinks.forEach((d, k) => d.classList.toggle("on", k === cur));
-    $(".topbar").classList.toggle("show", cur > 0);
-  }), { threshold: .45 });
-  slides.forEach(s => slideObs.observe(s));
-
-  addEventListener("scroll", () => {
-    const h = document.documentElement;
-    $(".progress span").style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + "%";
-  }, { passive: true });
-
-  const go = i => slides[Math.max(0, Math.min(slides.length - 1, i))].scrollIntoView({ behavior: "smooth" });
-  addEventListener("keydown", e => {
+  /* ---------- Phím tắt, nút bấm ---------- */
+  function onKey(e) {
     if ($(".lightbox").classList.contains("open")) { if (e.key === "Escape") closeLb(); return; }
-    if (["ArrowDown", "ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); go(cur + 1); }
-    if (["ArrowUp", "ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); go(cur - 1); }
-    if (e.key === "Home") go(0);
-    if (e.key === "End") go(slides.length - 1);
-    if (e.key.toLowerCase() === "f") document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
-  });
+    if (flow) return;
+    const k = e.key;
+    if (["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"].includes(k)) { e.preventDefault(); next(); }
+    else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(k)) { e.preventDefault(); prev(); }
+    else if (k === "Home") show(0);
+    else if (k === "End") show(seq.length - 1, maxStep(seq[seq.length - 1]));
+    else if (/^[1-9]$/.test(k) && seq === main) show(+k - 1);
+    else if (k.toLowerCase() === "n") notes.open();
+    else if (k.toLowerCase() === "r") notes.reset();
+    else if (k.toLowerCase() === "a") toggleAppendix();
+    else if (k.toLowerCase() === "f") document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  }
+  addEventListener("keydown", onKey);
+  $("#c-next").onclick = next;
+  $("#c-prev").onclick = prev;
+  $("#c-notes").onclick = () => notes.open();
+  $("#c-app").onclick = toggleAppendix;
+  $("#pager").innerHTML = main.map((s, k) => `<a title="${k + 1}. ${s.dataset.label}"></a>`).join("");
+  $$("#pager a").forEach((a, k) => (a.onclick = () => { seq = main; show(k); }));
 
   /* ---------- Phóng to ảnh ---------- */
   const lb = $(".lightbox");
@@ -136,15 +133,10 @@
   });
   lb.addEventListener("click", closeLb);
 
-  /* ---------- Lá bay ở phần mở đầu ---------- */
-  const hero = $(".hero");
-  for (let i = 0; i < 9; i++) {
-    const l = document.createElement("i");
-    l.className = "fa-solid fa-leaf leaf";
-    l.style.left = Math.random() * 100 + "%";
-    l.style.fontSize = 14 + Math.random() * 26 + "px";
-    l.style.animationDuration = 12 + Math.random() * 12 + "s";
-    l.style.animationDelay = -Math.random() * 20 + "s";
-    hero.appendChild(l);
-  }
+  /* ---------- Mở lại đúng slide theo địa chỉ (#id/bước) ---------- */
+  const [hid, hat] = location.hash.slice(1).split("/");
+  const start = all.find(s => s.id === hid);
+  if (start) { seq = start.hasAttribute("data-appendix") ? apx : main; idx = seq.indexOf(start); at = +hat || 0; }
+  addEventListener("resize", layout);
+  layout();
 })();
